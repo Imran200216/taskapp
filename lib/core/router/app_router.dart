@@ -1,0 +1,48 @@
+import 'package:go_router/go_router.dart';
+import 'package:taskapp/features/auth/view/auth_forget_password_screen.dart';
+import 'package:taskapp/features/auth/view/auth_screen.dart';
+import 'package:taskapp/features/bottom_nav/view/bottom_nav.dart';
+import 'package:taskapp/features/on_boarding/view/on_boarding_screen.dart';
+import 'package:taskapp/features/splash/view/splash_screen.dart';
+
+class AppRouter {
+  static final GoRouter router = GoRouter(
+    initialLocation: "/",
+    routes: [
+      /// splash screen
+      GoRoute(
+        path: "/",
+        name: "splash",
+        builder: (context, state) => const SplashScreen(),
+      ),
+
+      /// on boarding screen
+      GoRoute(
+        path: "/onBoarding",
+        name: "onBoarding",
+        builder: (context, state) => const OnBoardingScreen(),
+      ),
+
+      /// auth screen
+      GoRoute(
+        path: "/auth",
+        name: "auth",
+        builder: (context, state) => const AuthScreen(),
+      ),
+
+      /// auth forget password screen
+      GoRoute(
+        path: "/authForget",
+        name: "authForget",
+        builder: (context, state) => const AuthForgetPasswordScreen(),
+      ),
+
+      /// bottom nav screen
+      GoRoute(
+        path: "/bottomNav",
+        name: "bottomNav",
+        builder: (context, state) => const BottomNav(),
+      ),
+    ],
+  );
+}
