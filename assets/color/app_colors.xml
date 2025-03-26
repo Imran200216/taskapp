@@ -6,4 +6,13 @@
     <color name="grey">#999998</color>
     <color name="authTabBarBgColor">#F5F4F4</color>
     <color name="authErrorColor">#FF2D2D</color>
+
+    <!--  Toast bar color  -->
+    <color name="toastErrorColor">#FF2D2D</color>
+    <color name="toastSuccessColor">#02A75A</color>
+
+    <!-- Snack bar colors   -->
+    <color name="successSnackBarColor">#2E7C32</color>
+    <color name="failureSnackBarColor">#FF2D2D</color>
+    <color name="warningSnackBarColor">#EE981A</color>
 </resources>

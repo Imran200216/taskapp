@@ -1,0 +1,18 @@
+{
+  "authTitle": "Welcome to TaskNotify",
+  "authSubTitle": "Sign up or login below to manage your project, task and your productivity",
+  "login": "Login",
+  "signUp": "Sign Up",
+  "appleLogin": "Login with Apple",
+  "googleLogin": "Login with Google",
+  "continueWithEmail": "or continue with email",
+  "userNameHintText": "Enter your name",
+  "emailHintText": "Enter your email",
+  "passwordHintText": "Enter your password",
+  "confirmPasswordHintText": "Enter your confirm password",
+  "forgetPassword": "Forget Password?",
+  "forgetPasswordTitle": "Forget Password",
+  "forgetPasswordSubTitle": "Enter your email account to reset password",
+  "continueText": "Continue",
+  "backToLoginText": "Back to Login"
+}

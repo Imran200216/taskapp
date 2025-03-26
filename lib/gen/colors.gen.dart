@@ -22,14 +22,29 @@ class ColorName {
   /// Color: #000000
   static const Color black = Color(0xFF000000);
 
+  /// Color: #FF2D2D
+  static const Color failureSnackBarColor = Color(0xFFFF2D2D);
+
   /// Color: #999998
   static const Color grey = Color(0xFF999998);
 
   /// Color: #324646
   static const Color primary = Color(0xFF324646);
 
+  /// Color: #2E7C32
+  static const Color successSnackBarColor = Color(0xFF2E7C32);
+
+  /// Color: #FF2D2D
+  static const Color toastErrorColor = Color(0xFFFF2D2D);
+
+  /// Color: #02A75A
+  static const Color toastSuccessColor = Color(0xFF02A75A);
+
   /// Color: #00000000
   static const Color transparent = Color(0x00000000);
+
+  /// Color: #EE981A
+  static const Color warningSnackBarColor = Color(0xFFEE981A);
 
   /// Color: #FFFFFF
   static const Color white = Color(0xFFFFFFFF);

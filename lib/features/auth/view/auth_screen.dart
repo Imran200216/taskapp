@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:taskapp/features/auth/view/auth_login.dart';
 import 'package:taskapp/features/auth/view/auth_register.dart';
 import 'package:taskapp/gen/colors.gen.dart';
+import 'package:taskapp/l10n/app_localizations.dart';
 
 class AuthScreen extends StatefulWidget {
   const AuthScreen({super.key});
@@ -29,78 +30,83 @@ class _AuthScreenState extends State<AuthScreen>
 
   @override
   Widget build(BuildContext context) {
+    // app localization
+    final appLocalization = AppLocalizations.of(context);
+
     return SafeArea(
       child: Scaffold(
+        resizeToAvoidBottomInset: false,
         backgroundColor: ColorName.white,
-        body: Center(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              Container(
-                margin: EdgeInsets.symmetric(horizontal: 20.w, vertical: 20.h),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    /// title
-                    Text(
-                      textAlign: TextAlign.center,
-                      "Welcome to TaskNotify",
-                      style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-                        color: ColorName.primary,
-                        fontWeight: FontWeight.w600,
-                      ),
+        body: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            Container(
+              margin: EdgeInsets.symmetric(horizontal: 20.w, vertical: 20.h),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  /// Title
+                  Text(
+                    appLocalization.authTitle,
+                    textAlign: TextAlign.center,
+                    style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                      color: ColorName.primary,
+                      fontWeight: FontWeight.w600,
                     ),
+                  ),
 
-                    SizedBox(height: 10.h),
+                  SizedBox(height: 10.h),
 
-                    // Description
-                    Text(
-                      textAlign: TextAlign.center,
-                      "Sign up or login below to manage\nyour project, task and your productivity",
-                      style: Theme.of(context).textTheme.bodySmall!.copyWith(
-                        color: ColorName.grey,
-                        fontWeight: FontWeight.w500,
-                      ),
+                  // Description
+                  Text(
+                    appLocalization.authSubTitle,
+                    textAlign: TextAlign.center,
+                    style: Theme.of(context).textTheme.bodySmall!.copyWith(
+                      color: ColorName.grey,
+                      fontWeight: FontWeight.w500,
                     ),
+                  ),
 
-                    SizedBox(height: 10.h),
-                  ],
-                ),
+                  SizedBox(height: 10.h),
+                ],
               ),
+            ),
 
-              // tab bar
-              TabBar(
+            // Tab Bar
+            TabBar(
+              controller: _tabController,
+              indicatorColor: ColorName.primary,
+              indicatorSize: TabBarIndicatorSize.tab,
+              labelColor: ColorName.primary,
+              labelStyle: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                color: ColorName.primary,
+                fontWeight: FontWeight.w500,
+                fontSize: 12.sp,
+              ),
+              unselectedLabelColor: ColorName.grey,
+              automaticIndicatorColorAdjustment: true,
+              tabs: [
+                Tab(text: appLocalization.login),
+                Tab(text: appLocalization.signUp),
+              ],
+            ),
+
+            /// **Use Expanded to Fill Remaining Space**
+            Expanded(
+              child: TabBarView(
                 controller: _tabController,
-                indicatorColor: ColorName.primary,
-                indicatorSize: TabBarIndicatorSize.tab,
-                labelColor: ColorName.primary,
-                labelStyle: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                  color: ColorName.primary,
-                  fontWeight: FontWeight.w500,
-                  fontSize: 12.sp,
-                ),
-                unselectedLabelColor: ColorName.grey,
-                automaticIndicatorColorAdjustment: true,
-                tabs: const [Tab(text: "Login"), Tab(text: "Sign Up")],
-              ),
+                children: [
+                  // auth login
+                  AuthLogin(),
 
-              /// TabBarView (Screens for each tab)
-              Expanded(
-                child: TabBarView(
-                  controller: _tabController,
-                  children: [
-                    // auth login
-                    AuthLogin(),
-
-                    // auth sign up
-                    AuthRegister(),
-                  ],
-                ),
+                  // auth register
+                  AuthRegister(),
+                ],
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

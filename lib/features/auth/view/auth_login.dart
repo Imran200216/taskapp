@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
+import 'package:hive/hive.dart';
 import 'package:taskapp/commons/widgets/custom_auth_social_btn.dart';
 import 'package:taskapp/commons/widgets/custom_icon_filled_btn.dart';
 import 'package:taskapp/commons/widgets/custom_text_field.dart';
+import 'package:taskapp/core/validator/app_validator.dart';
 import 'package:taskapp/gen/assets.gen.dart';
 import 'package:taskapp/gen/colors.gen.dart';
+import 'package:taskapp/l10n/app_localizations.dart';
 
 class AuthLogin extends StatefulWidget {
   const AuthLogin({super.key});
@@ -24,6 +27,9 @@ class _AuthLoginState extends State<AuthLogin> {
 
   @override
   Widget build(BuildContext context) {
+    // app localization
+    final appLocalization = AppLocalizations.of(context);
+
     return Container(
       decoration: BoxDecoration(color: ColorName.authTabBarBgColor),
       child: Container(
@@ -36,8 +42,16 @@ class _AuthLoginState extends State<AuthLogin> {
             children: [
               // Apple login btn
               CustomAuthSocialBtn(
-                onTap: () {},
-                btnTitle: "Login with Apple",
+                onTap: () async {
+                  if (formKey.currentState!.validate()) {
+                    // apple sign in  functionality
+
+                    // hive auth status
+                    var box = Hive.box('userAuthStatusBox');
+                    await box.put('userAuthStatus', true);
+                  }
+                },
+                btnTitle: appLocalization.appleLogin,
                 iconPath: Assets.icon.svg.apple,
               ),
 
@@ -45,8 +59,16 @@ class _AuthLoginState extends State<AuthLogin> {
 
               // google login btn
               CustomAuthSocialBtn(
-                onTap: () {},
-                btnTitle: "Login with Google",
+                onTap: () async {
+                  if (formKey.currentState!.validate()) {
+                    // google sign in  functionality
+
+                    // hive auth status
+                    var box = Hive.box('userAuthStatusBox');
+                    await box.put('userAuthStatus', true);
+                  }
+                },
+                btnTitle: appLocalization.googleLogin,
                 iconPath: Assets.icon.svg.google,
               ),
 
@@ -55,7 +77,7 @@ class _AuthLoginState extends State<AuthLogin> {
               //  or continue with email text
               Text(
                 textAlign: TextAlign.center,
-                "or continue with email",
+                appLocalization.continueWithEmail,
                 style: Theme.of(context).textTheme.bodySmall!.copyWith(
                   color: ColorName.grey,
                   fontWeight: FontWeight.w500,
@@ -66,7 +88,8 @@ class _AuthLoginState extends State<AuthLogin> {
 
               // email text field
               CustomTextField(
-                hintText: "Enter your email",
+                validator: (value) => AppValidator.validateEmail(value),
+                hintText: appLocalization.emailHintText,
                 prefixIcon: Icons.alternate_email,
               ),
 
@@ -74,7 +97,8 @@ class _AuthLoginState extends State<AuthLogin> {
 
               // password text field
               CustomTextField(
-                hintText: "Enter your password",
+                validator: (value) => AppValidator.validatePassword(value),
+                hintText: appLocalization.passwordHintText,
                 isPassword: true,
                 prefixIcon: Icons.lock_outline,
               ),
@@ -83,7 +107,7 @@ class _AuthLoginState extends State<AuthLogin> {
 
               // forget password text btn
               Align(
-                alignment: Alignment.bottomLeft,
+                alignment: Alignment.bottomRight,
                 child: TextButton(
                   onPressed: () {
                     // forget password screen
@@ -91,9 +115,9 @@ class _AuthLoginState extends State<AuthLogin> {
                   },
                   child: Text(
                     textAlign: TextAlign.center,
-                    "Forget Password?",
+                    appLocalization.forgetPassword,
                     style: Theme.of(context).textTheme.bodySmall!.copyWith(
-                      color: ColorName.grey,
+                      color: ColorName.primary,
                       fontWeight: FontWeight.w500,
                     ),
                   ),
@@ -104,10 +128,23 @@ class _AuthLoginState extends State<AuthLogin> {
 
               // login btn
               CustomIconFilledBtn(
-                onTap: () {},
-                btnTitle: "Login",
+                onTap: () async {
+                  if (formKey.currentState!.validate()) {
+                    // login in functionality
+
+                    // hive auth status
+                    var box = Hive.box('userAuthStatusBox');
+                    await box.put('userAuthStatus', true);
+
+                    // bottom nav screen
+                    GoRouter.of(context).pushReplacementNamed("bottomNav");
+                  }
+                },
+                btnTitle: appLocalization.login,
                 iconPath: Assets.icon.svg.login,
               ),
+
+              SizedBox(height: 14.h),
             ],
           ),
         ),

@@ -1,0 +1,18 @@
+{
+  "authTitle": "مرحباً بكم في إشعار المهمة",
+  "authSubTitle": "سجل أو قم بتسجيل الدخول أدناه لإدارة مشروعك ومهمتك وإنتاجيتك",
+  "login": "تسجيل الدخول",
+  "signUp": "اشتراك",
+  "appleLogin": "تسجيل الدخول باستخدام Apple",
+  "googleLogin": "تسجيل الدخول باستخدام جوجل",
+  "continueWithEmail": "أو الاستمرار بالبريد الإلكتروني",
+  "userNameHintText": "أدخل اسمك",
+  "emailHintText": "أدخل بريدك الإلكتروني",
+  "passwordHintText": "أدخل كلمة المرور الخاصة بك",
+  "confirmPasswordHintText": "أدخل كلمة المرور الخاصة بك للتأكيد",
+  "forgetPassword": "نسيت كلمة المرور؟",
+  "forgetPasswordTitle": "نسيت كلمة المرور",
+  "forgetPasswordSubTitle": "أدخل حساب بريدك الإلكتروني لإعادة تعيين كلمة المرور",
+  "continueText": "يكمل",
+  "backToLoginText": "العودة إلى تسجيل الدخول"
+}

@@ -21,8 +21,8 @@ class _SplashScreenState extends State<SplashScreen> {
 
     // timer to navigate to on boarding screen
     Timer(const Duration(seconds: 2), () {
-      // on boarding screen
-      GoRouter.of(context).pushReplacementNamed("onBoarding");
+      // userLangPreference screen
+      GoRouter.of(context).pushReplacementNamed("userLangPreference");
     });
   }
 

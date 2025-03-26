@@ -2,6 +2,7 @@ import 'package:go_router/go_router.dart';
 import 'package:taskapp/features/auth/view/auth_forget_password_screen.dart';
 import 'package:taskapp/features/auth/view/auth_screen.dart';
 import 'package:taskapp/features/bottom_nav/view/bottom_nav.dart';
+import 'package:taskapp/features/language_preference/view/user_language_preference_screen.dart';
 import 'package:taskapp/features/on_boarding/view/on_boarding_screen.dart';
 import 'package:taskapp/features/splash/view/splash_screen.dart';
 
@@ -14,6 +15,13 @@ class AppRouter {
         path: "/",
         name: "splash",
         builder: (context, state) => const SplashScreen(),
+      ),
+
+      /// user language preference screen
+      GoRoute(
+        path: "/userLangPreference",
+        name: "userLangPreference",
+        builder: (context, state) => const UserLanguagePreferenceScreen(),
       ),
 
       /// on boarding screen
