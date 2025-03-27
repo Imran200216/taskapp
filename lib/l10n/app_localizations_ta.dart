@@ -55,4 +55,85 @@ class AppLocalizationsTa extends AppLocalizations {
 
   @override
   String get backToLoginText => 'உள்நுழைவுக்குத் திரும்பு';
+
+  @override
+  String get home => 'முகப்புப் பக்கம்';
+
+  @override
+  String get archive => 'காப்பகம்';
+
+  @override
+  String get addTask => 'பணியைச் சேர்';
+
+  @override
+  String get proverb => 'பழமொழி';
+
+  @override
+  String get profile => 'Pசுயவிவரம்';
+
+  @override
+  String get taskNameHintText => 'பணியின் பெயர்';
+
+  @override
+  String get taskDescriptionHintText => 'பணி விளக்கம்';
+
+  @override
+  String get myAccount => 'எனது கணக்கு';
+
+  @override
+  String get personalInfo => 'தனிப்பட்ட தகவல்';
+
+  @override
+  String get yourName => 'உங்கள் பெயர்';
+
+  @override
+  String get yourEmailAddress => 'உங்கள் மின்னஞ்சல் முகவரி';
+
+  @override
+  String get appInfo => 'இந்த ஆப்ஸ் பற்றி';
+
+  @override
+  String get taskNotifyAppInfoDescription => 'டாசிஃபை - ஸ்மார்ட் டாஸ்க் மேலாண்மை & உற்பத்தித்திறன்';
+
+  @override
+  String get devInfo => 'டெவலப்பர் தகவல்';
+
+  @override
+  String get devInfoSubTitle => 'டெவலப்பர் பற்றி';
+
+  @override
+  String get yourLanguage => 'உங்கள் மொழி';
+
+  @override
+  String get yourLanguageSubTitle => 'உங்களுக்கு விருப்பமான மொழியை மாற்றவும்';
+
+  @override
+  String get logout => 'வெளியேறு';
+
+  @override
+  String get logoutSubTitle => 'உங்கள் கணக்கிலிருந்து வெளியேற்றப்படுவீர்கள்.';
+
+  @override
+  String get emailRequired => 'மின்னஞ்சல் அவசியம்';
+
+  @override
+  String get invalidEmail => 'செல்லுபடியாகும் மின்னஞ்சல் முகவரியை உள்ளிடவும்.';
+
+  @override
+  String get passwordRequired => 'கடவுச்சொல் தேவை.';
+
+  @override
+  String get passwordMinLength => 'கடவுச்சொல் குறைந்தது 6 எழுத்துகள் நீளமாக இருக்க வேண்டும்.';
+
+  @override
+  String get confirmPasswordRequired => 'கடவுச்சொல்லை உறுதிப்படுத்துவது அவசியம்.';
+
+  @override
+  String get passwordsDoNotMatch => 'கடவுச்சொற்கள் பொருந்தவில்லை.';
+
+  @override
+  String get nameRequired => 'பெயர் அவசியம்';
+
+  @override
+  String get nameMinLength => 'பெயர் குறைந்தது 3 எழுத்துகள் நீளமாக இருக்க வேண்டும்.';
 }

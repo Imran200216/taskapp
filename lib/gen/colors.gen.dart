@@ -31,6 +31,9 @@ class ColorName {
   /// Color: #324646
   static const Color primary = Color(0xFF324646);
 
+  /// Color: #E3E3E3
+  static const Color profileBgColor = Color(0xFFE3E3E3);
+
   /// Color: #2E7C32
   static const Color successSnackBarColor = Color(0xFF2E7C32);
 

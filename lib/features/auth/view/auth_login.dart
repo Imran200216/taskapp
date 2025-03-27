@@ -88,7 +88,8 @@ class _AuthLoginState extends State<AuthLogin> {
 
               // email text field
               CustomTextField(
-                validator: (value) => AppValidator.validateEmail(value),
+                validator:
+                    (value) => AppValidator.validateEmail(context, value),
                 hintText: appLocalization.emailHintText,
                 prefixIcon: Icons.alternate_email,
               ),
@@ -97,7 +98,8 @@ class _AuthLoginState extends State<AuthLogin> {
 
               // password text field
               CustomTextField(
-                validator: (value) => AppValidator.validatePassword(value),
+                validator:
+                    (value) => AppValidator.validatePassword(context, value),
                 hintText: appLocalization.passwordHintText,
                 isPassword: true,
                 prefixIcon: Icons.lock_outline,

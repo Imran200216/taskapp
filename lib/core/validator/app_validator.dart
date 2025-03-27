@@ -1,40 +1,55 @@
+import 'package:flutter/material.dart';
+import 'package:taskapp/l10n/app_localizations.dart';
+
 class AppValidator {
-  /// Validate email
-  static String? validateEmail(String? value) {
+  static String? validateEmail(BuildContext context, String? value) {
+    // app localization
+    final appLocalization = AppLocalizations.of(context);
+
     if (value == null || value.isEmpty) {
-      return "Email is required";
+      return appLocalization.emailRequired;
     } else if (!RegExp(r'^[^@]+@[^@]+\.[^@]+').hasMatch(value)) {
-      return "Enter a valid email address";
+      return appLocalization.invalidEmail;
     }
     return null;
   }
 
-  /// Validate password
-  static String? validatePassword(String? value) {
+  static String? validatePassword(BuildContext context, String? value) {
+    // app localization
+    final appLocalization = AppLocalizations.of(context);
+
     if (value == null || value.isEmpty) {
-      return "Password is required";
+      return appLocalization.passwordRequired;
     } else if (value.length < 6) {
-      return "Password must be at least 6 characters long";
+      return appLocalization.passwordMinLength;
     }
     return null;
   }
 
-  /// Validate confirm password
-  static String? validateConfirmPassword(String? password, String? confirmPassword) {
+  static String? validateConfirmPassword(
+    BuildContext context,
+    String? password,
+    String? confirmPassword,
+  ) {
+    // app localization
+    final appLocalization = AppLocalizations.of(context);
+
     if (confirmPassword == null || confirmPassword.isEmpty) {
-      return "Confirm password is required";
+      return appLocalization.confirmPasswordRequired;
     } else if (password != confirmPassword) {
-      return "Passwords do not match";
+      return appLocalization.passwordsDoNotMatch;
     }
     return null;
   }
 
-  /// Validate name (optional)
-  static String? validateName(String? value) {
+  static String? validateName(BuildContext context, String? value) {
+    // app localization
+    final appLocalization = AppLocalizations.of(context);
+
     if (value == null || value.isEmpty) {
-      return "Name is required";
+      return appLocalization.nameRequired;
     } else if (value.length < 3) {
-      return "Name must be at least 3 characters long";
+      return appLocalization.nameMinLength;
     }
     return null;
   }

@@ -9,12 +9,16 @@ import 'package:taskapp/features/home/view/home_screen.dart';
 import 'package:taskapp/features/profile/view/profile_screen.dart';
 import 'package:taskapp/features/proverb/view/proverb_screen.dart';
 import 'package:taskapp/gen/colors.gen.dart';
+import 'package:taskapp/l10n/app_localizations.dart';
 
 class BottomNav extends StatelessWidget {
   const BottomNav({super.key});
 
   @override
   Widget build(BuildContext context) {
+    // app localization
+    final appLocalization = AppLocalizations.of(context);
+
     /// screens
     final List<Widget> pages = [
       // home
@@ -59,40 +63,40 @@ class BottomNav extends StatelessWidget {
                 // bottom nav bloc
                 context.read<BottomNavBloc>().add(SelectTab(index: index));
               },
-              items: const [
+              items: [
                 // home
                 BottomNavigationBarItem(
                   icon: Icon(Icons.home_outlined, color: ColorName.grey),
                   activeIcon: Icon(Icons.home, color: ColorName.primary),
-                  label: 'Home',
+                  label: appLocalization.home,
                 ),
 
                 // archive
                 BottomNavigationBarItem(
                   icon: Icon(Icons.archive_outlined, color: ColorName.grey),
                   activeIcon: Icon(Icons.archive, color: ColorName.primary),
-                  label: 'Archive',
+                  label: appLocalization.archive,
                 ),
 
                 // add
                 BottomNavigationBarItem(
                   icon: Icon(Icons.add_circle_outline, color: ColorName.grey),
                   activeIcon: Icon(Icons.add_circle, color: ColorName.primary),
-                  label: 'Add Task',
+                  label: appLocalization.addTask,
                 ),
 
                 // proverb
                 BottomNavigationBarItem(
                   icon: Icon(Icons.lightbulb_outline, color: ColorName.grey),
                   activeIcon: Icon(Icons.lightbulb, color: ColorName.primary),
-                  label: 'Proverb',
+                  label: appLocalization.proverb,
                 ),
 
                 // profile
                 BottomNavigationBarItem(
                   icon: Icon(Icons.person_outline, color: ColorName.grey),
                   activeIcon: Icon(Icons.person, color: ColorName.primary),
-                  label: 'Profile',
+                  label: appLocalization.profile,
                 ),
               ],
             ),

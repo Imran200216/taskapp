@@ -3,10 +3,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:taskapp/core/router/app_router.dart';
+import 'package:taskapp/core/service/quote_service.dart';
 import 'package:taskapp/core/styles/app_text_styles.dart';
 import 'package:taskapp/features/bottom_nav/view_modal/bottom_nav_bloc.dart';
 import 'package:taskapp/features/language_preference/view_modal/lang_pref_bloc/language_preference_bloc.dart';
 import 'package:taskapp/features/on_boarding/view_modal/on_boarding_bloc.dart';
+import 'package:taskapp/features/proverb/view_modal/quote_bloc/quote_bloc.dart';
 import 'package:taskapp/gen/colors.gen.dart';
 import 'package:taskapp/gen/fonts.gen.dart';
 import 'package:taskapp/l10n/app_localizations.dart';
@@ -52,6 +54,11 @@ class MyApp extends StatelessWidget {
 
         // user language preference bloc
         BlocProvider(create: (context) => LanguagePreferenceBloc()),
+
+        // quotes bloc
+        BlocProvider(
+          create: (context) => QuoteBloc(QuoteService())..add(FetchQuote()),
+        ),
       ],
       child: ScreenUtilInit(
         designSize: const Size(360, 690),
@@ -76,12 +83,15 @@ class MyApp extends StatelessWidget {
                 // arabic
                 Locale("ar"),
               ],
-              locale: Locale("ta"),
+              // current app localization
+              locale: Locale("en"),
               // router
               routerConfig: AppRouter.router,
               title: 'Task App',
               theme: ThemeData(
+                // scaffold bg color
                 scaffoldBackgroundColor: ColorName.white,
+                // colors
                 colorScheme: ColorScheme.fromSeed(seedColor: ColorName.primary),
                 // font family
                 fontFamily: FontFamily.poppins,

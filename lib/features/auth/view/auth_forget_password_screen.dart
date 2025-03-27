@@ -78,7 +78,8 @@ class _AuthForgetPasswordScreenState extends State<AuthForgetPasswordScreen> {
                   // email text field
                   CustomTextField(
                     textEditingController: emailForgetPasswordController,
-                    validator: (value) => AppValidator.validateEmail(value),
+                    validator:
+                        (value) => AppValidator.validateEmail(context, value),
                     hasBorder: true,
                     hintText: appLocalization.emailHintText,
                     prefixIcon: Icons.alternate_email,

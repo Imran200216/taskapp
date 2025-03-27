@@ -84,8 +84,14 @@ class $AssetsIconSvgGen {
   /// File path: assets/icon/svg/login.svg
   String get login => 'assets/icon/svg/login.svg';
 
+  /// File path: assets/icon/svg/quote-ending.svg
+  String get quoteEnding => 'assets/icon/svg/quote-ending.svg';
+
+  /// File path: assets/icon/svg/quote-starting.svg
+  String get quoteStarting => 'assets/icon/svg/quote-starting.svg';
+
   /// List of all assets
-  List<String> get values => [apple, google, login];
+  List<String> get values => [apple, google, login, quoteEnding, quoteStarting];
 }
 
 class $AssetsImgJpgGen {
@@ -102,14 +108,35 @@ class $AssetsImgJpgGen {
 class $AssetsImgSvgGen {
   const $AssetsImgSvgGen();
 
+  /// File path: assets/img/svg/add-task.svg
+  String get addTask => 'assets/img/svg/add-task.svg';
+
   /// File path: assets/img/svg/decoration-top.svg
   String get decorationTop => 'assets/img/svg/decoration-top.svg';
 
   /// File path: assets/img/svg/forget-password.svg
   String get forgetPassword => 'assets/img/svg/forget-password.svg';
 
+  /// File path: assets/img/svg/leaf.svg
+  String get leaf => 'assets/img/svg/leaf.svg';
+
+  /// File path: assets/img/svg/proverb-bottom-decoration.svg
+  String get proverbBottomDecoration =>
+      'assets/img/svg/proverb-bottom-decoration.svg';
+
+  /// File path: assets/img/svg/proverb-top-decoration.svg
+  String get proverbTopDecoration =>
+      'assets/img/svg/proverb-top-decoration.svg';
+
   /// List of all assets
-  List<String> get values => [decorationTop, forgetPassword];
+  List<String> get values => [
+    addTask,
+    decorationTop,
+    forgetPassword,
+    leaf,
+    proverbBottomDecoration,
+    proverbTopDecoration,
+  ];
 }
 
 class Assets {

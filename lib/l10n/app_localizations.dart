@@ -192,6 +192,168 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Back to Login'**
   String get backToLoginText;
+
+  /// No description provided for @home.
+  ///
+  /// In en, this message translates to:
+  /// **'Home'**
+  String get home;
+
+  /// No description provided for @archive.
+  ///
+  /// In en, this message translates to:
+  /// **'Archive'**
+  String get archive;
+
+  /// No description provided for @addTask.
+  ///
+  /// In en, this message translates to:
+  /// **'Add Task'**
+  String get addTask;
+
+  /// No description provided for @proverb.
+  ///
+  /// In en, this message translates to:
+  /// **'Proverb'**
+  String get proverb;
+
+  /// No description provided for @profile.
+  ///
+  /// In en, this message translates to:
+  /// **'Profile'**
+  String get profile;
+
+  /// No description provided for @taskNameHintText.
+  ///
+  /// In en, this message translates to:
+  /// **'Task name'**
+  String get taskNameHintText;
+
+  /// No description provided for @taskDescriptionHintText.
+  ///
+  /// In en, this message translates to:
+  /// **'Task description'**
+  String get taskDescriptionHintText;
+
+  /// No description provided for @myAccount.
+  ///
+  /// In en, this message translates to:
+  /// **'My account'**
+  String get myAccount;
+
+  /// No description provided for @personalInfo.
+  ///
+  /// In en, this message translates to:
+  /// **'Personal info'**
+  String get personalInfo;
+
+  /// No description provided for @yourName.
+  ///
+  /// In en, this message translates to:
+  /// **'Your name'**
+  String get yourName;
+
+  /// No description provided for @yourEmailAddress.
+  ///
+  /// In en, this message translates to:
+  /// **'Your email address'**
+  String get yourEmailAddress;
+
+  /// No description provided for @appInfo.
+  ///
+  /// In en, this message translates to:
+  /// **'App Info'**
+  String get appInfo;
+
+  /// No description provided for @taskNotifyAppInfoDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Tasify - Smart Task Management & Productivity'**
+  String get taskNotifyAppInfoDescription;
+
+  /// No description provided for @devInfo.
+  ///
+  /// In en, this message translates to:
+  /// **'Dev Info'**
+  String get devInfo;
+
+  /// No description provided for @devInfoSubTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'About the Developer'**
+  String get devInfoSubTitle;
+
+  /// No description provided for @yourLanguage.
+  ///
+  /// In en, this message translates to:
+  /// **'Your Language'**
+  String get yourLanguage;
+
+  /// No description provided for @yourLanguageSubTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Change your preferred language'**
+  String get yourLanguageSubTitle;
+
+  /// No description provided for @logout.
+  ///
+  /// In en, this message translates to:
+  /// **'Logout'**
+  String get logout;
+
+  /// No description provided for @logoutSubTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'You will be signed out from your account'**
+  String get logoutSubTitle;
+
+  /// No description provided for @emailRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'Email is required'**
+  String get emailRequired;
+
+  /// No description provided for @invalidEmail.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter a valid email address'**
+  String get invalidEmail;
+
+  /// No description provided for @passwordRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'Password is required'**
+  String get passwordRequired;
+
+  /// No description provided for @passwordMinLength.
+  ///
+  /// In en, this message translates to:
+  /// **'Password must be at least 6 characters long'**
+  String get passwordMinLength;
+
+  /// No description provided for @confirmPasswordRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'Confirm password is required'**
+  String get confirmPasswordRequired;
+
+  /// No description provided for @passwordsDoNotMatch.
+  ///
+  /// In en, this message translates to:
+  /// **'Passwords do not match'**
+  String get passwordsDoNotMatch;
+
+  /// No description provided for @nameRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'Name is required'**
+  String get nameRequired;
+
+  /// No description provided for @nameMinLength.
+  ///
+  /// In en, this message translates to:
+  /// **'Name must be at least 3 characters long'**
+  String get nameMinLength;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

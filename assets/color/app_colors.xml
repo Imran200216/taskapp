@@ -15,4 +15,7 @@
     <color name="successSnackBarColor">#2E7C32</color>
     <color name="failureSnackBarColor">#FF2D2D</color>
     <color name="warningSnackBarColor">#EE981A</color>
+
+    <!--  Profile screen bg color  -->
+    <color name="profileBgColor">#E3E3E3</color>
 </resources>

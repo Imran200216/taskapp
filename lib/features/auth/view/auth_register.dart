@@ -56,7 +56,7 @@ class _AuthRegisterState extends State<AuthRegister> {
               // user name  text field
               CustomTextField(
                 textEditingController: userNameRegisterController,
-                validator: (value) => AppValidator.validateName(value),
+                validator: (value) => AppValidator.validateName(context, value),
                 hintText: appLocalization.userNameHintText,
                 prefixIcon: Icons.person_outline,
               ),
@@ -66,7 +66,8 @@ class _AuthRegisterState extends State<AuthRegister> {
               // email text field
               CustomTextField(
                 textEditingController: emailRegisterController,
-                validator: (value) => AppValidator.validateEmail(value),
+                validator:
+                    (value) => AppValidator.validateEmail(context, value),
                 hintText: appLocalization.emailHintText,
                 prefixIcon: Icons.alternate_email,
               ),
@@ -76,7 +77,8 @@ class _AuthRegisterState extends State<AuthRegister> {
               // password text field
               CustomTextField(
                 textEditingController: passwordRegisterController,
-                validator: (value) => AppValidator.validatePassword(value),
+                validator:
+                    (value) => AppValidator.validatePassword(context, value),
                 hintText: appLocalization.passwordHintText,
                 isPassword: true,
                 prefixIcon: Icons.lock_outline,
@@ -89,6 +91,7 @@ class _AuthRegisterState extends State<AuthRegister> {
                 textEditingController: confirmPasswordRegisterController,
                 validator:
                     (value) => AppValidator.validateConfirmPassword(
+                      context,
                       passwordRegisterController.text,
                       value,
                     ),

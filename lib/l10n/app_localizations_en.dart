@@ -55,4 +55,85 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get backToLoginText => 'Back to Login';
+
+  @override
+  String get home => 'Home';
+
+  @override
+  String get archive => 'Archive';
+
+  @override
+  String get addTask => 'Add Task';
+
+  @override
+  String get proverb => 'Proverb';
+
+  @override
+  String get profile => 'Profile';
+
+  @override
+  String get taskNameHintText => 'Task name';
+
+  @override
+  String get taskDescriptionHintText => 'Task description';
+
+  @override
+  String get myAccount => 'My account';
+
+  @override
+  String get personalInfo => 'Personal info';
+
+  @override
+  String get yourName => 'Your name';
+
+  @override
+  String get yourEmailAddress => 'Your email address';
+
+  @override
+  String get appInfo => 'App Info';
+
+  @override
+  String get taskNotifyAppInfoDescription => 'Tasify - Smart Task Management & Productivity';
+
+  @override
+  String get devInfo => 'Dev Info';
+
+  @override
+  String get devInfoSubTitle => 'About the Developer';
+
+  @override
+  String get yourLanguage => 'Your Language';
+
+  @override
+  String get yourLanguageSubTitle => 'Change your preferred language';
+
+  @override
+  String get logout => 'Logout';
+
+  @override
+  String get logoutSubTitle => 'You will be signed out from your account';
+
+  @override
+  String get emailRequired => 'Email is required';
+
+  @override
+  String get invalidEmail => 'Enter a valid email address';
+
+  @override
+  String get passwordRequired => 'Password is required';
+
+  @override
+  String get passwordMinLength => 'Password must be at least 6 characters long';
+
+  @override
+  String get confirmPasswordRequired => 'Confirm password is required';
+
+  @override
+  String get passwordsDoNotMatch => 'Passwords do not match';
+
+  @override
+  String get nameRequired => 'Name is required';
+
+  @override
+  String get nameMinLength => 'Name must be at least 3 characters long';
 }

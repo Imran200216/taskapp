@@ -55,4 +55,85 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get backToLoginText => 'العودة إلى تسجيل الدخول';
+
+  @override
+  String get home => 'بيت';
+
+  @override
+  String get archive => 'أرشيف';
+
+  @override
+  String get addTask => 'إضافة مهمة';
+
+  @override
+  String get proverb => 'مثل';
+
+  @override
+  String get profile => 'حساب تعريفي';
+
+  @override
+  String get taskNameHintText => 'اسم المهمة';
+
+  @override
+  String get taskDescriptionHintText => 'وصف المهمة';
+
+  @override
+  String get myAccount => 'حسابي';
+
+  @override
+  String get personalInfo => 'المعلومات الشخصية';
+
+  @override
+  String get yourName => 'اسمك';
+
+  @override
+  String get yourEmailAddress => 'عنوان بريدك  الإلكتروني';
+
+  @override
+  String get appInfo => 'معلومات التطبيق';
+
+  @override
+  String get taskNotifyAppInfoDescription => 'Tasify - إدارة المهام والإنتاجية الذكية';
+
+  @override
+  String get devInfo => 'معلومات التطوير';
+
+  @override
+  String get devInfoSubTitle => 'نبذة عن المطور';
+
+  @override
+  String get yourLanguage => 'لغتك';
+
+  @override
+  String get yourLanguageSubTitle => 'تغيير اللغة المفضلة لديك';
+
+  @override
+  String get logout => 'تسجيل الخروج';
+
+  @override
+  String get logoutSubTitle => 'سيتم تسجيل خروجك من حسابك';
+
+  @override
+  String get emailRequired => 'البريد الإلكتروني مطلوب';
+
+  @override
+  String get invalidEmail => 'أدخل عنوان بريد إلكتروني صالح';
+
+  @override
+  String get passwordRequired => 'كلمة المرور مطلوبة';
+
+  @override
+  String get passwordMinLength => 'يجب أن تكون كلمة المرور مكونة من 6 أحرف على الأقل';
+
+  @override
+  String get confirmPasswordRequired => 'تأكيد كلمة المرور مطلوب';
+
+  @override
+  String get passwordsDoNotMatch => 'كلمات المرور غير متطابقة';
+
+  @override
+  String get nameRequired => 'الاسم مطلوب';
+
+  @override
+  String get nameMinLength => 'يجب أن يكون الاسم مكونًا من 3 أحرف على الأقل';
 }

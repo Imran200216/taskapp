@@ -8,7 +8,7 @@ import 'package:taskapp/features/splash/view/splash_screen.dart';
 
 class AppRouter {
   static final GoRouter router = GoRouter(
-    initialLocation: "/",
+    initialLocation: "/bottomNav",
     routes: [
       /// splash screen
       GoRoute(
