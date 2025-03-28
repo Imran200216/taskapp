@@ -10,9 +10,14 @@ import 'package:taskapp/gen/assets.gen.dart';
 import 'package:taskapp/gen/colors.gen.dart';
 import 'package:taskapp/l10n/app_localizations.dart';
 
-class AddTaskScreen extends StatelessWidget {
+class AddTaskScreen extends StatefulWidget {
   const AddTaskScreen({super.key});
 
+  @override
+  State<AddTaskScreen> createState() => _AddTaskScreenState();
+}
+
+class _AddTaskScreenState extends State<AddTaskScreen> {
   @override
   Widget build(BuildContext context) {
     // app localization
@@ -84,10 +89,9 @@ class AddTaskScreen extends StatelessWidget {
 
                       /// Task description text field
                       CustomDescriptionTextArea(
-                        maxLines: 8,
+                        hintText: "Task Description",
                         prefixIcon: Icons.description_outlined,
-                        hintText: appLocalization.taskDescriptionHintText,
-                        hasBorder: true,
+                        maxLines: 5,
                       ),
 
                       /// Task duration of start and end
@@ -113,8 +117,32 @@ class AddTaskScreen extends StatelessWidget {
                         },
                       ),
 
-                      /// tags text field
-
+                      /// Task Urgency drop down text field
+                      SizedBox(
+                        height: 80.h,
+                        child: Row(
+                          children: [
+                            Expanded(
+                              child: CustomDropdownTextField<String>(
+                                hasBorder: true,
+                                hintText: "Select an Task Urgency",
+                                prefixIcon: Icons.notifications_on_outlined,
+                                items: [
+                                  "Urgent (Immediate attention)",
+                                  "High Priority (Important but not immediate)",
+                                  "Normal (Routine work)",
+                                  "Low Priority (Can be done later)",
+                                ],
+                                itemLabel: (value) => value,
+                                selectedValue: "Urgent (Immediate attention)",
+                                onChanged: (value) {
+                                  print("Selected: $value");
+                                },
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
                     ],
                   ),
                 ),

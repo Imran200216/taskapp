@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hive_flutter/adapters.dart';
@@ -17,6 +18,11 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  /// safe area bg color
+  SystemChrome.setSystemUIOverlayStyle(
+    SystemUiOverlayStyle(statusBarColor: ColorName.primary.withOpacity(0.6)),
+  );
 
   /// hive
   await Hive.initFlutter();

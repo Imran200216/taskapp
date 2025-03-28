@@ -65,7 +65,8 @@ dependencies:
   flutter_contacts: ^1.1.9+2
   # connectivity_plus:
   connectivity_plus: ^6.1.3
-
+  # shimmer
+  skeletonizer: ^1.4.3
 
 
 dev_dependencies:

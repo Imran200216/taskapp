@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 import 'package:taskapp/features/proverb/view_modal/quote_bloc/quote_bloc.dart';
+import 'package:taskapp/features/proverb/widgets/custom_build_quote_display.dart';
 import 'package:taskapp/gen/assets.gen.dart';
 import 'package:taskapp/gen/colors.gen.dart';
 
@@ -51,11 +53,22 @@ class ProverbScreen extends StatelessWidget {
                 child: BlocBuilder<QuoteBloc, QuoteState>(
                   builder: (context, state) {
                     if (state is QuoteLoading) {
-                      return const CircularProgressIndicator();
+                      return Skeletonizer(
+                        child: CustomBuildQuoteDisplay(
+                          quote: "Loading quote...",
+                          author: "Loading...",
+                        ),
+                      );
                     } else if (state is QuoteLoaded) {
-                      return _buildQuoteDisplay(state.quote, state.author);
+                      return CustomBuildQuoteDisplay(
+                        quote: state.quote,
+                        author: state.author,
+                      );
                     } else if (state is QuoteError) {
-                      return _buildQuoteDisplay(state.message, "");
+                      return CustomBuildQuoteDisplay(
+                        quote: state.message,
+                        author: "",
+                      );
                     }
                     return const Text("Press the button to load a quote");
                   },
@@ -65,65 +78,6 @@ class ProverbScreen extends StatelessWidget {
           ),
         ),
       ),
-    );
-  }
-
-  /// build quote
-  Widget _buildQuoteDisplay(String quote, String author) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.center,
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        /// Starting quotes
-        SvgPicture.asset(
-          Assets.icon.svg.quoteStarting,
-          height: 50.h,
-          width: 50.w,
-          fit: BoxFit.cover,
-          color: ColorName.profileBgColor,
-        ),
-
-        SizedBox(height: 20.h),
-
-        /// Quote Text
-        Padding(
-          padding: EdgeInsets.symmetric(horizontal: 20.w),
-          child: Text(
-            '"$quote"',
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              fontSize: 18.sp,
-              fontWeight: FontWeight.w600,
-              color: ColorName.profileBgColor,
-            ),
-          ),
-        ),
-
-        SizedBox(height: 10.h),
-
-        /// Author Name
-        Text(
-          author.isNotEmpty ? "- $author" : "",
-          textAlign: TextAlign.center,
-          style: TextStyle(
-            fontSize: 16.sp,
-            fontStyle: FontStyle.italic,
-            fontWeight: FontWeight.w500,
-            color: ColorName.grey,
-          ),
-        ),
-
-        SizedBox(height: 20.h),
-
-        /// Ending quotes
-        SvgPicture.asset(
-          Assets.icon.svg.quoteEnding,
-          height: 50.h,
-          width: 50.w,
-          fit: BoxFit.cover,
-          color: ColorName.profileBgColor,
-        ),
-      ],
     );
   }
 }

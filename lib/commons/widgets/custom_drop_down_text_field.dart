@@ -90,11 +90,16 @@ class _CustomDropdownTextFieldState<T> extends State<CustomDropdownTextField<T>>
       items: widget.items.map((T value) {
         return DropdownMenuItem<T>(
           value: value,
-          child: Text(
-            widget.itemLabel(value),
-            style: Theme.of(context).textTheme.bodySmall!.copyWith(
-              color: ColorName.black,
-              fontWeight: FontWeight.w500,
+          child: FittedBox(
+            fit: BoxFit.scaleDown,
+            child: Text(
+              widget.itemLabel(value),
+              overflow: TextOverflow.ellipsis,
+              maxLines: 1,
+              style: Theme.of(context).textTheme.bodySmall!.copyWith(
+                color: ColorName.black,
+                fontWeight: FontWeight.w500,
+              ),
             ),
           ),
         );
