@@ -136,4 +136,79 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get nameMinLength => 'Name must be at least 3 characters long';
+
+  @override
+  String get noArchiveFound => 'No archive found';
+
+  @override
+  String get taskName => 'Task name';
+
+  @override
+  String get taskDescription => 'Task description';
+
+  @override
+  String get dataRange => 'Pick a date range';
+
+  @override
+  String get notificationAlert => 'Notification alert';
+
+  @override
+  String get taskStatus => 'Task Status';
+
+  @override
+  String get pendingStatus => 'Pending';
+
+  @override
+  String get inProgressStatus => 'In Progress';
+
+  @override
+  String get completedStatus => 'Completed';
+
+  @override
+  String get overDueStatus => 'Overdue';
+
+  @override
+  String get taskPriority => 'Task Priority';
+
+  @override
+  String get taskPriorityHigh => 'High';
+
+  @override
+  String get taskPriorityMedium => 'Medium';
+
+  @override
+  String get taskPriorityLow => 'Low';
+
+  @override
+  String get notificationOn => 'Notification On';
+
+  @override
+  String get notificationOff => 'Notification Off';
+
+  @override
+  String get archiveTask => 'ArchiveTask';
+
+  @override
+  String get taskNameRequired => 'Task name is required';
+
+  @override
+  String get taskNameMinLength => 'Task name must be at least 3 characters long';
+
+  @override
+  String get taskDescriptionRequired => 'Task description is required';
+
+  @override
+  String get taskDescriptionMinLength => 'Task description must be at least 10 characters long';
+
+  @override
+  String get notificationRequired => 'Notification selection is required';
+
+  @override
+  String get dateRangeRequired => 'Date range selection is required';
+
+  @override
+  String get taskStatusRequired => 'Task status selection is required';
+
+  @override
+  String get taskPriorityRequired => 'Task priority selection is required';
 }

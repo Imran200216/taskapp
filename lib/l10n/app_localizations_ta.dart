@@ -136,4 +136,79 @@ class AppLocalizationsTa extends AppLocalizations {
 
   @override
   String get nameMinLength => 'பெயர் குறைந்தது 3 எழுத்துகள் நீளமாக இருக்க வேண்டும்.';
+
+  @override
+  String get noArchiveFound => 'காப்பகம் எதுவும் கிடைக்கவில்லை.';
+
+  @override
+  String get taskName => 'பணியின் பெயர்';
+
+  @override
+  String get taskDescription => 'பணி விளக்கம்';
+
+  @override
+  String get dataRange => 'தேதி வரம்பைத் தேர்ந்தெடுக்கவும்';
+
+  @override
+  String get notificationAlert => 'அறிவிப்பு எச்சரிக்கை';
+
+  @override
+  String get taskStatus => 'பணி நிலை';
+
+  @override
+  String get pendingStatus => 'நிலுவையில் உள்ளது';
+
+  @override
+  String get inProgressStatus => 'செயல்பாட்டில் உள்ளது';
+
+  @override
+  String get completedStatus => 'முடிந்தது';
+
+  @override
+  String get overDueStatus => 'காலாவதியானது';
+
+  @override
+  String get taskPriority => 'பணி முன்னுரிமை';
+
+  @override
+  String get taskPriorityHigh => 'உயர்';
+
+  @override
+  String get taskPriorityMedium => 'நடுத்தரம்';
+
+  @override
+  String get taskPriorityLow => 'குறைந்த';
+
+  @override
+  String get notificationOn => 'அறிவிப்பு இயக்கப்பட்டது';
+
+  @override
+  String get notificationOff => 'அறிவிப்பு முடக்கப்பட்டுள்ளது';
+
+  @override
+  String get archiveTask => 'காப்பகப் பணி';
+
+  @override
+  String get taskNameRequired => 'பணியின் பெயர் அவசியம்.';
+
+  @override
+  String get taskNameMinLength => 'பணியின் பெயர் குறைந்தது 3 எழுத்துகள் நீளமாக இருக்க வேண்டும்.';
+
+  @override
+  String get taskDescriptionRequired => 'பணி விளக்கம் அவசியம்.';
+
+  @override
+  String get taskDescriptionMinLength => 'பணி விளக்கம் குறைந்தது 10 எழுத்துகள் நீளமாக இருக்க வேண்டும்.';
+
+  @override
+  String get notificationRequired => 'அறிவிப்புத் தேர்வு அவசியம்';
+
+  @override
+  String get dateRangeRequired => 'தேதி வரம்பைத் தேர்ந்தெடுக்க வேண்டும்.';
+
+  @override
+  String get taskStatusRequired => 'பணி நிலையைத் தேர்ந்தெடுக்க வேண்டும்.';
+
+  @override
+  String get taskPriorityRequired => 'பணி முன்னுரிமைத் தேர்வு அவசியம்.';
 }

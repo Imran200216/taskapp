@@ -120,6 +120,9 @@ class $AssetsImgSvgGen {
   /// File path: assets/img/svg/leaf.svg
   String get leaf => 'assets/img/svg/leaf.svg';
 
+  /// File path: assets/img/svg/no-task.svg
+  String get noTask => 'assets/img/svg/no-task.svg';
+
   /// File path: assets/img/svg/proverb-bottom-decoration.svg
   String get proverbBottomDecoration =>
       'assets/img/svg/proverb-bottom-decoration.svg';
@@ -134,6 +137,7 @@ class $AssetsImgSvgGen {
     decorationTop,
     forgetPassword,
     leaf,
+    noTask,
     proverbBottomDecoration,
     proverbTopDecoration,
   ];

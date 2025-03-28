@@ -2,14 +2,13 @@ import 'package:go_router/go_router.dart';
 import 'package:taskapp/features/auth/view/auth_forget_password_screen.dart';
 import 'package:taskapp/features/auth/view/auth_screen.dart';
 import 'package:taskapp/features/bottom_nav/view/bottom_nav.dart';
-import 'package:taskapp/features/contact/view/contact_screen.dart';
 import 'package:taskapp/features/language_preference/view/user_language_preference_screen.dart';
 import 'package:taskapp/features/on_boarding/view/on_boarding_screen.dart';
 import 'package:taskapp/features/splash/view/splash_screen.dart';
 
 class AppRouter {
   static final GoRouter router = GoRouter(
-    initialLocation: "/contact",
+    initialLocation: "/bottomNav",
     routes: [
       /// splash screen
       GoRoute(
@@ -51,13 +50,6 @@ class AppRouter {
         path: "/bottomNav",
         name: "bottomNav",
         builder: (context, state) => const BottomNav(),
-      ),
-
-      /// contact screen
-      GoRoute(
-        path: "/contact",
-        name: "contact",
-        builder: (context, state) => const ContactScreen(),
       ),
     ],
   );

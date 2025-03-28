@@ -136,4 +136,79 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get nameMinLength => 'يجب أن يكون الاسم مكونًا من 3 أحرف على الأقل';
+
+  @override
+  String get noArchiveFound => 'لم يتم العثور على الأرشيف';
+
+  @override
+  String get taskName => 'اسم المهمة';
+
+  @override
+  String get taskDescription => 'وصف المهمة';
+
+  @override
+  String get dataRange => 'اختر نطاق التاريخ';
+
+  @override
+  String get notificationAlert => 'تنبيه الإشعار';
+
+  @override
+  String get taskStatus => 'حالة المهمة';
+
+  @override
+  String get pendingStatus => 'قيد الانتظار';
+
+  @override
+  String get inProgressStatus => 'في تَقَدم';
+
+  @override
+  String get completedStatus => 'مكتمل';
+
+  @override
+  String get overDueStatus => 'متأخر';
+
+  @override
+  String get taskPriority => 'أولوية المهمة';
+
+  @override
+  String get taskPriorityHigh => 'عالي';
+
+  @override
+  String get taskPriorityMedium => 'واسطة';
+
+  @override
+  String get taskPriorityLow => 'قليل';
+
+  @override
+  String get notificationOn => 'الإشعار قيد التشغيل';
+
+  @override
+  String get notificationOff => 'إيقاف الإشعارات';
+
+  @override
+  String get archiveTask => 'أرشيف المهمة';
+
+  @override
+  String get taskNameRequired => 'اسم المهمة مطلوب';
+
+  @override
+  String get taskNameMinLength => 'يجب أن يكون اسم المهمة 3 أحرف على الأقل';
+
+  @override
+  String get taskDescriptionRequired => 'وصف المهمة مطلوب';
+
+  @override
+  String get taskDescriptionMinLength => 'يجب أن يكون وصف المهمة 10 أحرف على الأقل';
+
+  @override
+  String get notificationRequired => 'مطلوب اختيار الإشعار';
+
+  @override
+  String get dateRangeRequired => 'مطلوب تحديد نطاق التاريخ';
+
+  @override
+  String get taskStatusRequired => 'مطلوب تحديد حالة المهمة';
+
+  @override
+  String get taskPriorityRequired => 'مطلوب تحديد أولوية المهمة';
 }

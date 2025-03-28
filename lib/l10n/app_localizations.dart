@@ -354,6 +354,156 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Name must be at least 3 characters long'**
   String get nameMinLength;
+
+  /// No description provided for @noArchiveFound.
+  ///
+  /// In en, this message translates to:
+  /// **'No archive found'**
+  String get noArchiveFound;
+
+  /// No description provided for @taskName.
+  ///
+  /// In en, this message translates to:
+  /// **'Task name'**
+  String get taskName;
+
+  /// No description provided for @taskDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Task description'**
+  String get taskDescription;
+
+  /// No description provided for @dataRange.
+  ///
+  /// In en, this message translates to:
+  /// **'Pick a date range'**
+  String get dataRange;
+
+  /// No description provided for @notificationAlert.
+  ///
+  /// In en, this message translates to:
+  /// **'Notification alert'**
+  String get notificationAlert;
+
+  /// No description provided for @taskStatus.
+  ///
+  /// In en, this message translates to:
+  /// **'Task Status'**
+  String get taskStatus;
+
+  /// No description provided for @pendingStatus.
+  ///
+  /// In en, this message translates to:
+  /// **'Pending'**
+  String get pendingStatus;
+
+  /// No description provided for @inProgressStatus.
+  ///
+  /// In en, this message translates to:
+  /// **'In Progress'**
+  String get inProgressStatus;
+
+  /// No description provided for @completedStatus.
+  ///
+  /// In en, this message translates to:
+  /// **'Completed'**
+  String get completedStatus;
+
+  /// No description provided for @overDueStatus.
+  ///
+  /// In en, this message translates to:
+  /// **'Overdue'**
+  String get overDueStatus;
+
+  /// No description provided for @taskPriority.
+  ///
+  /// In en, this message translates to:
+  /// **'Task Priority'**
+  String get taskPriority;
+
+  /// No description provided for @taskPriorityHigh.
+  ///
+  /// In en, this message translates to:
+  /// **'High'**
+  String get taskPriorityHigh;
+
+  /// No description provided for @taskPriorityMedium.
+  ///
+  /// In en, this message translates to:
+  /// **'Medium'**
+  String get taskPriorityMedium;
+
+  /// No description provided for @taskPriorityLow.
+  ///
+  /// In en, this message translates to:
+  /// **'Low'**
+  String get taskPriorityLow;
+
+  /// No description provided for @notificationOn.
+  ///
+  /// In en, this message translates to:
+  /// **'Notification On'**
+  String get notificationOn;
+
+  /// No description provided for @notificationOff.
+  ///
+  /// In en, this message translates to:
+  /// **'Notification Off'**
+  String get notificationOff;
+
+  /// No description provided for @archiveTask.
+  ///
+  /// In en, this message translates to:
+  /// **'ArchiveTask'**
+  String get archiveTask;
+
+  /// No description provided for @taskNameRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'Task name is required'**
+  String get taskNameRequired;
+
+  /// No description provided for @taskNameMinLength.
+  ///
+  /// In en, this message translates to:
+  /// **'Task name must be at least 3 characters long'**
+  String get taskNameMinLength;
+
+  /// No description provided for @taskDescriptionRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'Task description is required'**
+  String get taskDescriptionRequired;
+
+  /// No description provided for @taskDescriptionMinLength.
+  ///
+  /// In en, this message translates to:
+  /// **'Task description must be at least 10 characters long'**
+  String get taskDescriptionMinLength;
+
+  /// No description provided for @notificationRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'Notification selection is required'**
+  String get notificationRequired;
+
+  /// No description provided for @dateRangeRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'Date range selection is required'**
+  String get dateRangeRequired;
+
+  /// No description provided for @taskStatusRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'Task status selection is required'**
+  String get taskStatusRequired;
+
+  /// No description provided for @taskPriorityRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'Task priority selection is required'**
+  String get taskPriorityRequired;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {
