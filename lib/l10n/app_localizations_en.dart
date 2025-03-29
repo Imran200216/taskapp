@@ -211,4 +211,37 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get taskPriorityRequired => 'Task priority selection is required';
+
+  @override
+  String get emailAlreadyInUse => 'The email address is already in use.';
+
+  @override
+  String get operationNotAllowed => 'Email/password accounts are not enabled.';
+
+  @override
+  String get weakPassword => 'The password is too weak.';
+
+  @override
+  String get userDisabled => 'This user account has been disabled.';
+
+  @override
+  String get userNotFound => 'No user found with this email.';
+
+  @override
+  String get wrongPassword => 'Incorrect password.';
+
+  @override
+  String get tooManyRequests => 'Too many login attempts. Please try again later.';
+
+  @override
+  String get accountExistsWithDifferentCredential => 'This email is already associated with another sign-in method.';
+
+  @override
+  String get invalidCredential => 'The credential received is invalid.';
+
+  @override
+  String get networkRequestFailed => 'Please check your internet connection and try again.';
+
+  @override
+  String get unexpectedError => 'An unexpected error occurred. Please try again.';
 }

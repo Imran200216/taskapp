@@ -7,8 +7,8 @@ import 'package:taskapp/features/on_boarding/view/on_boarding_screen.dart';
 import 'package:taskapp/features/splash/view/splash_screen.dart';
 
 class AppRouter {
-  static final GoRouter router = GoRouter(
-    initialLocation: "/bottomNav",
+  static final GoRouter _router = GoRouter(
+    initialLocation: "/",
     routes: [
       /// splash screen
       GoRoute(
@@ -53,4 +53,6 @@ class AppRouter {
       ),
     ],
   );
+  /// Method to access the router
+  GoRouter get config => _router;
 }

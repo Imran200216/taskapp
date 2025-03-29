@@ -7,6 +7,7 @@ import 'package:intl/intl.dart' as intl;
 
 import 'app_localizations_ar.dart';
 import 'app_localizations_en.dart';
+import 'app_localizations_fr.dart';
 import 'app_localizations_ta.dart';
 
 // ignore_for_file: type=lint
@@ -94,6 +95,7 @@ abstract class AppLocalizations {
   static const List<Locale> supportedLocales = <Locale>[
     Locale('ar'),
     Locale('en'),
+    Locale('fr'),
     Locale('ta')
   ];
 
@@ -504,6 +506,72 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Task priority selection is required'**
   String get taskPriorityRequired;
+
+  /// No description provided for @emailAlreadyInUse.
+  ///
+  /// In en, this message translates to:
+  /// **'The email address is already in use.'**
+  String get emailAlreadyInUse;
+
+  /// No description provided for @operationNotAllowed.
+  ///
+  /// In en, this message translates to:
+  /// **'Email/password accounts are not enabled.'**
+  String get operationNotAllowed;
+
+  /// No description provided for @weakPassword.
+  ///
+  /// In en, this message translates to:
+  /// **'The password is too weak.'**
+  String get weakPassword;
+
+  /// No description provided for @userDisabled.
+  ///
+  /// In en, this message translates to:
+  /// **'This user account has been disabled.'**
+  String get userDisabled;
+
+  /// No description provided for @userNotFound.
+  ///
+  /// In en, this message translates to:
+  /// **'No user found with this email.'**
+  String get userNotFound;
+
+  /// No description provided for @wrongPassword.
+  ///
+  /// In en, this message translates to:
+  /// **'Incorrect password.'**
+  String get wrongPassword;
+
+  /// No description provided for @tooManyRequests.
+  ///
+  /// In en, this message translates to:
+  /// **'Too many login attempts. Please try again later.'**
+  String get tooManyRequests;
+
+  /// No description provided for @accountExistsWithDifferentCredential.
+  ///
+  /// In en, this message translates to:
+  /// **'This email is already associated with another sign-in method.'**
+  String get accountExistsWithDifferentCredential;
+
+  /// No description provided for @invalidCredential.
+  ///
+  /// In en, this message translates to:
+  /// **'The credential received is invalid.'**
+  String get invalidCredential;
+
+  /// No description provided for @networkRequestFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Please check your internet connection and try again.'**
+  String get networkRequestFailed;
+
+  /// No description provided for @unexpectedError.
+  ///
+  /// In en, this message translates to:
+  /// **'An unexpected error occurred. Please try again.'**
+  String get unexpectedError;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {
@@ -515,7 +583,7 @@ class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> 
   }
 
   @override
-  bool isSupported(Locale locale) => <String>['ar', 'en', 'ta'].contains(locale.languageCode);
+  bool isSupported(Locale locale) => <String>['ar', 'en', 'fr', 'ta'].contains(locale.languageCode);
 
   @override
   bool shouldReload(_AppLocalizationsDelegate old) => false;
@@ -528,6 +596,7 @@ AppLocalizations lookupAppLocalizations(Locale locale) {
   switch (locale.languageCode) {
     case 'ar': return AppLocalizationsAr();
     case 'en': return AppLocalizationsEn();
+    case 'fr': return AppLocalizationsFr();
     case 'ta': return AppLocalizationsTa();
   }
 

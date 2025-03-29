@@ -211,4 +211,37 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get taskPriorityRequired => 'مطلوب تحديد أولوية المهمة';
+
+  @override
+  String get emailAlreadyInUse => 'عنوان البريد الإلكتروني مستخدم بالفعل.';
+
+  @override
+  String get operationNotAllowed => 'حسابات البريد الإلكتروني/كلمة المرور غير مفعلة.';
+
+  @override
+  String get weakPassword => 'كلمة المرور ضعيفة جدًا.';
+
+  @override
+  String get userDisabled => 'تم تعطيل حساب المستخدم هذا.';
+
+  @override
+  String get userNotFound => 'لم يتم العثور على مستخدم بهذا البريد الإلكتروني.';
+
+  @override
+  String get wrongPassword => 'كلمة المرور غير صحيحة.';
+
+  @override
+  String get tooManyRequests => 'عدد كبير جدًا من محاولات تسجيل الدخول. يرجى المحاولة لاحقًا.';
+
+  @override
+  String get accountExistsWithDifferentCredential => 'هذا البريد الإلكتروني مرتبط بطريقة تسجيل دخول أخرى.';
+
+  @override
+  String get invalidCredential => 'بيانات الاعتماد المستلمة غير صالحة.';
+
+  @override
+  String get networkRequestFailed => 'يرجى التحقق من اتصال الإنترنت والمحاولة مرة أخرى.';
+
+  @override
+  String get unexpectedError => 'حدث خطأ غير متوقع. يرجى المحاولة مرة أخرى.';
 }

@@ -1,11 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hive/hive.dart';
 import 'package:taskapp/commons/widgets/custom_auth_social_btn.dart';
 import 'package:taskapp/commons/widgets/custom_icon_filled_btn.dart';
 import 'package:taskapp/commons/widgets/custom_text_field.dart';
+import 'package:taskapp/core/helper/toast_helper.dart';
+import 'package:taskapp/core/locator/service_locator.dart';
 import 'package:taskapp/core/validator/app_validator.dart';
+import 'package:taskapp/features/auth/view_modals/apple_sign_in_bloc/apple_auth_bloc.dart';
+import 'package:taskapp/features/auth/view_modals/email_password_bloc/email_bloc.dart';
+import 'package:taskapp/features/auth/view_modals/google_sign_in_bloc/google_auth_bloc.dart';
 import 'package:taskapp/gen/assets.gen.dart';
 import 'package:taskapp/gen/colors.gen.dart';
 import 'package:taskapp/l10n/app_localizations.dart';
@@ -26,128 +32,257 @@ class _AuthLoginState extends State<AuthLogin> {
   final formKey = GlobalKey<FormState>();
 
   @override
+  void dispose() {
+    emailLoginController.dispose();
+    passwordLoginController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     // app localization
     final appLocalization = AppLocalizations.of(context);
 
-    return Container(
-      decoration: BoxDecoration(color: ColorName.authTabBarBgColor),
-      child: Container(
-        margin: EdgeInsets.symmetric(horizontal: 20.w, vertical: 20.h),
-        child: Form(
-          key: formKey,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              // Apple login btn
-              CustomAuthSocialBtn(
-                onTap: () async {
-                  if (formKey.currentState!.validate()) {
-                    // apple sign in  functionality
+    return MultiBlocProvider(
+      providers: [
+        // email auth  bloc
+        BlocProvider(create: (context) => locator<EmailBloc>()),
 
-                    // hive auth status
-                    var box = Hive.box('userAuthStatusBox');
-                    await box.put('userAuthStatus', true);
-                  }
-                },
-                btnTitle: appLocalization.appleLogin,
-                iconPath: Assets.icon.svg.apple,
-              ),
+        // google auth bloc
+        BlocProvider(create: (context) => locator<GoogleAuthBloc>()),
 
-              SizedBox(height: 10.h),
+        // apple auth bloc
+        BlocProvider(create: (context) => locator<AppleAuthBloc>()),
+      ],
 
-              // google login btn
-              CustomAuthSocialBtn(
-                onTap: () async {
-                  if (formKey.currentState!.validate()) {
-                    // google sign in  functionality
+      child: MultiBlocListener(
+        listeners: [
+          // email auth bloc
+          BlocListener<EmailBloc, EmailState>(
+            listener: (context, state) async {
+              if (state is EmailPasswordAuthSuccess) {
+                //  hive status
+                var box = Hive.box('userAuthStatusBox');
+                await box.put('userAuthStatus', true);
 
-                    // hive auth status
-                    var box = Hive.box('userAuthStatusBox');
-                    await box.put('userAuthStatus', true);
-                  }
-                },
-                btnTitle: appLocalization.googleLogin,
-                iconPath: Assets.icon.svg.google,
-              ),
+                // Navigate to the bottom navigation screen
+                GoRouter.of(context).pushReplacementNamed("bottomNav");
 
-              SizedBox(height: 20.h),
+                // Show success message
+                ToastHelper.showToast(
+                  context: context,
+                  message: "Sign In successfully",
+                  isSuccess: false,
+                );
+              } else if (state is EmailPasswordAuthFailure) {
+                // Show error message
+                ToastHelper.showToast(
+                  context: context,
+                  message: state.error,
+                  isSuccess: false,
+                );
+              }
+            },
+          ),
 
-              //  or continue with email text
-              Text(
-                textAlign: TextAlign.center,
-                appLocalization.continueWithEmail,
-                style: Theme.of(context).textTheme.bodySmall!.copyWith(
-                  color: ColorName.grey,
-                  fontWeight: FontWeight.w500,
-                ),
-              ),
+          // google auth bloc
+          BlocListener<GoogleAuthBloc, GoogleAuthState>(
+            listener: (context, state) async {
+              if (state is GoogleAuthSuccess) {
+                // hive status
+                var box = Hive.box('userAuthStatusBox');
+                await box.put('userAuthStatus', true);
 
-              SizedBox(height: 20.h),
+                // Navigate to the bottom navigation screen
+                GoRouter.of(context).pushReplacementNamed("bottomNav");
 
-              // email text field
-              CustomTextField(
-                validator:
-                    (value) => AppValidator.validateEmail(context, value),
-                hintText: appLocalization.emailHintText,
-                prefixIcon: Icons.alternate_email,
-              ),
+                // Show success message
+                ToastHelper.showToast(
+                  context: context,
+                  message: "Sign In successfully",
+                  isSuccess: false,
+                );
+              } else if (state is GoogleAuthFailure) {
+                // Show error message
+                ToastHelper.showToast(
+                  context: context,
+                  message: state.error,
+                  isSuccess: false,
+                );
+              }
+            },
+          ),
 
-              SizedBox(height: 14.h),
+          // apple auth bloc
+          BlocListener<AppleAuthBloc, AppleAuthState>(
+            listener: (context, state) async {
+              if (state is AppleAuthSuccess) {
+                // hive status
+                var box = Hive.box('userAuthStatusBox');
+                await box.put('userAuthStatus', true);
 
-              // password text field
-              CustomTextField(
-                validator:
-                    (value) => AppValidator.validatePassword(context, value),
-                hintText: appLocalization.passwordHintText,
-                isPassword: true,
-                prefixIcon: Icons.lock_outline,
-              ),
+                // Navigate to the bottom navigation screen
+                GoRouter.of(context).pushReplacementNamed("bottomNav");
 
-              SizedBox(height: 14.h),
+                // Show success message
+                ToastHelper.showToast(
+                  context: context,
+                  message: "Sign In successfully",
+                  isSuccess: false,
+                );
+              } else if (state is AppleAuthFailure) {
+                // Show error message
+                ToastHelper.showToast(
+                  context: context,
+                  message: state.error,
+                  isSuccess: false,
+                );
+              }
+            },
+          ),
+        ],
 
-              // forget password text btn
-              Align(
-                alignment: Alignment.bottomRight,
-                child: TextButton(
-                  onPressed: () {
-                    // forget password screen
-                    GoRouter.of(context).pushNamed("authForget");
-                  },
-                  child: Text(
+        child: Container(
+          decoration: BoxDecoration(color: ColorName.authTabBarBgColor),
+          child: Container(
+            margin: EdgeInsets.symmetric(horizontal: 20.w, vertical: 20.h),
+            child: Form(
+              key: formKey,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  // Apple login btn
+                  BlocBuilder<AppleAuthBloc, AppleAuthState>(
+                    builder: (context, state) {
+                      return CustomAuthSocialBtn(
+                        isLoading: state is AppleAuthLoading,
+                        onTap: () async {
+                          if (formKey.currentState!.validate()) {
+                            // apple sign in functionality
+                            context.read<AppleAuthBloc>().add(
+                              AppleSignInRequested(),
+                            );
+                          }
+                        },
+                        btnTitle: appLocalization.appleLogin,
+                        iconPath: Assets.icon.svg.apple,
+                      );
+                    },
+                  ),
+
+                  SizedBox(height: 10.h),
+
+                  // google login btn
+                  BlocBuilder<GoogleAuthBloc, GoogleAuthState>(
+                    builder: (context, state) {
+                      return CustomAuthSocialBtn(
+                        isLoading: state is GoogleAuthLoading,
+                        onTap: () async {
+                          if (formKey.currentState!.validate()) {
+                            // google sign in functionality
+                            context.read<GoogleAuthBloc>().add(
+                              SignInWithGoogleEvent(
+                                context: context,
+                                userUid: "",
+                                userLanguagePreference: "",
+                                name: "",
+                                email: "",
+                              ),
+                            );
+                          }
+                        },
+                        btnTitle: appLocalization.googleLogin,
+                        iconPath: Assets.icon.svg.google,
+                      );
+                    },
+                  ),
+
+                  SizedBox(height: 20.h),
+
+                  //  or continue with email text
+                  Text(
                     textAlign: TextAlign.center,
-                    appLocalization.forgetPassword,
+                    appLocalization.continueWithEmail,
                     style: Theme.of(context).textTheme.bodySmall!.copyWith(
-                      color: ColorName.primary,
+                      color: ColorName.grey,
                       fontWeight: FontWeight.w500,
                     ),
                   ),
-                ),
+
+                  SizedBox(height: 20.h),
+
+                  // email text field
+                  CustomTextField(
+                    textEditingController: emailLoginController,
+                    validator:
+                        (value) => AppValidator.validateEmail(context, value),
+                    hintText: appLocalization.emailHintText,
+                    prefixIcon: Icons.alternate_email,
+                  ),
+
+                  SizedBox(height: 14.h),
+
+                  // password text field
+                  CustomTextField(
+                    textEditingController: passwordLoginController,
+                    validator:
+                        (value) =>
+                            AppValidator.validatePassword(context, value),
+                    hintText: appLocalization.passwordHintText,
+                    isPassword: true,
+                    prefixIcon: Icons.lock_outline,
+                  ),
+
+                  SizedBox(height: 14.h),
+
+                  // forget password text btn
+                  Align(
+                    alignment: Alignment.bottomRight,
+                    child: TextButton(
+                      onPressed: () {
+                        GoRouter.of(context).pushNamed("authForget");
+                      },
+                      child: Text(
+                        textAlign: TextAlign.center,
+                        appLocalization.forgetPassword,
+                        style: Theme.of(context).textTheme.bodySmall!.copyWith(
+                          color: ColorName.primary,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                    ),
+                  ),
+
+                  Spacer(),
+
+                  // login btn
+                  BlocBuilder<EmailBloc, EmailState>(
+                    builder: (context, state) {
+                      return CustomIconFilledBtn(
+                        onTap: () {
+                          if (formKey.currentState!.validate()) {
+                            //  Sign In functionality
+                            context.read<EmailBloc>().add(
+                              SignInEvent(
+                                email: emailLoginController.text.trim(),
+                                password: passwordLoginController.text.trim(),
+                                context: context,
+                              ),
+                            );
+                          }
+                        },
+                        btnTitle: appLocalization.login,
+                        iconPath: Assets.icon.svg.login,
+                        isLoading: state is EmailPasswordAuthLoading,
+                      );
+                    },
+                  ),
+
+                  SizedBox(height: 14.h),
+                ],
               ),
-
-              Spacer(),
-
-              // login btn
-              CustomIconFilledBtn(
-                onTap: () async {
-                  if (formKey.currentState!.validate()) {
-                    // login in functionality
-
-                    // hive auth status
-                    var box = Hive.box('userAuthStatusBox');
-                    await box.put('userAuthStatus', true);
-
-                    // bottom nav screen
-                    GoRouter.of(context).pushReplacementNamed("bottomNav");
-                  }
-                },
-                btnTitle: appLocalization.login,
-                iconPath: Assets.icon.svg.login,
-              ),
-
-              SizedBox(height: 14.h),
-            ],
+            ),
           ),
         ),
       ),

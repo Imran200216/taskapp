@@ -66,5 +66,16 @@
   "notificationRequired": "مطلوب اختيار الإشعار",
   "dateRangeRequired": "مطلوب تحديد نطاق التاريخ",
   "taskStatusRequired": "مطلوب تحديد حالة المهمة",
-  "taskPriorityRequired": "مطلوب تحديد أولوية المهمة"
+  "taskPriorityRequired": "مطلوب تحديد أولوية المهمة",
+  "emailAlreadyInUse": "عنوان البريد الإلكتروني مستخدم بالفعل.",
+  "operationNotAllowed": "حسابات البريد الإلكتروني/كلمة المرور غير مفعلة.",
+  "weakPassword": "كلمة المرور ضعيفة جدًا.",
+  "userDisabled": "تم تعطيل حساب المستخدم هذا.",
+  "userNotFound": "لم يتم العثور على مستخدم بهذا البريد الإلكتروني.",
+  "wrongPassword": "كلمة المرور غير صحيحة.",
+  "tooManyRequests": "عدد كبير جدًا من محاولات تسجيل الدخول. يرجى المحاولة لاحقًا.",
+  "unexpectedError": "حدث خطأ غير متوقع. يرجى المحاولة مرة أخرى.",
+  "accountExistsWithDifferentCredential": "هذا البريد الإلكتروني مرتبط بطريقة تسجيل دخول أخرى.",
+  "invalidCredential": "بيانات الاعتماد المستلمة غير صالحة.",
+  "networkRequestFailed": "يرجى التحقق من اتصال الإنترنت والمحاولة مرة أخرى."
 }

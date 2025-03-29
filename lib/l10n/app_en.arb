@@ -66,5 +66,16 @@
   "notificationRequired": "Notification selection is required",
   "dateRangeRequired": "Date range selection is required",
   "taskStatusRequired": "Task status selection is required",
-  "taskPriorityRequired": "Task priority selection is required"
+  "taskPriorityRequired": "Task priority selection is required",
+  "emailAlreadyInUse": "The email address is already in use.",
+  "operationNotAllowed": "Email/password accounts are not enabled.",
+  "weakPassword": "The password is too weak.",
+  "userDisabled": "This user account has been disabled.",
+  "userNotFound": "No user found with this email.",
+  "wrongPassword": "Incorrect password.",
+  "tooManyRequests": "Too many login attempts. Please try again later.",
+  "accountExistsWithDifferentCredential": "This email is already associated with another sign-in method.",
+  "invalidCredential": "The credential received is invalid.",
+  "networkRequestFailed": "Please check your internet connection and try again.",
+  "unexpectedError": "An unexpected error occurred. Please try again."
 }

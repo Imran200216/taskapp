@@ -4,6 +4,8 @@
 <dict>
     <key>NSContactsUsageDescription</key>
     <string>Reason we need access to the contact list</string>
+    <key>NSAppleIDUsageDescription</key>
+    <string>We use Apple Sign-In to authenticate you in the app.</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>

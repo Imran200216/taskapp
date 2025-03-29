@@ -133,7 +133,7 @@ class UserLanguagePreferenceScreen extends StatelessWidget {
                                 },
                               ),
 
-                              /// tamil list tile
+                              /// arabic list tile
                               CustomLangPreferenceListTile(
                                 title: "Arabic",
                                 isChecked: selectedLanguage == "Arabic",
@@ -141,6 +141,19 @@ class UserLanguagePreferenceScreen extends StatelessWidget {
                                   if (value == true) {
                                     context.read<LanguagePreferenceBloc>().add(
                                       const ToggleLanguage(language: "Arabic"),
+                                    );
+                                  }
+                                },
+                              ),
+
+                              /// french list tile
+                              CustomLangPreferenceListTile(
+                                title: "French",
+                                isChecked: selectedLanguage == "French",
+                                onChanged: (bool? value) {
+                                  if (value == true) {
+                                    context.read<LanguagePreferenceBloc>().add(
+                                      const ToggleLanguage(language: "French"),
                                     );
                                   }
                                 },

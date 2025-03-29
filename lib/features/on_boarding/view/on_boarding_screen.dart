@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hive/hive.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+import 'package:taskapp/core/locator/service_locator.dart';
 import 'package:taskapp/features/on_boarding/view_modal/on_boarding_bloc.dart';
 import 'package:taskapp/features/on_boarding/widgets/custom_on_boarding.dart';
 import 'package:taskapp/features/on_boarding/widgets/custom_on_boarding_btn.dart';
@@ -91,6 +92,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
 
               /// SmoothPageIndicator
               BlocBuilder<OnBoardingBloc, OnBoardingState>(
+                bloc: locator.get<OnBoardingBloc>(),
                 builder: (context, state) {
                   return Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -128,7 +130,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                               );
 
                               // Update the Bloc state
-                              context.read<OnBoardingBloc>().add(
+                              locator.get<OnBoardingBloc>().add(
                                 PageChangeEvent(pageIndex: nextPage),
                               );
                             } else {

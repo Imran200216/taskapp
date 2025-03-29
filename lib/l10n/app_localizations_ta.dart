@@ -211,4 +211,37 @@ class AppLocalizationsTa extends AppLocalizations {
 
   @override
   String get taskPriorityRequired => 'பணி முன்னுரிமைத் தேர்வு அவசியம்.';
+
+  @override
+  String get emailAlreadyInUse => 'மின்னஞ்சல் முகவரி ஏற்கனவே பயன்படுத்தப்படுகிறது.';
+
+  @override
+  String get operationNotAllowed => 'மின்னஞ்சல்/கடவுச்சொல் கணக்குகள் செயல்படுத்தப்படவில்லை.';
+
+  @override
+  String get weakPassword => 'கடவுச்சொல் மிகவும் பலவீனமானது.';
+
+  @override
+  String get userDisabled => 'இந்த பயனர் கணக்கு முடக்கப்பட்டுள்ளது.';
+
+  @override
+  String get userNotFound => 'இந்த மின்னஞ்சலுடன் எந்த பயனரும் கிடைக்கவில்லை.';
+
+  @override
+  String get wrongPassword => 'தவறான கடவுச்சொல்.';
+
+  @override
+  String get tooManyRequests => 'அதிகமான உள்நுழைவு முயற்சிகள். பிறகு முயற்சிக்கவும்.';
+
+  @override
+  String get accountExistsWithDifferentCredential => 'இந்த மின்னஞ்சல் ஏற்கனவே மற்றொரு உள்நுழைவு முறையுடன் தொடர்புடையது.';
+
+  @override
+  String get invalidCredential => 'பெறப்பட்ட நற்சான்றிதழ் தவறானது.';
+
+  @override
+  String get networkRequestFailed => 'உங்கள் இணைய இணைப்பை சரிபார்த்து மீண்டும் முயற்சிக்கவும்.';
+
+  @override
+  String get unexpectedError => 'எதிர்பாராத தவறு ஏற்பட்டது. மீண்டும் முயற்சிக்கவும்.';
 }
