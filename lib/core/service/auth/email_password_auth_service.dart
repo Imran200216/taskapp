@@ -69,7 +69,7 @@ class EmailPasswordAuthService {
 
   /// **Handle Firebase Authentication Errors**
   String _handleFirebaseAuthError(BuildContext context, FirebaseAuthException e) {
-    final appLocalization = AppLocalizations.of(context)!; // Ensure non-null
+    final appLocalization = AppLocalizations.of(context); // Ensure non-null
 
     switch (e.code) {
       case 'email-already-in-use':

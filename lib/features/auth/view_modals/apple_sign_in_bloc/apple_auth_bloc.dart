@@ -1,6 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:taskapp/core/service/auth/apple_auth_service.dart';
 
 part 'apple_auth_event.dart';
@@ -21,8 +22,12 @@ class AppleAuthBloc extends Bloc<AppleAuthEvent, AppleAuthState> {
   ) async {
     emit(AppleAuthLoading());
     try {
-      final UserCredential? userCredential =
-          await _appleAuthService.signInWithApple();
+      final UserCredential? userCredential = await _appleAuthService
+          .signInWithApple(
+            context: event.context,
+            userLanguagePreference: event.userLanguagePreference,
+            userUid: event.userUid,
+          );
       if (userCredential != null) {
         emit(AppleAuthSuccess(userCredential.user!));
       } else {

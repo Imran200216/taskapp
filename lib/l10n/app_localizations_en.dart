@@ -244,4 +244,16 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get unexpectedError => 'An unexpected error occurred. Please try again.';
+
+  @override
+  String get appleSignInNotSupported => 'Apple Sign-In is only supported on iOS and macOS.';
+
+  @override
+  String get appleSignInNotEnabled => 'Apple sign-in is not enabled for this Firebase project.';
+
+  @override
+  String get networkError => 'Check your internet connection and try again.';
+
+  @override
+  String get unknownError => 'An unknown error occurred. Please try again.';
 }

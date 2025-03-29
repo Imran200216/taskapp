@@ -244,4 +244,16 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get unexpectedError => 'Une erreur inattendue s\'est produite. Veuillez réessayer.';
+
+  @override
+  String get appleSignInNotSupported => 'La connexion avec Apple est uniquement prise en charge sur iOS et macOS.';
+
+  @override
+  String get appleSignInNotEnabled => 'La connexion avec Apple n\'est pas activée pour ce projet Firebase.';
+
+  @override
+  String get networkError => 'Vérifiez votre connexion Internet et réessayez.';
+
+  @override
+  String get unknownError => 'Une erreur inconnue s\'est produite. Veuillez réessayer.';
 }

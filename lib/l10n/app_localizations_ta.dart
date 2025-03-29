@@ -244,4 +244,16 @@ class AppLocalizationsTa extends AppLocalizations {
 
   @override
   String get unexpectedError => 'எதிர்பாராத தவறு ஏற்பட்டது. மீண்டும் முயற்சிக்கவும்.';
+
+  @override
+  String get appleSignInNotSupported => 'ஆப்பிள் உள்நுழைவு iOS மற்றும் macOS இல் மட்டுமே ஆதரிக்கப்படுகிறது.';
+
+  @override
+  String get appleSignInNotEnabled => 'இந்த Firebase திட்டத்தில் ஆப்பிள் உள்நுழைவு செயல்படுத்தப்படவில்லை.';
+
+  @override
+  String get networkError => 'உங்கள் இன்டர்நெட் இணைப்பைச் சரிபார்த்து மீண்டும் முயற்சிக்கவும்.';
+
+  @override
+  String get unknownError => 'திடீர் பிழை ஏற்பட்டுள்ளது. தயவுசெய்து மீண்டும் முயற்சிக்கவும்.';
 }

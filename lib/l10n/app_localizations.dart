@@ -572,6 +572,30 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'An unexpected error occurred. Please try again.'**
   String get unexpectedError;
+
+  /// No description provided for @appleSignInNotSupported.
+  ///
+  /// In en, this message translates to:
+  /// **'Apple Sign-In is only supported on iOS and macOS.'**
+  String get appleSignInNotSupported;
+
+  /// No description provided for @appleSignInNotEnabled.
+  ///
+  /// In en, this message translates to:
+  /// **'Apple sign-in is not enabled for this Firebase project.'**
+  String get appleSignInNotEnabled;
+
+  /// No description provided for @networkError.
+  ///
+  /// In en, this message translates to:
+  /// **'Check your internet connection and try again.'**
+  String get networkError;
+
+  /// No description provided for @unknownError.
+  ///
+  /// In en, this message translates to:
+  /// **'An unknown error occurred. Please try again.'**
+  String get unknownError;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

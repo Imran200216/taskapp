@@ -244,4 +244,16 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get unexpectedError => 'حدث خطأ غير متوقع. يرجى المحاولة مرة أخرى.';
+
+  @override
+  String get appleSignInNotSupported => 'تسجيل الدخول عبر Apple مدعوم فقط على iOS و macOS.';
+
+  @override
+  String get appleSignInNotEnabled => 'لم يتم تمكين تسجيل الدخول عبر Apple لهذا المشروع في Firebase.';
+
+  @override
+  String get networkError => 'تحقق من اتصال الإنترنت وحاول مرة أخرى.';
+
+  @override
+  String get unknownError => 'حدث خطأ غير معروف. الرجاء المحاولة مرة أخرى.';
 }

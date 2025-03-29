@@ -77,5 +77,9 @@
   "accountExistsWithDifferentCredential": "This email is already associated with another sign-in method.",
   "invalidCredential": "The credential received is invalid.",
   "networkRequestFailed": "Please check your internet connection and try again.",
-  "unexpectedError": "An unexpected error occurred. Please try again."
+  "unexpectedError": "An unexpected error occurred. Please try again.",
+  "appleSignInNotSupported": "Apple Sign-In is only supported on iOS and macOS.",
+  "appleSignInNotEnabled": "Apple sign-in is not enabled for this Firebase project.",
+  "networkError": "Check your internet connection and try again.",
+  "unknownError": "An unknown error occurred. Please try again."
 }

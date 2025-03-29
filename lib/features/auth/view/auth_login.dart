@@ -72,7 +72,7 @@ class _AuthLoginState extends State<AuthLogin> {
                 ToastHelper.showToast(
                   context: context,
                   message: "Sign In successfully",
-                  isSuccess: false,
+                  isSuccess: true,
                 );
               } else if (state is EmailPasswordAuthFailure) {
                 // Show error message
@@ -100,7 +100,7 @@ class _AuthLoginState extends State<AuthLogin> {
                 ToastHelper.showToast(
                   context: context,
                   message: "Sign In successfully",
-                  isSuccess: false,
+                  isSuccess: true,
                 );
               } else if (state is GoogleAuthFailure) {
                 // Show error message
@@ -128,7 +128,7 @@ class _AuthLoginState extends State<AuthLogin> {
                 ToastHelper.showToast(
                   context: context,
                   message: "Sign In successfully",
-                  isSuccess: false,
+                  isSuccess: true,
                 );
               } else if (state is AppleAuthFailure) {
                 // Show error message
@@ -158,12 +158,23 @@ class _AuthLoginState extends State<AuthLogin> {
                       return CustomAuthSocialBtn(
                         isLoading: state is AppleAuthLoading,
                         onTap: () async {
-                          if (formKey.currentState!.validate()) {
-                            // apple sign in functionality
-                            context.read<AppleAuthBloc>().add(
-                              AppleSignInRequested(),
-                            );
-                          }
+                          // user language preference hive box
+                          final box = await Hive.openBox(
+                            "userLanguagePreferenceBox",
+                          );
+
+                          /// Retrieve and print stored data
+                          String storedLang = box.get("selectedLanguage");
+                          String storedUserId = box.get("userId");
+
+                          // apple sign in functionality
+                          context.read<AppleAuthBloc>().add(
+                            AppleSignInRequested(
+                              userUid: storedUserId,
+                              userLanguagePreference: storedLang,
+                              context: context,
+                            ),
+                          );
                         },
                         btnTitle: appLocalization.appleLogin,
                         iconPath: Assets.icon.svg.apple,
@@ -179,18 +190,23 @@ class _AuthLoginState extends State<AuthLogin> {
                       return CustomAuthSocialBtn(
                         isLoading: state is GoogleAuthLoading,
                         onTap: () async {
-                          if (formKey.currentState!.validate()) {
-                            // google sign in functionality
-                            context.read<GoogleAuthBloc>().add(
-                              SignInWithGoogleEvent(
-                                context: context,
-                                userUid: "",
-                                userLanguagePreference: "",
-                                name: "",
-                                email: "",
-                              ),
-                            );
-                          }
+                          // user language preference hive box
+                          final box = await Hive.openBox(
+                            "userLanguagePreferenceBox",
+                          );
+
+                          /// Retrieve and print stored data
+                          String storedLang = box.get("selectedLanguage");
+                          String storedUserId = box.get("userId");
+
+                          // google sign in functionality
+                          context.read<GoogleAuthBloc>().add(
+                            SignInWithGoogleEvent(
+                              context: context,
+                              userUid: storedUserId,
+                              userLanguagePreference: storedLang,
+                            ),
+                          );
                         },
                         btnTitle: appLocalization.googleLogin,
                         iconPath: Assets.icon.svg.google,

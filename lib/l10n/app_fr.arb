@@ -77,5 +77,9 @@
   "unexpectedError": "Une erreur inattendue s'est produite. Veuillez réessayer.",
   "accountExistsWithDifferentCredential": "Cet e-mail est déjà associé à une autre méthode de connexion.",
   "invalidCredential": "Les informations d'identification reçues sont invalides.",
-  "networkRequestFailed": "Veuillez vérifier votre connexion Internet et réessayer."
+  "networkRequestFailed": "Veuillez vérifier votre connexion Internet et réessayer.",
+  "appleSignInNotSupported": "La connexion avec Apple est uniquement prise en charge sur iOS et macOS.",
+  "appleSignInNotEnabled": "La connexion avec Apple n'est pas activée pour ce projet Firebase.",
+  "networkError": "Vérifiez votre connexion Internet et réessayez.",
+  "unknownError": "Une erreur inconnue s'est produite. Veuillez réessayer."
 }

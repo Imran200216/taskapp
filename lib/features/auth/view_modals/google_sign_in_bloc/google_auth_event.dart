@@ -10,20 +10,18 @@ sealed class GoogleAuthEvent extends Equatable {
 class SignInWithGoogleEvent extends GoogleAuthEvent {
   final BuildContext context;
   final String userUid;
-  final String email;
-  final String name;
+
   final String userLanguagePreference;
 
   const SignInWithGoogleEvent({
     required this.context,
     required this.userUid,
-    required this.email,
-    required this.name,
+
     required this.userLanguagePreference,
   });
 
   @override
-  List<Object?> get props => [userUid, email, name, userLanguagePreference];
+  List<Object?> get props => [userUid, userLanguagePreference];
 }
 
 class SignOutFromGoogleEvent extends GoogleAuthEvent {

@@ -144,8 +144,17 @@ class _AuthRegisterState extends State<AuthRegister> {
                     builder: (context, state) {
                       return CustomIconFilledBtn(
                         isLoading: state is EmailPasswordAuthLoading,
-                        onTap: () {
+                        onTap: () async {
                           if (formKey.currentState!.validate()) {
+                            // user language preference hive box
+                            final box = await Hive.openBox(
+                              "userLanguagePreferenceBox",
+                            );
+
+                            /// Retrieve and print stored data
+                            String storedLang = box.get("selectedLanguage");
+                            String storedUserId = box.get("userId");
+
                             // Sign Up functionality
                             context.read<EmailBloc>().add(
                               SignUpEvent(
@@ -153,8 +162,8 @@ class _AuthRegisterState extends State<AuthRegister> {
                                 email: emailRegisterController.text.trim(),
                                 password:
                                     passwordRegisterController.text.trim(),
-                                userLanguagePreference: "",
-                                userUid: "",
+                                userLanguagePreference: storedLang,
+                                userUid: storedUserId,
                                 context: context,
                               ),
                             );
