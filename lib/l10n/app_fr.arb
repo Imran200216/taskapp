@@ -81,5 +81,14 @@
   "appleSignInNotSupported": "La connexion avec Apple est uniquement prise en charge sur iOS et macOS.",
   "appleSignInNotEnabled": "La connexion avec Apple n'est pas activée pour ce projet Firebase.",
   "networkError": "Vérifiez votre connexion Internet et réessayez.",
-  "unknownError": "Une erreur inconnue s'est produite. Veuillez réessayer."
+  "unknownError": "Une erreur inconnue s'est produite. Veuillez réessayer.",
+  "onBoardingTitleFirst": "Restez organisé et boostez votre productivité",
+  "onBoardingSubTitleFirst": "Gérez facilement vos tâches, collaborez avec votre équipe et suivez vos progrès en un seul endroit. Grâce à une planification intelligente, une assistance alimentée par l'IA et des mises à jour en temps réel, Tasify vous aide à respecter vos délais et à accomplir plus ! 🚀",
+  "onBoardingTitleSecond": "Organisez, Planifiez et Atteignez",
+  "onBoardingSubTitleSecond": "Restez maître de vos tâches grâce à une planification intelligente, une collaboration facile et un suivi des progrès en temps réel. Avec Tasify, gérer votre travail n'a jamais été aussi simple—boostez votre productivité et accomplissez plus chaque jour ! ✅",
+  "permissionDenied": "Permission refusée",
+  "documentNotFound": "Document non trouvé",
+  "serviceUnavailable": "Service indisponible",
+  "addTaskToastSuccess": "Tâche ajoutée avec succès",
+  "addTaskToastFailure": "Échec de l'ajout de la tâche. Veuillez réessayer."
 }

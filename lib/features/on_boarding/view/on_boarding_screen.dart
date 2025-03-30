@@ -9,6 +9,7 @@ import 'package:taskapp/features/on_boarding/view_modal/on_boarding_bloc.dart';
 import 'package:taskapp/features/on_boarding/widgets/custom_on_boarding.dart';
 import 'package:taskapp/features/on_boarding/widgets/custom_on_boarding_btn.dart';
 import 'package:taskapp/gen/colors.gen.dart';
+import 'package:taskapp/l10n/app_localizations.dart';
 
 class OnBoardingScreen extends StatefulWidget {
   const OnBoardingScreen({super.key});
@@ -34,6 +35,9 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
 
   @override
   Widget build(BuildContext context) {
+    // app localization
+    final appLocalization = AppLocalizations.of(context);
+
     return SafeArea(
       child: Scaffold(
         backgroundColor: ColorName.white,
@@ -57,9 +61,9 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                   children: [
                     // page 1
                     CustomOnBoarding(
-                      onBoardingTitle: "Stay Organized & Boost Productivity",
+                      onBoardingTitle: appLocalization.onBoardingTitleFirst,
                       onBoardingSubTitle:
-                          "Effortlessly manage your tasks, collaborate with your team, and track progress in one place. With smart scheduling, AI-powered assistance, and real-time updates, Tasify helps you stay ahead of deadlines and achieve more! 🚀",
+                          appLocalization.onBoardingSubTitleFirst,
                       imgUrlFirst:
                           "https://images.unsplash.com/photo-1611224923853-80b023f02d71?q=80&w=1339&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
                       imgUrlSecond:
@@ -72,9 +76,9 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
 
                     // page 2
                     CustomOnBoarding(
-                      onBoardingTitle: "Organize, Plan & Achieve",
+                      onBoardingTitle: appLocalization.onBoardingTitleSecond,
                       onBoardingSubTitle:
-                          "Stay on top of your tasks with smart planning, effortless collaboration, and real-time progress tracking. With Tasify, managing work has never been easier—boost productivity and accomplish more every day! ✅",
+                          appLocalization.onBoardingSubTitleSecond,
                       imgUrlFirst:
                           "https://images.unsplash.com/photo-1590402494587-44b71d7772f6?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
                       imgUrlSecond:
@@ -92,7 +96,6 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
 
               /// SmoothPageIndicator
               BlocBuilder<OnBoardingBloc, OnBoardingState>(
-                bloc: locator.get<OnBoardingBloc>(),
                 builder: (context, state) {
                   return Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -135,9 +138,13 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                               );
                             } else {
                               // Onboarding finished, store status in Hive and navigate to auth screen
-                              var box = Hive.box('userOnBoardingStatusBox');
+                              var box = await Hive.openBox(
+                                'userOnBoardingStatusBox',
+                              ); // ✅ Ensure box is opened
                               await box.put('userOnBoardingStatus', true);
 
+                              if (!context.mounted)
+                                return; // ✅ Check if widget is still active before navigating
                               GoRouter.of(context).pushReplacementNamed("auth");
                             }
                           }

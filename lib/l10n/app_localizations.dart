@@ -8,6 +8,7 @@ import 'package:intl/intl.dart' as intl;
 import 'app_localizations_ar.dart';
 import 'app_localizations_en.dart';
 import 'app_localizations_fr.dart';
+import 'app_localizations_hi.dart';
 import 'app_localizations_ta.dart';
 
 // ignore_for_file: type=lint
@@ -96,6 +97,7 @@ abstract class AppLocalizations {
     Locale('ar'),
     Locale('en'),
     Locale('fr'),
+    Locale('hi'),
     Locale('ta')
   ];
 
@@ -596,6 +598,60 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'An unknown error occurred. Please try again.'**
   String get unknownError;
+
+  /// No description provided for @onBoardingTitleFirst.
+  ///
+  /// In en, this message translates to:
+  /// **'Stay Organized & Boost Productivity'**
+  String get onBoardingTitleFirst;
+
+  /// No description provided for @onBoardingSubTitleFirst.
+  ///
+  /// In en, this message translates to:
+  /// **'Effortlessly manage your tasks, collaborate with your team, and track progress in one place. With smart scheduling, AI-powered assistance, and real-time updates, Tasify helps you stay ahead of deadlines and achieve more! 🚀'**
+  String get onBoardingSubTitleFirst;
+
+  /// No description provided for @onBoardingTitleSecond.
+  ///
+  /// In en, this message translates to:
+  /// **'Organize, Plan & Achieve'**
+  String get onBoardingTitleSecond;
+
+  /// No description provided for @onBoardingSubTitleSecond.
+  ///
+  /// In en, this message translates to:
+  /// **'Stay on top of your tasks with smart planning, effortless collaboration, and real-time progress tracking. With Tasify, managing work has never been easier—boost productivity and accomplish more every day! ✅'**
+  String get onBoardingSubTitleSecond;
+
+  /// No description provided for @permissionDenied.
+  ///
+  /// In en, this message translates to:
+  /// **'Permission denied'**
+  String get permissionDenied;
+
+  /// No description provided for @documentNotFound.
+  ///
+  /// In en, this message translates to:
+  /// **'Document not found'**
+  String get documentNotFound;
+
+  /// No description provided for @serviceUnavailable.
+  ///
+  /// In en, this message translates to:
+  /// **'Service unavailable'**
+  String get serviceUnavailable;
+
+  /// No description provided for @addTaskToastSuccess.
+  ///
+  /// In en, this message translates to:
+  /// **'Task added successfully'**
+  String get addTaskToastSuccess;
+
+  /// No description provided for @addTaskToastFailure.
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to add task. Please try again.'**
+  String get addTaskToastFailure;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {
@@ -607,7 +663,7 @@ class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> 
   }
 
   @override
-  bool isSupported(Locale locale) => <String>['ar', 'en', 'fr', 'ta'].contains(locale.languageCode);
+  bool isSupported(Locale locale) => <String>['ar', 'en', 'fr', 'hi', 'ta'].contains(locale.languageCode);
 
   @override
   bool shouldReload(_AppLocalizationsDelegate old) => false;
@@ -621,6 +677,7 @@ AppLocalizations lookupAppLocalizations(Locale locale) {
     case 'ar': return AppLocalizationsAr();
     case 'en': return AppLocalizationsEn();
     case 'fr': return AppLocalizationsFr();
+    case 'hi': return AppLocalizationsHi();
     case 'ta': return AppLocalizationsTa();
   }
 

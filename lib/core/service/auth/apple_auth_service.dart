@@ -7,31 +7,36 @@ import 'package:taskapp/l10n/app_localizations.dart';
 import 'package:taskapp/features/auth/modals/UserModal.dart';
 
 class AppleAuthService {
+
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
   /// **Sign in with Apple**
   Future<UserCredential?> signInWithApple({
     required BuildContext context,
-    required String userUid, // Pass user UID
-    required String userLanguagePreference, // Pass user's language preference
+    required String userUid, // Passed UID
+    required String userLanguagePreference, // Passed language preference
   }) async {
     try {
       final appLocalization = AppLocalizations.of(context);
 
-      // Apple Sign-In only works on iOS and macOS
+      // Ensure Apple Sign-In is supported on the platform
       if (!Platform.isIOS && !Platform.isMacOS) {
         throw appLocalization.appleSignInNotSupported;
       }
 
+      print("🟡 Requesting Apple Sign-In...");
+
       // Request Apple credentials
       final AuthorizationCredentialAppleID appleCredential =
-      await SignInWithApple.getAppleIDCredential(
-        scopes: [
-          AppleIDAuthorizationScopes.email,
-          AppleIDAuthorizationScopes.fullName,
-        ],
-      );
+          await SignInWithApple.getAppleIDCredential(
+            scopes: [
+              AppleIDAuthorizationScopes.email,
+              AppleIDAuthorizationScopes.fullName,
+            ],
+          );
+
+      print("🟢 Apple Credential received!");
 
       // Create Firebase OAuth credential
       final OAuthCredential credential = OAuthProvider("apple.com").credential(
@@ -39,39 +44,52 @@ class AppleAuthService {
         accessToken: appleCredential.authorizationCode,
       );
 
-      // Sign in to Firebase with Apple credentials
-      UserCredential userCredential =
-      await _auth.signInWithCredential(credential);
+      // Sign in to Firebase
+      UserCredential userCredential = await _auth.signInWithCredential(
+        credential,
+      );
+
+      print("✅ Firebase Sign-In Successful!");
 
       // Get user details
       User? user = userCredential.user;
       if (user != null) {
+        print("📄 Saving user to Firestore...");
         await _saveUserToFirestore(userUid, user, userLanguagePreference);
+        print("✅ User saved successfully!");
       }
 
       return userCredential;
     } on FirebaseAuthException catch (e) {
+      print("❌ Firebase Auth Error: ${e.message}");
       throw _handleFirebaseAuthError(context, e);
     } catch (e) {
+      print("❌ Unexpected Error: $e");
       throw '${AppLocalizations.of(context).unexpectedError}: $e';
     }
   }
 
   /// **Save User to Firestore**
   Future<void> _saveUserToFirestore(
-      String userUid, User user, String userLanguagePreference) async {
+    String userUid,
+    User user,
+    String userLanguagePreference,
+  ) async {
+    // Use Firebase UID if userUid is empty
+    String finalUid = userUid.isNotEmpty ? userUid : user.uid;
+
     // Create user model
     UserModel userModel = UserModel(
-      uid: userUid, // Use passed UID instead of Firebase-generated UID
+      uid: finalUid,
       name: user.displayName ?? "Unknown",
       email: user.email ?? "",
       userLanguagePreference: userLanguagePreference,
     );
 
-    // Save to Firestore under `users` collection using userUid
+    // Save to Firestore
     await _firestore
         .collection('users')
-        .doc(userUid)
+        .doc(finalUid)
         .set(userModel.toJson(), SetOptions(merge: true));
   }
 
@@ -81,7 +99,10 @@ class AppleAuthService {
   }
 
   /// **Handle Firebase Authentication Errors**
-  String _handleFirebaseAuthError(BuildContext context, FirebaseAuthException e) {
+  String _handleFirebaseAuthError(
+    BuildContext context,
+    FirebaseAuthException e,
+  ) {
     final appLocalization = AppLocalizations.of(context);
 
     switch (e.code) {

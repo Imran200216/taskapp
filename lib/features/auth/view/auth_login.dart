@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -117,21 +118,25 @@ class _AuthLoginState extends State<AuthLogin> {
           BlocListener<AppleAuthBloc, AppleAuthState>(
             listener: (context, state) async {
               if (state is AppleAuthSuccess) {
-                // hive status
+                print("✅ Apple Sign-In Successful! Saving status...");
+
+                // Save auth status in Hive
                 var box = Hive.box('userAuthStatusBox');
                 await box.put('userAuthStatus', true);
 
-                // Navigate to the bottom navigation screen
+                // Navigate to home
                 GoRouter.of(context).pushReplacementNamed("bottomNav");
 
-                // Show success message
+                // Show success toast
                 ToastHelper.showToast(
                   context: context,
                   message: "Sign In successfully",
                   isSuccess: true,
                 );
               } else if (state is AppleAuthFailure) {
-                // Show error message
+                print("❌ Apple Sign-In Failed: ${state.error}");
+
+                // Show error toast
                 ToastHelper.showToast(
                   context: context,
                   message: state.error,
@@ -153,34 +158,36 @@ class _AuthLoginState extends State<AuthLogin> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   // Apple login btn
-                  BlocBuilder<AppleAuthBloc, AppleAuthState>(
-                    builder: (context, state) {
-                      return CustomAuthSocialBtn(
-                        isLoading: state is AppleAuthLoading,
-                        onTap: () async {
-                          // user language preference hive box
-                          final box = await Hive.openBox(
-                            "userLanguagePreferenceBox",
-                          );
+                  Platform.isIOS
+                      ? BlocBuilder<AppleAuthBloc, AppleAuthState>(
+                        builder: (context, state) {
+                          return CustomAuthSocialBtn(
+                            isLoading: state is AppleAuthLoading,
+                            onTap: () async {
+                              // user language preference hive box
+                              final box = await Hive.openBox(
+                                "userLanguagePreferenceBox",
+                              );
 
-                          /// Retrieve and print stored data
-                          String storedLang = box.get("selectedLanguage");
-                          String storedUserId = box.get("userId");
+                              /// Retrieve and print stored data
+                              String storedLang = box.get("selectedLanguage");
+                              String storedUserId = box.get("userId");
 
-                          // apple sign in functionality
-                          context.read<AppleAuthBloc>().add(
-                            AppleSignInRequested(
-                              userUid: storedUserId,
-                              userLanguagePreference: storedLang,
-                              context: context,
-                            ),
+                              // apple sign in functionality
+                              context.read<AppleAuthBloc>().add(
+                                AppleSignInRequested(
+                                  userUid: storedUserId,
+                                  userLanguagePreference: storedLang,
+                                  context: context,
+                                ),
+                              );
+                            },
+                            btnTitle: appLocalization.appleLogin,
+                            iconPath: Assets.icon.svg.apple,
                           );
                         },
-                        btnTitle: appLocalization.appleLogin,
-                        iconPath: Assets.icon.svg.apple,
-                      );
-                    },
-                  ),
+                      )
+                      : SizedBox(),
 
                   SizedBox(height: 10.h),
 

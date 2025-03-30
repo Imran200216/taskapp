@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:taskapp/core/locator/service_locator.dart';
 import 'package:taskapp/core/service/haptic_feedback_service.dart';
 import 'package:taskapp/features/add_task/view/add_task_screen.dart';
 import 'package:taskapp/features/archive/view/archive_screen.dart';
@@ -34,86 +33,76 @@ class BottomNav extends StatelessWidget {
       ProfileScreen(),
     ];
 
-    return BlocProvider(
-      create: (context) => locator.get<BottomNavBloc>(),
-      child: BlocBuilder<BottomNavBloc, BottomNavState>(
-        builder: (context, state) {
-          return SafeArea(
-            child: Scaffold(
-              // screens
-              body: pages[state.selectedIndex],
-              // bottom nav
-              bottomNavigationBar: BottomNavigationBar(
-                showSelectedLabels: true,
-                type: BottomNavigationBarType.fixed,
-                showUnselectedLabels: true,
-                iconSize: 18.h,
-                unselectedLabelStyle: Theme.of(
-                  context,
-                ).textTheme.bodySmall!.copyWith(
-                  color: ColorName.grey,
-                  fontWeight: FontWeight.w500,
-                ),
-                selectedLabelStyle: Theme.of(
-                  context,
-                ).textTheme.bodySmall!.copyWith(
-                  color: ColorName.primary,
-                  fontWeight: FontWeight.w600,
-                ),
-                selectedItemColor: ColorName.primary,
-                unselectedItemColor: ColorName.grey,
-                currentIndex: state.selectedIndex,
-                onTap: (index) {
-                  // haptic feedback
-                  HapticFeedbackUtilityService.mediumImpact();
-
-                  // bottom nav bloc
-                  context.read()<BottomNavBloc>().add(SelectTab(index: index));
-                },
-                items: [
-                  // home
-                  BottomNavigationBarItem(
-                    icon: Icon(Icons.home_outlined, color: ColorName.grey),
-                    activeIcon: Icon(Icons.home, color: ColorName.primary),
-                    label: appLocalization.home,
-                  ),
-
-                  // archive
-                  BottomNavigationBarItem(
-                    icon: Icon(Icons.archive_outlined, color: ColorName.grey),
-                    activeIcon: Icon(Icons.archive, color: ColorName.primary),
-                    label: appLocalization.archive,
-                  ),
-
-                  // add
-                  BottomNavigationBarItem(
-                    icon: Icon(Icons.add_circle_outline, color: ColorName.grey),
-                    activeIcon: Icon(
-                      Icons.add_circle,
-                      color: ColorName.primary,
-                    ),
-                    label: appLocalization.addTask,
-                  ),
-
-                  // proverb
-                  BottomNavigationBarItem(
-                    icon: Icon(Icons.lightbulb_outline, color: ColorName.grey),
-                    activeIcon: Icon(Icons.lightbulb, color: ColorName.primary),
-                    label: appLocalization.proverb,
-                  ),
-
-                  // profile
-                  BottomNavigationBarItem(
-                    icon: Icon(Icons.person_outline, color: ColorName.grey),
-                    activeIcon: Icon(Icons.person, color: ColorName.primary),
-                    label: appLocalization.profile,
-                  ),
-                ],
+    return BlocBuilder<BottomNavBloc, BottomNavState>(
+      builder: (context, state) {
+        return SafeArea(
+          child: Scaffold(
+            // screens
+            body: pages[state.selectedIndex],
+            // bottom nav
+            bottomNavigationBar: BottomNavigationBar(
+              showSelectedLabels: true,
+              type: BottomNavigationBarType.fixed,
+              showUnselectedLabels: true,
+              iconSize: 18.h,
+              unselectedLabelStyle: Theme.of(context).textTheme.bodySmall!
+                  .copyWith(color: ColorName.grey, fontWeight: FontWeight.w500),
+              selectedLabelStyle: Theme.of(
+                context,
+              ).textTheme.bodySmall!.copyWith(
+                color: ColorName.primary,
+                fontWeight: FontWeight.w600,
               ),
+              selectedItemColor: ColorName.primary,
+              unselectedItemColor: ColorName.grey,
+              currentIndex: state.selectedIndex,
+              onTap: (index) {
+                // haptic feedback
+                HapticFeedbackUtilityService.mediumImpact();
+
+                // bottom nav bloc
+                context.read<BottomNavBloc>().add(SelectTab(index: index));
+              },
+              items: [
+                // home
+                BottomNavigationBarItem(
+                  icon: Icon(Icons.home_outlined, color: ColorName.grey),
+                  activeIcon: Icon(Icons.home, color: ColorName.primary),
+                  label: appLocalization.home,
+                ),
+
+                // archive
+                BottomNavigationBarItem(
+                  icon: Icon(Icons.archive_outlined, color: ColorName.grey),
+                  activeIcon: Icon(Icons.archive, color: ColorName.primary),
+                  label: appLocalization.archive,
+                ),
+
+                // add
+                BottomNavigationBarItem(
+                  icon: Icon(Icons.add_circle_outline, color: ColorName.grey),
+                  activeIcon: Icon(Icons.add_circle, color: ColorName.primary),
+                  label: appLocalization.addTask,
+                ),
+
+                // proverb
+                BottomNavigationBarItem(
+                  icon: Icon(Icons.lightbulb_outline, color: ColorName.grey),
+                  activeIcon: Icon(Icons.lightbulb, color: ColorName.primary),
+                  label: appLocalization.proverb,
+                ),
+
+                // profile
+                BottomNavigationBarItem(
+                  icon: Icon(Icons.person_outline, color: ColorName.grey),
+                  activeIcon: Icon(Icons.person, color: ColorName.primary),
+                  label: appLocalization.profile,
+                ),
+              ],
             ),
-          );
-        },
-      ),
+          ),
+        );
+      },
     );
   }
 }

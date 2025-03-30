@@ -24,7 +24,11 @@ class GoogleAuthBloc extends Bloc<GoogleAuthEvent, GoogleAuthState> {
     emit(GoogleAuthLoading());
     try {
       final UserCredential? userCredential = await _googleAuthService
-          .signInWithGoogle(event.context, event.userUid);
+          .signInWithGoogle(
+            event.context,
+            event.userUid,
+            event.userLanguagePreference,
+          );
       if (userCredential != null && userCredential.user != null) {
         emit(GoogleAuthSuccess(userCredential.user!));
       } else {

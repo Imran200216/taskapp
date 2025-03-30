@@ -58,6 +58,9 @@ class $AssetsFontGen {
 class $AssetsIconGen {
   const $AssetsIconGen();
 
+  /// Directory path: assets/icon/png
+  $AssetsIconPngGen get png => const $AssetsIconPngGen();
+
   /// Directory path: assets/icon/svg
   $AssetsIconSvgGen get svg => const $AssetsIconSvgGen();
 }
@@ -70,6 +73,16 @@ class $AssetsImgGen {
 
   /// Directory path: assets/img/svg
   $AssetsImgSvgGen get svg => const $AssetsImgSvgGen();
+}
+
+class $AssetsIconPngGen {
+  const $AssetsIconPngGen();
+
+  /// File path: assets/icon/png/logo.png
+  AssetGenImage get logo => const AssetGenImage('assets/icon/png/logo.png');
+
+  /// List of all assets
+  List<AssetGenImage> get values => [logo];
 }
 
 class $AssetsIconSvgGen {

@@ -256,4 +256,31 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get unknownError => 'An unknown error occurred. Please try again.';
+
+  @override
+  String get onBoardingTitleFirst => 'Stay Organized & Boost Productivity';
+
+  @override
+  String get onBoardingSubTitleFirst => 'Effortlessly manage your tasks, collaborate with your team, and track progress in one place. With smart scheduling, AI-powered assistance, and real-time updates, Tasify helps you stay ahead of deadlines and achieve more! 🚀';
+
+  @override
+  String get onBoardingTitleSecond => 'Organize, Plan & Achieve';
+
+  @override
+  String get onBoardingSubTitleSecond => 'Stay on top of your tasks with smart planning, effortless collaboration, and real-time progress tracking. With Tasify, managing work has never been easier—boost productivity and accomplish more every day! ✅';
+
+  @override
+  String get permissionDenied => 'Permission denied';
+
+  @override
+  String get documentNotFound => 'Document not found';
+
+  @override
+  String get serviceUnavailable => 'Service unavailable';
+
+  @override
+  String get addTaskToastSuccess => 'Task added successfully';
+
+  @override
+  String get addTaskToastFailure => 'Failed to add task. Please try again.';
 }

@@ -2,10 +2,12 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:get_it/get_it.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:taskapp/core/router/app_router.dart';
+import 'package:taskapp/core/service/add_task/add_task_service.dart';
 import 'package:taskapp/core/service/auth/apple_auth_service.dart';
 import 'package:taskapp/core/service/auth/email_password_auth_service.dart';
 import 'package:taskapp/core/service/auth/google_auth_service.dart';
 import 'package:taskapp/core/service/quote_service.dart';
+import 'package:taskapp/features/add_task/view_modals/add_task_bloc/add_task_bloc.dart';
 import 'package:taskapp/features/auth/view_modals/apple_sign_in_bloc/apple_auth_bloc.dart';
 import 'package:taskapp/features/auth/view_modals/email_password_bloc/email_bloc.dart';
 import 'package:taskapp/features/auth/view_modals/google_sign_in_bloc/google_auth_bloc.dart';
@@ -32,6 +34,7 @@ Future<void> setupLocator() async {
 
   /// Services
   locator.registerLazySingleton(() => QuoteService());
+  locator.registerLazySingleton(() => AddTaskService());
 
   /// Auth Services
   locator.registerLazySingleton(() => EmailPasswordAuthService());
@@ -48,6 +51,9 @@ Future<void> setupLocator() async {
   locator.registerFactory(() => EmailBloc(locator<EmailPasswordAuthService>()));
   locator.registerFactory(() => GoogleAuthBloc(locator<GoogleAuthService>()));
   locator.registerFactory(() => AppleAuthBloc(locator<AppleAuthService>()));
+
+  // Add Task Bloc
+  locator.registerFactory(() => AddTaskBloc(locator<AddTaskService>()));
 
   /// Router
   locator.registerLazySingleton<AppRouter>(() => AppRouter());

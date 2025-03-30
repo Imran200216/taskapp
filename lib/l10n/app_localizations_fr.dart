@@ -256,4 +256,31 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get unknownError => 'Une erreur inconnue s\'est produite. Veuillez réessayer.';
+
+  @override
+  String get onBoardingTitleFirst => 'Restez organisé et boostez votre productivité';
+
+  @override
+  String get onBoardingSubTitleFirst => 'Gérez facilement vos tâches, collaborez avec votre équipe et suivez vos progrès en un seul endroit. Grâce à une planification intelligente, une assistance alimentée par l\'IA et des mises à jour en temps réel, Tasify vous aide à respecter vos délais et à accomplir plus ! 🚀';
+
+  @override
+  String get onBoardingTitleSecond => 'Organisez, Planifiez et Atteignez';
+
+  @override
+  String get onBoardingSubTitleSecond => 'Restez maître de vos tâches grâce à une planification intelligente, une collaboration facile et un suivi des progrès en temps réel. Avec Tasify, gérer votre travail n\'a jamais été aussi simple—boostez votre productivité et accomplissez plus chaque jour ! ✅';
+
+  @override
+  String get permissionDenied => 'Permission refusée';
+
+  @override
+  String get documentNotFound => 'Document non trouvé';
+
+  @override
+  String get serviceUnavailable => 'Service indisponible';
+
+  @override
+  String get addTaskToastSuccess => 'Tâche ajoutée avec succès';
+
+  @override
+  String get addTaskToastFailure => 'Échec de l\'ajout de la tâche. Veuillez réessayer.';
 }

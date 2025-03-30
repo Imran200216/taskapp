@@ -11,14 +11,19 @@ class GoogleAuthService {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
   /// **Sign in with Google & Store Data in Firestore**
-  Future<UserCredential?> signInWithGoogle(BuildContext context, String userUid) async {
+  Future<UserCredential?> signInWithGoogle(
+    BuildContext context,
+    String userUid,
+    String userLanguagePreference,
+  ) async {
     try {
       // Trigger Google Sign-In
       final GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
       if (googleUser == null) return null;
 
       // Obtain authentication details
-      final GoogleSignInAuthentication googleAuth = await googleUser.authentication;
+      final GoogleSignInAuthentication googleAuth =
+          await googleUser.authentication;
 
       // Create credential for Firebase authentication
       final OAuthCredential credential = GoogleAuthProvider.credential(
@@ -27,11 +32,14 @@ class GoogleAuthService {
       );
 
       // Sign in to Firebase with the Google credentials
-      UserCredential userCredential = await _auth.signInWithCredential(credential);
+      UserCredential userCredential = await _auth.signInWithCredential(
+        credential,
+      );
       User? user = userCredential.user;
 
       if (user != null) {
-        await _saveUserToFirestore(user, userUid); // Pass stored userUid
+        // save to firestore
+        await _saveUserToFirestore(user, userUid, userLanguagePreference);
       }
 
       return userCredential;
@@ -40,8 +48,11 @@ class GoogleAuthService {
     }
   }
 
-
-  Future<void> _saveUserToFirestore(User user, String userUid) async {
+  Future<void> _saveUserToFirestore(
+    User user,
+    String userUid,
+    String userLanguagePreference,
+  ) async {
     DocumentReference userDoc = _firestore.collection('users').doc(userUid);
 
     DocumentSnapshot docSnapshot = await userDoc.get();
@@ -50,13 +61,12 @@ class GoogleAuthService {
         uid: userUid, // Use the provided userUid
         name: user.displayName ?? "No Name",
         email: user.email ?? "No Email",
-        userLanguagePreference: "en", // Default language
+        userLanguagePreference: userLanguagePreference,
       );
 
       await userDoc.set(userModel.toJson());
     }
   }
-
 
   /// **Sign out from Google**
   Future<void> signOutFromGoogle() async {
@@ -65,7 +75,10 @@ class GoogleAuthService {
   }
 
   /// **Handle Firebase Authentication Errors with Localization**
-  String _handleFirebaseAuthError(BuildContext context, FirebaseAuthException e) {
+  String _handleFirebaseAuthError(
+    BuildContext context,
+    FirebaseAuthException e,
+  ) {
     final appLocalization = AppLocalizations.of(context);
 
     switch (e.code) {

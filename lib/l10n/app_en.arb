@@ -81,5 +81,14 @@
   "appleSignInNotSupported": "Apple Sign-In is only supported on iOS and macOS.",
   "appleSignInNotEnabled": "Apple sign-in is not enabled for this Firebase project.",
   "networkError": "Check your internet connection and try again.",
-  "unknownError": "An unknown error occurred. Please try again."
+  "unknownError": "An unknown error occurred. Please try again.",
+  "onBoardingTitleFirst": "Stay Organized & Boost Productivity",
+  "onBoardingSubTitleFirst": "Effortlessly manage your tasks, collaborate with your team, and track progress in one place. With smart scheduling, AI-powered assistance, and real-time updates, Tasify helps you stay ahead of deadlines and achieve more! 🚀",
+  "onBoardingTitleSecond": "Organize, Plan & Achieve",
+  "onBoardingSubTitleSecond": "Stay on top of your tasks with smart planning, effortless collaboration, and real-time progress tracking. With Tasify, managing work has never been easier—boost productivity and accomplish more every day! ✅",
+  "permissionDenied": "Permission denied",
+  "documentNotFound": "Document not found",
+  "serviceUnavailable": "Service unavailable",
+  "addTaskToastSuccess": "Task added successfully",
+  "addTaskToastFailure": "Failed to add task. Please try again."
 }

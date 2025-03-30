@@ -133,6 +133,19 @@ class UserLanguagePreferenceScreen extends StatelessWidget {
                                 },
                               ),
 
+                              /// english list tile
+                              CustomLangPreferenceListTile(
+                                title: "Hindi",
+                                isChecked: selectedLanguage == "Hindi",
+                                onChanged: (bool? value) {
+                                  if (value == true) {
+                                    context.read<LanguagePreferenceBloc>().add(
+                                      const ToggleLanguage(language: "Hindi"),
+                                    );
+                                  }
+                                },
+                              ),
+
                               /// arabic list tile
                               CustomLangPreferenceListTile(
                                 title: "Arabic",
@@ -197,11 +210,11 @@ class UserLanguagePreferenceScreen extends StatelessWidget {
                                 return;
                               }
 
-                              /// generating the uuid
+                              /// Generating the UUID
                               const uuid = Uuid();
                               String userId = uuid.v4();
 
-                              /// store the user selected lang (String)
+                              /// Open the Hive box and store values
                               final box = await Hive.openBox(
                                 "userLanguagePreferenceBox",
                               );
@@ -210,16 +223,26 @@ class UserLanguagePreferenceScreen extends StatelessWidget {
                                 selectedLanguage,
                               );
                               await box.put("userId", userId);
+                              await box.put(
+                                "userLanguagePreferenceStatus",
+                                true,
+                              ); // Default is false
 
                               /// Retrieve and print stored data
                               String storedLang = box.get("selectedLanguage");
                               String storedUserId = box.get("userId");
+                              bool storedStatus = box.get(
+                                "userLanguagePreferenceStatus",
+                              );
 
                               print(
                                 "=========== Stored Language: $storedLang =========",
                               );
                               print(
                                 "=========== Stored User ID: $storedUserId =========",
+                              );
+                              print(
+                                "=========== Language Preference Status: $storedStatus =========",
                               );
 
                               // Show success toast
@@ -230,8 +253,10 @@ class UserLanguagePreferenceScreen extends StatelessWidget {
                                 isSuccess: true,
                               );
 
-                              // auth screen
-                              GoRouter.of(context).pushReplacementNamed("auth");
+                              // Navigate to Onboarding Screen
+                              GoRouter.of(
+                                context,
+                              ).pushReplacementNamed("onBoarding");
                             },
                             btnTitle: "Continue",
                             iconPath: Assets.icon.svg.login,
