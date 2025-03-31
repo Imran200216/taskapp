@@ -61,7 +61,7 @@ class _AuthRegisterState extends State<AuthRegister> {
             // Show success message
             ToastHelper.showToast(
               context: context,
-              message: "Sign Up successfully",
+              message: appLocalization.authSignUpSuccessToast,
               isSuccess: true,
             );
           } else if (state is EmailPasswordAuthFailure) {

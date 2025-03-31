@@ -270,6 +270,12 @@ class AppLocalizationsAr extends AppLocalizations {
   String get onBoardingSubTitleSecond => 'ابقَ على اطلاع دائم بمهامك من خلال التخطيط الذكي والتعاون السهل وتتبع التقدم في الوقت الفعلي. مع Tasify، أصبح تنظيم العمل أسهل من أي وقت مضى—زد إنتاجيتك وحقق المزيد كل يوم! ✅';
 
   @override
+  String get onBoardingTitleThird => 'تعاون سلس وتحديثات في الوقت الفعلي';
+
+  @override
+  String get onBoardingSubTitleThird => 'اعمل معًا بسهولة مع الإشعارات والتحديثات الفورية. ابقَ متزامنًا مع فريقك في أي وقت وأي مكان.';
+
+  @override
   String get permissionDenied => 'تم رفض الإذن';
 
   @override
@@ -283,4 +289,55 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get addTaskToastFailure => 'فشل في إضافة المهمة. يرجى المحاولة مرة أخرى.';
+
+  @override
+  String get madeWith => 'مصنوع بـ ';
+
+  @override
+  String get from => ' من ';
+
+  @override
+  String get imran => 'عِمْرَان بِي';
+
+  @override
+  String get languagePreferenceSuccessToast => 'تم حفظ تفضيل اللغة بنجاح!';
+
+  @override
+  String get languagePreferenceFailureToast => 'يرجى اختيار لغة قبل المتابعة.';
+
+  @override
+  String get authSignInSuccessToast => 'تم تسجيل الدخول بنجاح';
+
+  @override
+  String get authSignUpSuccessToast => 'تم التسجيل بنجاح';
+
+  @override
+  String get authForgetPasswordSentSuccessToast => 'تم إرسال كلمة المرور بنجاح';
+
+  @override
+  String get userLanguagePreferenceSubTitle => 'اختر لغتك';
+
+  @override
+  String get tamil => 'التاميلية';
+
+  @override
+  String get english => 'الإنجليزية';
+
+  @override
+  String get hindi => 'الهندية';
+
+  @override
+  String get arabic => 'العربية';
+
+  @override
+  String get french => 'الفرنسية';
+
+  @override
+  String get userLanguagePreferenceSettings => 'يمكنك تغيير تفضيل اللغة الخاصة بك في أي وقت في الإعدادات.';
+
+  @override
+  String get next => 'التالي';
+
+  @override
+  String get getStarted => 'ابدأ';
 }

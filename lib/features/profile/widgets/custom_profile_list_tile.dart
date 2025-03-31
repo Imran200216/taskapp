@@ -4,50 +4,54 @@ import 'package:taskapp/core/service/haptic_feedback_service.dart';
 import 'package:taskapp/gen/colors.gen.dart';
 
 class CustomProfileListTile extends StatelessWidget {
-  final VoidCallback onTap;
+  final VoidCallback? onTap;
   final IconData leadingIcon;
   final String title;
   final String subtitle;
   final bool isSwitch;
   final bool switchValue;
   final ValueChanged<bool>? onSwitchChanged;
+  final bool showTrailing; // Added flag to make trailing optional
 
   const CustomProfileListTile({
     super.key,
-    required this.onTap,
+    this.onTap,
     required this.leadingIcon,
     required this.title,
     required this.subtitle,
     this.isSwitch = false,
     this.switchValue = false,
     this.onSwitchChanged,
+    this.showTrailing = true, // Default is true
   });
 
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      onTap: () {
-        // Haptic feedback
+      onTap: onTap != null
+          ? () {
         HapticFeedbackUtilityService.mediumImpact();
-        onTap();
-      },
+        onTap!();
+      }
+          : null,
 
       // Leading icon
       leading: Icon(leadingIcon, color: ColorName.primary, size: 20.h),
 
-      // Trailing widget (either an icon or a switch)
-      trailing:
-          isSwitch
-              ? Switch.adaptive(
-                value: switchValue,
-                onChanged: onSwitchChanged,
-                activeColor: ColorName.primary,
-              )
-              : Icon(
-                Icons.arrow_forward_ios,
-                color: ColorName.primary,
-                size: 12.h,
-              ),
+      // Trailing widget (only if showTrailing is true)
+      trailing: showTrailing
+          ? (isSwitch
+          ? Switch.adaptive(
+        value: switchValue,
+        onChanged: onSwitchChanged,
+        activeColor: ColorName.primary,
+      )
+          : Icon(
+        Icons.arrow_forward_ios,
+        color: ColorName.primary,
+        size: 12.h,
+      ))
+          : null,
 
       // Title & Subtitle
       title: Text(title),

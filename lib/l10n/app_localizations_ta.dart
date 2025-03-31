@@ -270,6 +270,12 @@ class AppLocalizationsTa extends AppLocalizations {
   String get onBoardingSubTitleSecond => 'புத்திசாலி திட்டமிடல், எளிதான கூட்டணி மற்றும் நேரடி முன்னேற்ற கண்காணிப்புடன் உங்கள் பணிகளில் முன்னிலையில் இருங்கள். Tasify உடன், பணிய اد الاستدارة தாக முன் நிர்வகிக்க எளிதாக உள்ளது—உற்பத்தித்திறனை அதிகரிக்கவும், தினமும் அதிகம் சாதிக்கவும்! ✅';
 
   @override
+  String get onBoardingTitleThird => 'தடையற்ற ஒத்துழைப்பு & நேரலை புதுப்பிப்புகள்';
+
+  @override
+  String get onBoardingSubTitleThird => 'நேரலை அறிவிப்புகள் மற்றும் புதுப்பிப்புகளுடன் எளிதாக இணைந்து செயல்படுங்கள். எப்போது வேண்டுமானாலும், எங்கே வேண்டுமானாலும் உங்கள் குழுவுடன் இணைந்திருங்கள்.';
+
+  @override
   String get permissionDenied => 'அனுமதி மறுக்கப்பட்டது';
 
   @override
@@ -283,4 +289,55 @@ class AppLocalizationsTa extends AppLocalizations {
 
   @override
   String get addTaskToastFailure => 'பணியைச் சேர்க்க முடியவில்லை. மீண்டும் முயற்சிக்கவும்.';
+
+  @override
+  String get madeWith => 'உருவாக்கியது ';
+
+  @override
+  String get from => ' இருந்து ';
+
+  @override
+  String get imran => 'இம்ரான் பி';
+
+  @override
+  String get languagePreferenceSuccessToast => 'மொழி முன்னுரிமை வெற்றிகரமாக சேமிக்கப்பட்டது!';
+
+  @override
+  String get languagePreferenceFailureToast => 'தொடருவதற்கு முன் ஒரு மொழியைத் தேர்ந்தெடுக்கவும்.';
+
+  @override
+  String get authSignInSuccessToast => 'உள்நுழைவு வெற்றிகரமாக முடிந்தது';
+
+  @override
+  String get authSignUpSuccessToast => 'பதிவுசெய்தல் வெற்றிகரமாக முடிந்தது';
+
+  @override
+  String get authForgetPasswordSentSuccessToast => 'கடவுச்சொல் வெற்றிகரமாக அனுப்பப்பட்டது';
+
+  @override
+  String get userLanguagePreferenceSubTitle => 'உங்கள் மொழியை தேர்வுசெய்க';
+
+  @override
+  String get tamil => 'தமிழ்';
+
+  @override
+  String get english => 'ஆங்கிலம்';
+
+  @override
+  String get hindi => 'இந்தி';
+
+  @override
+  String get arabic => 'அரபிக்';
+
+  @override
+  String get french => 'பிரெஞ்சு';
+
+  @override
+  String get userLanguagePreferenceSettings => 'உங்கள் மொழி முன்னுரிமையை எப்போது வேண்டுமானாலும் அமைப்புகளில் மாற்றலாம்.';
+
+  @override
+  String get next => 'அடுத்து';
+
+  @override
+  String get getStarted => 'தொடங்குங்கள்';
 }

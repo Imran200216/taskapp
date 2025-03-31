@@ -623,6 +623,18 @@ abstract class AppLocalizations {
   /// **'Stay on top of your tasks with smart planning, effortless collaboration, and real-time progress tracking. With Tasify, managing work has never been easier—boost productivity and accomplish more every day! ✅'**
   String get onBoardingSubTitleSecond;
 
+  /// No description provided for @onBoardingTitleThird.
+  ///
+  /// In en, this message translates to:
+  /// **'Seamless Collaboration & Real-time Updates'**
+  String get onBoardingTitleThird;
+
+  /// No description provided for @onBoardingSubTitleThird.
+  ///
+  /// In en, this message translates to:
+  /// **'Work together effortlessly with real-time notifications and updates. Stay in sync with your team anytime, anywhere.'**
+  String get onBoardingSubTitleThird;
+
   /// No description provided for @permissionDenied.
   ///
   /// In en, this message translates to:
@@ -652,6 +664,108 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Failed to add task. Please try again.'**
   String get addTaskToastFailure;
+
+  /// No description provided for @madeWith.
+  ///
+  /// In en, this message translates to:
+  /// **'Made with '**
+  String get madeWith;
+
+  /// No description provided for @from.
+  ///
+  /// In en, this message translates to:
+  /// **' from '**
+  String get from;
+
+  /// No description provided for @imran.
+  ///
+  /// In en, this message translates to:
+  /// **'Imran B'**
+  String get imran;
+
+  /// No description provided for @languagePreferenceSuccessToast.
+  ///
+  /// In en, this message translates to:
+  /// **'Language preference saved successfully!'**
+  String get languagePreferenceSuccessToast;
+
+  /// No description provided for @languagePreferenceFailureToast.
+  ///
+  /// In en, this message translates to:
+  /// **'Please select a language before continuing.'**
+  String get languagePreferenceFailureToast;
+
+  /// No description provided for @authSignInSuccessToast.
+  ///
+  /// In en, this message translates to:
+  /// **'Sign In successfully'**
+  String get authSignInSuccessToast;
+
+  /// No description provided for @authSignUpSuccessToast.
+  ///
+  /// In en, this message translates to:
+  /// **'Sign Up successfully'**
+  String get authSignUpSuccessToast;
+
+  /// No description provided for @authForgetPasswordSentSuccessToast.
+  ///
+  /// In en, this message translates to:
+  /// **'Password sent successfully'**
+  String get authForgetPasswordSentSuccessToast;
+
+  /// No description provided for @userLanguagePreferenceSubTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose your language'**
+  String get userLanguagePreferenceSubTitle;
+
+  /// No description provided for @tamil.
+  ///
+  /// In en, this message translates to:
+  /// **'Tamil'**
+  String get tamil;
+
+  /// No description provided for @english.
+  ///
+  /// In en, this message translates to:
+  /// **'English'**
+  String get english;
+
+  /// No description provided for @hindi.
+  ///
+  /// In en, this message translates to:
+  /// **'Hindi'**
+  String get hindi;
+
+  /// No description provided for @arabic.
+  ///
+  /// In en, this message translates to:
+  /// **'Arabic'**
+  String get arabic;
+
+  /// No description provided for @french.
+  ///
+  /// In en, this message translates to:
+  /// **'French'**
+  String get french;
+
+  /// No description provided for @userLanguagePreferenceSettings.
+  ///
+  /// In en, this message translates to:
+  /// **'Your language preference can be changed at any time in Settings.'**
+  String get userLanguagePreferenceSettings;
+
+  /// No description provided for @next.
+  ///
+  /// In en, this message translates to:
+  /// **'Next'**
+  String get next;
+
+  /// No description provided for @getStarted.
+  ///
+  /// In en, this message translates to:
+  /// **'Get Started'**
+  String get getStarted;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hive/hive.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+import 'package:taskapp/core/constants/app_constants.dart';
 import 'package:taskapp/core/locator/service_locator.dart';
 import 'package:taskapp/features/on_boarding/view_modal/on_boarding_bloc.dart';
 import 'package:taskapp/features/on_boarding/widgets/custom_on_boarding.dart';
@@ -59,34 +60,37 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                     );
                   },
                   children: [
-                    // page 1
+                    // Page 1
                     CustomOnBoarding(
                       onBoardingTitle: appLocalization.onBoardingTitleFirst,
                       onBoardingSubTitle:
                           appLocalization.onBoardingSubTitleFirst,
-                      imgUrlFirst:
-                          "https://images.unsplash.com/photo-1611224923853-80b023f02d71?q=80&w=1339&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-                      imgUrlSecond:
-                          "https://images.unsplash.com/photo-1590402494756-10c265b9d736?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-                      imgUrlThird:
-                          "https://images.unsplash.com/photo-1586473219010-2ffc57b0d282?q=80&w=1364&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-                      imgUrlFourth:
-                          "https://images.unsplash.com/photo-1589987607627-616cac5c2c5a?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+                      imgUrlFirst: AppConstants.onBoardingPage1Img1,
+                      imgUrlSecond: AppConstants.onBoardingPage1Img2,
+                      imgUrlThird: AppConstants.onBoardingPage1Img3,
+                      imgUrlFourth: AppConstants.onBoardingPage1Img4,
                     ),
 
-                    // page 2
+                    // Page 2
                     CustomOnBoarding(
                       onBoardingTitle: appLocalization.onBoardingTitleSecond,
                       onBoardingSubTitle:
                           appLocalization.onBoardingSubTitleSecond,
-                      imgUrlFirst:
-                          "https://images.unsplash.com/photo-1590402494587-44b71d7772f6?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-                      imgUrlSecond:
-                          "https://images.unsplash.com/photo-1563986768609-322da13575f3?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-                      imgUrlThird:
-                          "https://plus.unsplash.com/premium_photo-1661370149497-0a6e3aa2394a?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-                      imgUrlFourth:
-                          "https://images.unsplash.com/photo-1634078111133-a1e12d6131b6?q=80&w=1230&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+                      imgUrlFirst: AppConstants.onBoardingPage2Img1,
+                      imgUrlSecond: AppConstants.onBoardingPage2Img2,
+                      imgUrlThird: AppConstants.onBoardingPage2Img3,
+                      imgUrlFourth: AppConstants.onBoardingPage2Img4,
+                    ),
+
+                    // Page 3
+                    CustomOnBoarding(
+                      onBoardingTitle: appLocalization.onBoardingTitleThird,
+                      onBoardingSubTitle:
+                          appLocalization.onBoardingSubTitleThird,
+                      imgUrlFirst: AppConstants.onBoardingPage3Img1,
+                      imgUrlSecond: AppConstants.onBoardingPage3Img2,
+                      imgUrlThird: AppConstants.onBoardingPage3Img3,
+                      imgUrlFourth: AppConstants.onBoardingPage3Img4,
                     ),
                   ],
                 ),
@@ -103,7 +107,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                     children: [
                       SmoothPageIndicator(
                         controller: pageController,
-                        count: 2,
+                        count: 3,
                         effect: ExpandingDotsEffect(
                           activeDotColor: ColorName.primary,
                           dotColor: ColorName.grey,
@@ -116,15 +120,15 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                       CustomOnBoardingBtn(
                         btnTitle:
                             state is OnBoardingPageChangedSuccess &&
-                                    state.currentPage == 0
-                                ? "Next"
-                                : "Get Started",
+                                    state.currentPage < 2
+                                ? appLocalization.next
+                                : appLocalization.getStarted,
 
                         onTap: () async {
                           if (state is OnBoardingPageChangedSuccess) {
                             final nextPage = state.currentPage + 1;
 
-                            if (nextPage < 2) {
+                            if (nextPage < 3) {
                               // Move the PageView forward
                               pageController.animateToPage(
                                 nextPage,
@@ -143,8 +147,9 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                               ); // ✅ Ensure box is opened
                               await box.put('userOnBoardingStatus', true);
 
-                              if (!context.mounted)
-                                return; // ✅ Check if widget is still active before navigating
+                              if (!context.mounted) return;
+
+                              // auth screen
                               GoRouter.of(context).pushReplacementNamed("auth");
                             }
                           }

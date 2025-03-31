@@ -72,7 +72,7 @@ class _AuthLoginState extends State<AuthLogin> {
                 // Show success message
                 ToastHelper.showToast(
                   context: context,
-                  message: "Sign In successfully",
+                  message: appLocalization.authSignInSuccessToast,
                   isSuccess: true,
                 );
               } else if (state is EmailPasswordAuthFailure) {
@@ -100,7 +100,7 @@ class _AuthLoginState extends State<AuthLogin> {
                 // Show success message
                 ToastHelper.showToast(
                   context: context,
-                  message: "Sign In successfully",
+                  message:appLocalization.authSignInSuccessToast,
                   isSuccess: true,
                 );
               } else if (state is GoogleAuthFailure) {
@@ -130,7 +130,7 @@ class _AuthLoginState extends State<AuthLogin> {
                 // Show success toast
                 ToastHelper.showToast(
                   context: context,
-                  message: "Sign In successfully",
+                  message: appLocalization.authSignInSuccessToast,
                   isSuccess: true,
                 );
               } else if (state is AppleAuthFailure) {

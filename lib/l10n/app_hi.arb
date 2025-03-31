@@ -90,6 +90,25 @@
   "documentNotFound": "दस्तावेज़ नहीं मिला",
   "serviceUnavailable": "सेवा उपलब्ध नहीं है",
   "addTaskToastSuccess": "कार्य सफलतापूर्वक जोड़ा गया",
-  "addTaskToastFailure": "कार्य जोड़ने में विफल। कृपया पुनः प्रयास करें।"
+  "addTaskToastFailure": "कार्य जोड़ने में विफल। कृपया पुनः प्रयास करें।",
+  "madeWith": "के साथ बनाया ",
+  "from": " से ",
+  "imran": "इमरान बी",
+  "languagePreferenceSuccessToast": "भाषा प्राथमिकता सफलतापूर्वक सहेजी गई!",
+  "languagePreferenceFailureToast": "कृपया जारी रखने से पहले एक भाषा चुनें।",
+  "authSignInSuccessToast": "सफलतापूर्वक साइन इन किया गया",
+  "authSignUpSuccessToast": "सफलतापूर्वक साइन अप किया गया",
+  "authForgetPasswordSentSuccessToast": "पासवर्ड सफलतापूर्वक भेजा गया",
+  "userLanguagePreferenceSubTitle": "अपनी भाषा चुनें",
+  "tamil": "तमिल",
+  "english": "अंग्रेज़ी",
+  "hindi": "हिन्दी",
+  "arabic": "अरबी",
+  "french": "फ्रेंच",
+  "userLanguagePreferenceSettings": "आप अपनी भाषा वरीयता को कभी भी सेटिंग्स में बदल सकते हैं।",
+  "next": "आगे",
+  "getStarted": "शुरू करें",
+  "onBoardingTitleThird": "निर्बाध सहयोग और रीयल-टाइम अपडेट",
+  "onBoardingSubTitleThird": "रीयल-टाइम सूचनाओं और अपडेट के साथ आसानी से मिलकर काम करें। किसी भी समय, कहीं भी अपनी टीम के साथ तालमेल बनाए रखें।"
 }
 

@@ -270,6 +270,12 @@ class AppLocalizationsFr extends AppLocalizations {
   String get onBoardingSubTitleSecond => 'Restez maître de vos tâches grâce à une planification intelligente, une collaboration facile et un suivi des progrès en temps réel. Avec Tasify, gérer votre travail n\'a jamais été aussi simple—boostez votre productivité et accomplissez plus chaque jour ! ✅';
 
   @override
+  String get onBoardingTitleThird => 'Collaboration fluide et mises à jour en temps réel';
+
+  @override
+  String get onBoardingSubTitleThird => 'Travaillez ensemble sans effort avec des notifications et des mises à jour en temps réel. Restez synchronisé avec votre équipe à tout moment, n\'importe où.';
+
+  @override
   String get permissionDenied => 'Permission refusée';
 
   @override
@@ -283,4 +289,55 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get addTaskToastFailure => 'Échec de l\'ajout de la tâche. Veuillez réessayer.';
+
+  @override
+  String get madeWith => 'Fait avec ';
+
+  @override
+  String get from => ' de ';
+
+  @override
+  String get imran => 'Imran B';
+
+  @override
+  String get languagePreferenceSuccessToast => 'Préférence de langue enregistrée avec succès !';
+
+  @override
+  String get languagePreferenceFailureToast => 'Veuillez sélectionner une langue avant de continuer.';
+
+  @override
+  String get authSignInSuccessToast => 'Connexion réussie';
+
+  @override
+  String get authSignUpSuccessToast => 'Inscription réussie';
+
+  @override
+  String get authForgetPasswordSentSuccessToast => 'Mot de passe envoyé avec succès';
+
+  @override
+  String get userLanguagePreferenceSubTitle => 'Choisissez votre langue';
+
+  @override
+  String get tamil => 'Tamoul';
+
+  @override
+  String get english => 'Anglais';
+
+  @override
+  String get hindi => 'Hindi';
+
+  @override
+  String get arabic => 'Arabe';
+
+  @override
+  String get french => 'Français';
+
+  @override
+  String get userLanguagePreferenceSettings => 'Vous pouvez modifier votre préférence linguistique à tout moment dans les paramètres.';
+
+  @override
+  String get next => 'Suivant';
+
+  @override
+  String get getStarted => 'Commencer';
 }

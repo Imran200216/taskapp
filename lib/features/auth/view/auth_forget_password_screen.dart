@@ -42,7 +42,7 @@ class _AuthForgetPasswordScreenState extends State<AuthForgetPasswordScreen> {
             // Show success message
             ToastHelper.showToast(
               context: context,
-              message: "Password sent successfully",
+              message: appLocalization.authForgetPasswordSentSuccessToast,
               isSuccess: true,
             );
           } else if (state is EmailPasswordAuthFailure) {

@@ -270,6 +270,12 @@ class AppLocalizationsEn extends AppLocalizations {
   String get onBoardingSubTitleSecond => 'Stay on top of your tasks with smart planning, effortless collaboration, and real-time progress tracking. With Tasify, managing work has never been easier—boost productivity and accomplish more every day! ✅';
 
   @override
+  String get onBoardingTitleThird => 'Seamless Collaboration & Real-time Updates';
+
+  @override
+  String get onBoardingSubTitleThird => 'Work together effortlessly with real-time notifications and updates. Stay in sync with your team anytime, anywhere.';
+
+  @override
   String get permissionDenied => 'Permission denied';
 
   @override
@@ -283,4 +289,55 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get addTaskToastFailure => 'Failed to add task. Please try again.';
+
+  @override
+  String get madeWith => 'Made with ';
+
+  @override
+  String get from => ' from ';
+
+  @override
+  String get imran => 'Imran B';
+
+  @override
+  String get languagePreferenceSuccessToast => 'Language preference saved successfully!';
+
+  @override
+  String get languagePreferenceFailureToast => 'Please select a language before continuing.';
+
+  @override
+  String get authSignInSuccessToast => 'Sign In successfully';
+
+  @override
+  String get authSignUpSuccessToast => 'Sign Up successfully';
+
+  @override
+  String get authForgetPasswordSentSuccessToast => 'Password sent successfully';
+
+  @override
+  String get userLanguagePreferenceSubTitle => 'Choose your language';
+
+  @override
+  String get tamil => 'Tamil';
+
+  @override
+  String get english => 'English';
+
+  @override
+  String get hindi => 'Hindi';
+
+  @override
+  String get arabic => 'Arabic';
+
+  @override
+  String get french => 'French';
+
+  @override
+  String get userLanguagePreferenceSettings => 'Your language preference can be changed at any time in Settings.';
+
+  @override
+  String get next => 'Next';
+
+  @override
+  String get getStarted => 'Get Started';
 }

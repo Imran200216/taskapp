@@ -1,36 +1,40 @@
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:taskapp/gen/assets.gen.dart';
 
 class CustomPersonAvatar extends StatelessWidget {
   final String imageUrl;
-  final double size;
+  final double? size;
+  final String placeholderImage;
 
-  const CustomPersonAvatar({
+  CustomPersonAvatar({
     super.key,
     required this.imageUrl,
-    this.size = 80.0, // Default size
-  });
+    this.size,
+    String? placeholderImage,
+  }) : placeholderImage =
+           placeholderImage ?? Assets.img.jpg.profilePlaceholder.path;
 
   @override
   Widget build(BuildContext context) {
+    //  avatar size
+    double avatarSize = size ?? 74.0.h;
+
     return Container(
-      width: size,
-      height: size,
-      decoration: BoxDecoration(
-        shape: BoxShape.circle,
-      ),
+      width: avatarSize,
+      height: avatarSize,
+      decoration: const BoxDecoration(shape: BoxShape.circle),
       child: ClipOval(
         child: CachedNetworkImage(
           imageUrl: imageUrl,
           fit: BoxFit.cover,
-          placeholder: (context, url) => const Center(
-            child: CircularProgressIndicator(), // Loading indicator
-          ),
-          errorWidget: (context, url, error) => const Icon(
-            Icons.error, // Error icon
-            color: Colors.red,
-            size: 40,
-          ),
+          placeholder:
+              (context, url) =>
+                  Image.asset(placeholderImage, fit: BoxFit.cover),
+          errorWidget:
+              (context, url, error) =>
+                  Image.asset(placeholderImage, fit: BoxFit.cover),
         ),
       ),
     );

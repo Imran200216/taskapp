@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart'; 
 import 'package:hive_flutter/adapters.dart';
 import 'package:taskapp/core/locator/service_locator.dart';
 import 'package:taskapp/core/router/app_router.dart';

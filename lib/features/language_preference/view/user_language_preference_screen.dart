@@ -11,6 +11,7 @@ import 'package:taskapp/features/language_preference/view_modal/lang_pref_bloc/l
 import 'package:taskapp/features/language_preference/widgets/custom_lang_preference_List_tile.dart';
 import 'package:taskapp/gen/assets.gen.dart';
 import 'package:taskapp/gen/colors.gen.dart';
+import 'package:taskapp/l10n/app_localizations.dart';
 import 'package:uuid/uuid.dart';
 
 class UserLanguagePreferenceScreen extends StatelessWidget {
@@ -18,6 +19,9 @@ class UserLanguagePreferenceScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // app localization
+    final appLocalization = AppLocalizations.of(context);
+
     return SafeArea(
       child: Scaffold(
         body: Container(
@@ -76,7 +80,7 @@ class UserLanguagePreferenceScreen extends StatelessWidget {
                       children: [
                         // Welcome text
                         Text(
-                          "Welcome to Tasify",
+                          appLocalization.authTitle,
                           style: Theme.of(
                             context,
                           ).textTheme.headlineMedium!.copyWith(
@@ -90,7 +94,7 @@ class UserLanguagePreferenceScreen extends StatelessWidget {
 
                         // Choose your language
                         Text(
-                          "Choose your language",
+                          appLocalization.userLanguagePreferenceSubTitle,
                           style: Theme.of(
                             context,
                           ).textTheme.headlineMedium!.copyWith(
@@ -109,12 +113,12 @@ class UserLanguagePreferenceScreen extends StatelessWidget {
                             children: [
                               /// tamil list tile
                               CustomLangPreferenceListTile(
-                                title: "Tamil",
+                                title: appLocalization.tamil,
                                 isChecked: selectedLanguage == "Tamil",
                                 onChanged: (bool? value) {
                                   if (value == true) {
                                     context.read<LanguagePreferenceBloc>().add(
-                                      const ToggleLanguage(language: "Tamil"),
+                                      ToggleLanguage(language: "Tamil"),
                                     );
                                   }
                                 },
@@ -122,25 +126,25 @@ class UserLanguagePreferenceScreen extends StatelessWidget {
 
                               /// english list tile
                               CustomLangPreferenceListTile(
-                                title: "English",
+                                title: appLocalization.english,
                                 isChecked: selectedLanguage == "English",
                                 onChanged: (bool? value) {
                                   if (value == true) {
                                     context.read<LanguagePreferenceBloc>().add(
-                                      const ToggleLanguage(language: "English"),
+                                      ToggleLanguage(language: "English"),
                                     );
                                   }
                                 },
                               ),
 
-                              /// english list tile
+                              /// hindi list tile
                               CustomLangPreferenceListTile(
-                                title: "Hindi",
+                                title: appLocalization.hindi,
                                 isChecked: selectedLanguage == "Hindi",
                                 onChanged: (bool? value) {
                                   if (value == true) {
                                     context.read<LanguagePreferenceBloc>().add(
-                                      const ToggleLanguage(language: "Hindi"),
+                                      ToggleLanguage(language: "Hindi"),
                                     );
                                   }
                                 },
@@ -148,12 +152,12 @@ class UserLanguagePreferenceScreen extends StatelessWidget {
 
                               /// arabic list tile
                               CustomLangPreferenceListTile(
-                                title: "Arabic",
+                                title: appLocalization.arabic,
                                 isChecked: selectedLanguage == "Arabic",
                                 onChanged: (bool? value) {
                                   if (value == true) {
                                     context.read<LanguagePreferenceBloc>().add(
-                                      const ToggleLanguage(language: "Arabic"),
+                                      ToggleLanguage(language: "Arabic"),
                                     );
                                   }
                                 },
@@ -161,12 +165,12 @@ class UserLanguagePreferenceScreen extends StatelessWidget {
 
                               /// french list tile
                               CustomLangPreferenceListTile(
-                                title: "French",
+                                title: appLocalization.french,
                                 isChecked: selectedLanguage == "French",
                                 onChanged: (bool? value) {
                                   if (value == true) {
                                     context.read<LanguagePreferenceBloc>().add(
-                                      const ToggleLanguage(language: "French"),
+                                      ToggleLanguage(language: "French"),
                                     );
                                   }
                                 },
@@ -182,7 +186,7 @@ class UserLanguagePreferenceScreen extends StatelessWidget {
                           padding: EdgeInsets.symmetric(horizontal: 44.w),
                           child: Text(
                             textAlign: TextAlign.center,
-                            "Your language preference can be changed at any time in Settings.",
+                            appLocalization.userLanguagePreferenceSettings,
                             style: Theme.of(
                               context,
                             ).textTheme.headlineMedium!.copyWith(
@@ -204,7 +208,8 @@ class UserLanguagePreferenceScreen extends StatelessWidget {
                                 ToastHelper.showToast(
                                   context: context,
                                   message:
-                                      "Please select a language before continuing.",
+                                      appLocalization
+                                          .languagePreferenceFailureToast,
                                   isSuccess: false,
                                 );
                                 return;
@@ -249,7 +254,8 @@ class UserLanguagePreferenceScreen extends StatelessWidget {
                               ToastHelper.showToast(
                                 context: context,
                                 message:
-                                    "Language preference saved successfully!",
+                                    appLocalization
+                                        .languagePreferenceSuccessToast,
                                 isSuccess: true,
                               );
 
@@ -258,7 +264,7 @@ class UserLanguagePreferenceScreen extends StatelessWidget {
                                 context,
                               ).pushReplacementNamed("onBoarding");
                             },
-                            btnTitle: "Continue",
+                            btnTitle: appLocalization.continueText,
                             iconPath: Assets.icon.svg.login,
                           ),
                         ),

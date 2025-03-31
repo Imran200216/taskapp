@@ -114,8 +114,12 @@ class $AssetsImgJpgGen {
   AssetGenImage get imgPlaceholder =>
       const AssetGenImage('assets/img/jpg/img-placeholder.jpg');
 
+  /// File path: assets/img/jpg/profile-placeholder.jpg
+  AssetGenImage get profilePlaceholder =>
+      const AssetGenImage('assets/img/jpg/profile-placeholder.jpg');
+
   /// List of all assets
-  List<AssetGenImage> get values => [imgPlaceholder];
+  List<AssetGenImage> get values => [imgPlaceholder, profilePlaceholder];
 }
 
 class $AssetsImgSvgGen {

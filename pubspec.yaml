@@ -83,6 +83,8 @@ dependencies:
   google_sign_in: ^6.3.0
   # apple sign in
   sign_in_with_apple: ^6.1.4
+  # url launcher
+  url_launcher: ^6.3.1
 
 
 dev_dependencies:

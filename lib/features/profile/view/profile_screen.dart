@@ -1,7 +1,11 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
+import 'package:taskapp/core/constants/app_constants.dart';
 import 'package:taskapp/features/profile/widgets/custom_person_avatar.dart';
 import 'package:taskapp/features/profile/widgets/custom_profile_list_tile.dart';
+import 'package:taskapp/features/profile/widgets/custom_profile_thanks_text.dart';
 import 'package:taskapp/gen/colors.gen.dart';
 import 'package:taskapp/l10n/app_localizations.dart';
 
@@ -12,6 +16,13 @@ class ProfileScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     // app localization
     final appLocalization = AppLocalizations.of(context);
+
+    // current user
+    final User? currentUser = FirebaseAuth.instance.currentUser;
+    // current user name
+    final currentUserName = currentUser?.displayName ?? "No Name";
+    // current user email
+    final currentUserEmail = currentUser?.email ?? "No Email";
 
     return SafeArea(
       child: Scaffold(
@@ -39,7 +50,7 @@ class ProfileScreen extends StatelessWidget {
                 CustomPersonAvatar(
                   size: 120,
                   imageUrl:
-                      "https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=1288&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+                      currentUser?.photoURL ?? AppConstants.personPlaceHolder,
                 ),
 
                 SizedBox(height: 40.h),
@@ -54,81 +65,99 @@ class ProfileScreen extends StatelessWidget {
                       ),
                       color: ColorName.white,
                     ),
-                    child: Container(
-                      margin: EdgeInsets.symmetric(
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(
                         horizontal: 20.w,
                         vertical: 14.h,
                       ),
-                      child: SingleChildScrollView(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            /// personal info text
-                            Text(
-                              textAlign: TextAlign.start,
-                              appLocalization.personalInfo,
-                              style: Theme.of(
-                                context,
-                              ).textTheme.bodySmall!.copyWith(
-                                color: ColorName.primary,
-                                fontWeight: FontWeight.w500,
-                                fontSize: 13.sp,
+                      child: Column(
+                        children: [
+                          /// Scrollable content
+                          Expanded(
+                            child: SingleChildScrollView(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  /// personal info text
+                                  Text(
+                                    appLocalization.personalInfo,
+                                    style: Theme.of(
+                                      context,
+                                    ).textTheme.bodySmall!.copyWith(
+                                      color: ColorName.primary,
+                                      fontWeight: FontWeight.w500,
+                                      fontSize: 13.sp,
+                                    ),
+                                  ),
+                                  SizedBox(height: 20.h),
+
+                                  // Name list tile
+                                  CustomProfileListTile(
+                                    leadingIcon: Icons.person_outline,
+                                    title: appLocalization.yourName,
+                                    subtitle: currentUserName,
+                                    showTrailing: false,
+                                  ),
+
+                                  // Email list tile
+                                  CustomProfileListTile(
+                                    leadingIcon: Icons.alternate_email,
+                                    title: appLocalization.yourEmailAddress,
+                                    subtitle: currentUserEmail,
+                                    showTrailing: false,
+                                  ),
+
+                                  // App info tile
+                                  CustomProfileListTile(
+                                    onTap: () {
+                                      // app info settings screen
+                                      GoRouter.of(
+                                        context,
+                                      ).pushNamed("appInfoSettings");
+                                    },
+                                    leadingIcon: Icons.info_outline_rounded,
+                                    title: appLocalization.appInfo,
+                                    subtitle:
+                                        appLocalization
+                                            .taskNotifyAppInfoDescription,
+                                  ),
+
+                                  // Language preference list
+                                  CustomProfileListTile(
+                                    onTap: () {
+                                      // language preference settings screen
+                                      GoRouter.of(
+                                        context,
+                                      ).pushNamed("languagePreferenceSettings");
+                                    },
+                                    leadingIcon: Icons.language_outlined,
+                                    title: appLocalization.yourLanguage,
+                                    subtitle:
+                                        appLocalization.yourLanguageSubTitle,
+                                  ),
+
+                                  // Log out list tile
+                                  CustomProfileListTile(
+                                    onTap: () {},
+                                    leadingIcon: Icons.logout_outlined,
+                                    title: appLocalization.logout,
+                                    subtitle: appLocalization.logoutSubTitle,
+                                  ),
+                                ],
                               ),
                             ),
+                          ),
 
-                            SizedBox(height: 20.h),
-
-                            // name list tile
-                            CustomProfileListTile(
-                              onTap: () {},
-                              leadingIcon: Icons.person_outline,
-                              title: appLocalization.yourName,
-                              subtitle: "Marie Gwen",
+                          /// Thanks section
+                          Padding(
+                            padding: EdgeInsets.only(bottom: 10.h),
+                            child: CustomProfileThanksText(
+                              developerName: appLocalization.imran,
+                              developerPortfolio: "https://linktr.ee/Imran_B",
                             ),
-
-                            // email list tile
-                            CustomProfileListTile(
-                              onTap: () {},
-                              leadingIcon: Icons.alternate_email,
-                              title: appLocalization.yourEmailAddress,
-                              subtitle: "MarieGwen@gmail.com",
-                            ),
-
-                            // app info tile
-                            CustomProfileListTile(
-                              onTap: () {},
-                              leadingIcon: Icons.info_outline_rounded,
-                              title: appLocalization.appInfo,
-                              subtitle:
-                                  appLocalization.taskNotifyAppInfoDescription,
-                            ),
-
-                            // dev info tile
-                            CustomProfileListTile(
-                              onTap: () {},
-                              leadingIcon: Icons.developer_mode,
-                              title: appLocalization.devInfo,
-                              subtitle: appLocalization.devInfoSubTitle,
-                            ),
-
-                            // language preference list
-                            CustomProfileListTile(
-                              onTap: () {},
-                              leadingIcon: Icons.language_outlined,
-                              title: appLocalization.yourLanguage,
-                              subtitle: appLocalization.yourLanguageSubTitle,
-                            ),
-
-                            // log out list tile
-                            CustomProfileListTile(
-                              onTap: () {},
-                              leadingIcon: Icons.logout_outlined,
-                              title: appLocalization.logout,
-                              subtitle: appLocalization.logoutSubTitle,
-                            ),
-                          ],
-                        ),
+                          ),
+                        ],
                       ),
                     ),
                   ),
