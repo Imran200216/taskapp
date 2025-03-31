@@ -18,4 +18,7 @@
 
     <!--  Profile screen bg color  -->
     <color name="profileBgColor">#E3E3E3</color>
+
+    <!-- Profile email bg color  -->
+    <color name="profileEmailBgColor">#D0E1FD</color>
 </resources>

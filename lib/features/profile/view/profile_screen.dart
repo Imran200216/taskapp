@@ -1,8 +1,11 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:taskapp/core/constants/app_constants.dart';
+import 'package:taskapp/features/profile/view_modals/auth_checker_provider/auth_checker_provider_bloc.dart';
+import 'package:taskapp/features/profile/widgets/custom_email_person_avatar.dart';
 import 'package:taskapp/features/profile/widgets/custom_person_avatar.dart';
 import 'package:taskapp/features/profile/widgets/custom_profile_list_tile.dart';
 import 'package:taskapp/features/profile/widgets/custom_profile_thanks_text.dart';
@@ -47,10 +50,27 @@ class ProfileScreen extends StatelessWidget {
                 SizedBox(height: 20.h),
 
                 /// person profile img
-                CustomPersonAvatar(
-                  size: 120,
-                  imageUrl:
-                      currentUser?.photoURL ?? AppConstants.personPlaceHolder,
+                BlocBuilder<AuthCheckerProviderBloc, AuthCheckerProviderState>(
+                  builder: (context, state) {
+                    print("BlocBuilder State: $state"); // Debug log
+
+                    if (state is AuthChecked && state.isEmailAuth) {
+                      String userEmailFirstLetter =
+                          currentUserEmail.isNotEmpty
+                              ? currentUserEmail[0].toUpperCase()
+                              : "?";
+
+                      return CustomEmailPersonAvatar(
+                        userEmailFirstLetter: userEmailFirstLetter,
+                      );
+                    } else {
+                      return CustomPersonAvatar(
+                        imageUrl:
+                            currentUser?.photoURL ??
+                            AppConstants.personPlaceHolder,
+                      );
+                    }
+                  },
                 ),
 
                 SizedBox(height: 40.h),
@@ -92,12 +112,24 @@ class ProfileScreen extends StatelessWidget {
                                   ),
                                   SizedBox(height: 20.h),
 
-                                  // Name list tile
-                                  CustomProfileListTile(
-                                    leadingIcon: Icons.person_outline,
-                                    title: appLocalization.yourName,
-                                    subtitle: currentUserName,
-                                    showTrailing: false,
+                                  // Name list tile (Only for Google/Apple Sign-In)
+                                  BlocBuilder<
+                                    AuthCheckerProviderBloc,
+                                    AuthCheckerProviderState
+                                  >(
+                                    builder: (context, state) {
+                                      if (state is AuthChecked &&
+                                          state.isEmailAuth) {
+                                        return SizedBox();
+                                      } else {
+                                        return CustomProfileListTile(
+                                          leadingIcon: Icons.person_outline,
+                                          title: appLocalization.yourName,
+                                          subtitle: currentUserName,
+                                          showTrailing: false,
+                                        );
+                                      }
+                                    },
                                   ),
 
                                   // Email list tile

@@ -34,6 +34,9 @@ class ColorName {
   /// Color: #E3E3E3
   static const Color profileBgColor = Color(0xFFE3E3E3);
 
+  /// Color: #D0E1FD
+  static const Color profileEmailBgColor = Color(0xFFD0E1FD);
+
   /// Color: #2E7C32
   static const Color successSnackBarColor = Color(0xFF2E7C32);
 

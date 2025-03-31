@@ -14,6 +14,7 @@ import 'package:taskapp/features/auth/view_modals/google_sign_in_bloc/google_aut
 import 'package:taskapp/features/bottom_nav/view_modal/bottom_nav_bloc.dart';
 import 'package:taskapp/features/language_preference/view_modal/lang_pref_bloc/language_preference_bloc.dart';
 import 'package:taskapp/features/on_boarding/view_modal/on_boarding_bloc.dart';
+import 'package:taskapp/features/profile/view_modals/auth_checker_provider/auth_checker_provider_bloc.dart';
 import 'package:taskapp/features/proverb/view_modal/quote_bloc/quote_bloc.dart';
 import 'package:taskapp/firebase_options.dart';
 
@@ -51,6 +52,7 @@ Future<void> setupLocator() async {
   locator.registerFactory(() => EmailBloc(locator<EmailPasswordAuthService>()));
   locator.registerFactory(() => GoogleAuthBloc(locator<GoogleAuthService>()));
   locator.registerFactory(() => AppleAuthBloc(locator<AppleAuthService>()));
+  locator.registerFactory(() => AuthCheckerProviderBloc());
 
   // Add Task Bloc
   locator.registerFactory(() => AddTaskBloc(locator<AddTaskService>()));

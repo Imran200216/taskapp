@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart'; 
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:taskapp/core/locator/service_locator.dart';
 import 'package:taskapp/core/router/app_router.dart';
 import 'package:taskapp/core/styles/app_text_styles.dart';
 import 'package:taskapp/features/bottom_nav/view_modal/bottom_nav_bloc.dart';
 import 'package:taskapp/features/on_boarding/view_modal/on_boarding_bloc.dart';
+import 'package:taskapp/features/profile/view_modals/auth_checker_provider/auth_checker_provider_bloc.dart';
 import 'package:taskapp/features/proverb/view_modal/quote_bloc/quote_bloc.dart';
 import 'package:taskapp/gen/colors.gen.dart';
 import 'package:taskapp/gen/fonts.gen.dart';
@@ -61,16 +62,31 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
+        // on boarding bloc
         BlocProvider(create: (context) => locator<OnBoardingBloc>()),
+
+        // bottom nav bloc
         BlocProvider(create: (context) => locator<BottomNavBloc>()),
+
+        // language preference bloc
         BlocProvider(
           create:
               (context) =>
                   locator<LanguagePreferenceBloc>()
                     ..add(ToggleLanguage(language: storedLang)),
         ),
+
+        // quotes bloc
         BlocProvider(
           create: (context) => locator<QuoteBloc>()..add(FetchQuote()),
+        ),
+
+        // auth checker provider bloc
+        BlocProvider<AuthCheckerProviderBloc>(
+          create:
+              (context) =>
+                  locator.get<AuthCheckerProviderBloc>()
+                    ..add(CheckAuthMethod()), // Dispatch the event once
         ),
       ],
       child: BlocBuilder<LanguagePreferenceBloc, LanguagePreferenceState>(
