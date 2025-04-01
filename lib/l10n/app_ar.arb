@@ -109,5 +109,18 @@
   "next": "التالي",
   "getStarted": "ابدأ",
   "onBoardingTitleThird": "تعاون سلس وتحديثات في الوقت الفعلي",
-  "onBoardingSubTitleThird": "اعمل معًا بسهولة مع الإشعارات والتحديثات الفورية. ابقَ متزامنًا مع فريقك في أي وقت وأي مكان."
+  "onBoardingSubTitleThird": "اعمل معًا بسهولة مع الإشعارات والتحديثات الفورية. ابقَ متزامنًا مع فريقك في أي وقت وأي مكان.",
+  "forgetPasswordSuccessTitle": "تحقق من بريدك الإلكتروني",
+  "forgetPasswordSuccessSubTitle": "لقد أرسلنا تعليمات استعادة كلمة المرور إلى بريدك الإلكتروني",
+  "goToSignIn": "انتقل إلى تسجيل الدخول",
+  "skipLater": "تخطي، سأؤكد لاحقًا",
+  "continueLanguage": "تأكيد اللغة",
+  "languagePreferenceSettingsAppBarTitle": "تفضيل اللغة",
+  "languagePreferenceSettingsSubTitle": "حدد لغتك المفضلة لتجربة أفضل.",
+  "changeLanguagePreferenceAlertDialogTitle": "تغيير تفضيل اللغة",
+  "changeLanguagePreferenceAlertDialogSubTitle": "هل أنت متأكد أنك تريد تغيير تفضيل اللغة؟\nلا يمكن التراجع عن هذا الإجراء.",
+  "cancelDialogText": "إلغاء",
+  "confirmDialogText": "تأكيد",
+  "appName": "إشعار المهمة",
+  "version": "الإصدار"
 }

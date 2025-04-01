@@ -11,10 +11,17 @@ final class AuthCheckerProviderInitial extends AuthCheckerProviderState {
 
 class AuthChecked extends AuthCheckerProviderState {
   final bool isEmailAuth;
-  const AuthChecked(this.isEmailAuth);
+  final bool isGoogleAuth;
+  final bool isAppleAuth;
+
+  const AuthChecked({
+    required this.isEmailAuth,
+    required this.isGoogleAuth,
+    required this.isAppleAuth,
+  });
 
   @override
-  // TODO: implement props
-  List<Object?> get props => [isEmailAuth];
+  List<Object?> get props => [isEmailAuth, isGoogleAuth, isAppleAuth];
 }
+
 

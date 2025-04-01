@@ -766,6 +766,84 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Get Started'**
   String get getStarted;
+
+  /// No description provided for @forgetPasswordSuccessTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Check your mail'**
+  String get forgetPasswordSuccessTitle;
+
+  /// No description provided for @forgetPasswordSuccessSubTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'We have sent a password recover\ninstructions to your email'**
+  String get forgetPasswordSuccessSubTitle;
+
+  /// No description provided for @goToSignIn.
+  ///
+  /// In en, this message translates to:
+  /// **'Go to Sign In'**
+  String get goToSignIn;
+
+  /// No description provided for @skipLater.
+  ///
+  /// In en, this message translates to:
+  /// **'Skip, I\'ll confirm later'**
+  String get skipLater;
+
+  /// No description provided for @continueLanguage.
+  ///
+  /// In en, this message translates to:
+  /// **'Confirm Language'**
+  String get continueLanguage;
+
+  /// No description provided for @languagePreferenceSettingsAppBarTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Language Preference'**
+  String get languagePreferenceSettingsAppBarTitle;
+
+  /// No description provided for @languagePreferenceSettingsSubTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Select your preferred language for a better experience.'**
+  String get languagePreferenceSettingsSubTitle;
+
+  /// No description provided for @changeLanguagePreferenceAlertDialogTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Change Language Preference'**
+  String get changeLanguagePreferenceAlertDialogTitle;
+
+  /// No description provided for @changeLanguagePreferenceAlertDialogSubTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Are you sure you want to change the language preference?\nThis action cannot be undone.'**
+  String get changeLanguagePreferenceAlertDialogSubTitle;
+
+  /// No description provided for @cancelDialogText.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancel'**
+  String get cancelDialogText;
+
+  /// No description provided for @confirmDialogText.
+  ///
+  /// In en, this message translates to:
+  /// **'Confirm'**
+  String get confirmDialogText;
+
+  /// No description provided for @appName.
+  ///
+  /// In en, this message translates to:
+  /// **'TaskNotify'**
+  String get appName;
+
+  /// No description provided for @version.
+  ///
+  /// In en, this message translates to:
+  /// **'Version'**
+  String get version;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

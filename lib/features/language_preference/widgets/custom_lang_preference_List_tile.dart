@@ -22,7 +22,7 @@ class CustomLangPreferenceListTile extends StatelessWidget {
         side: BorderSide(color: ColorName.grey, width: 0.6.w),
       ),
       child: CheckboxListTile(
-        contentPadding: EdgeInsets.symmetric(horizontal: 16.0.w),
+        contentPadding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 1.h),
         title: Text(
           title,
           style: Theme.of(context).textTheme.headlineMedium!.copyWith(

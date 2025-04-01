@@ -14,6 +14,7 @@ class EmailBloc extends Bloc<EmailEvent, EmailState> {
     on<SignUpEvent>(_onSignUp);
     on<SignInEvent>(_onSignIn);
     on<ResetPasswordEvent>(_onResetPassword);
+    on<SignOutEvent>(_onSignOut);
   }
 
   /// Email password sign-up bloc
@@ -63,6 +64,17 @@ class EmailBloc extends Bloc<EmailEvent, EmailState> {
       emit(EmailPasswordAuthSuccess("Password reset email sent!"));
     } catch (e) {
       emit(EmailPasswordAuthFailure(e.toString()));
+    }
+  }
+
+  /// **Sign Out Logic**
+  Future<void> _onSignOut(SignOutEvent event, Emitter<EmailState> emit) async {
+    emit(EmailSignOutLoading());
+    try {
+      await _authService.signOut();
+      emit(EmailSignOutSuccess("Signed out successfully!"));
+    } catch (e) {
+      emit(EmailSignOutFailure(e.toString()));
     }
   }
 }

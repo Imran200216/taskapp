@@ -16,6 +16,7 @@ import 'package:taskapp/features/language_preference/view_modal/lang_pref_bloc/l
 import 'package:taskapp/features/on_boarding/view_modal/on_boarding_bloc.dart';
 import 'package:taskapp/features/profile/view_modals/auth_checker_provider/auth_checker_provider_bloc.dart';
 import 'package:taskapp/features/proverb/view_modal/quote_bloc/quote_bloc.dart';
+import 'package:taskapp/features/splash/view_modals/app_version_bloc/app_version_bloc.dart';
 import 'package:taskapp/firebase_options.dart';
 
 /// locator of get it
@@ -56,6 +57,9 @@ Future<void> setupLocator() async {
 
   // Add Task Bloc
   locator.registerFactory(() => AddTaskBloc(locator<AddTaskService>()));
+
+  // App version Bloc
+  locator.registerFactory(() => AppVersionBloc());
 
   /// Router
   locator.registerLazySingleton<AppRouter>(() => AppRouter());

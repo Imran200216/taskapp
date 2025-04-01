@@ -109,6 +109,19 @@
   "next": "आगे",
   "getStarted": "शुरू करें",
   "onBoardingTitleThird": "निर्बाध सहयोग और रीयल-टाइम अपडेट",
-  "onBoardingSubTitleThird": "रीयल-टाइम सूचनाओं और अपडेट के साथ आसानी से मिलकर काम करें। किसी भी समय, कहीं भी अपनी टीम के साथ तालमेल बनाए रखें।"
+  "onBoardingSubTitleThird": "रीयल-टाइम सूचनाओं और अपडेट के साथ आसानी से मिलकर काम करें। किसी भी समय, कहीं भी अपनी टीम के साथ तालमेल बनाए रखें।",
+  "forgetPasswordSuccessTitle": "अपना मेल जांचें",
+  "forgetPasswordSuccessSubTitle": "हमने आपके ईमेल पर पासवर्ड पुनर्प्राप्ति निर्देश भेजे हैं",
+  "goToSignIn": "साइन इन करने जाएं",
+  "skipLater": "छोड़ें, मैं बाद में पुष्टि करूंगा",
+  "continueLanguage": "भाषा की पुष्टि करें",
+  "languagePreferenceSettingsAppBarTitle": "भाषा वरीयता",
+  "languagePreferenceSettingsSubTitle": "बेहतर अनुभव के लिए अपनी पसंदीदा भाषा चुनें।",
+  "changeLanguagePreferenceAlertDialogTitle": "भाषा वरीयता बदलें",
+  "changeLanguagePreferenceAlertDialogSubTitle": "क्या आप वाकई भाषा वरीयता बदलना चाहते हैं?\nइस क्रिया को वापस नहीं लिया जा सकता।",
+  "cancelDialogText": "रद्द करें",
+  "confirmDialogText": "पुष्टि करें",
+  "appName": "कार्यसूचना",
+  "version": "संस्करण"
 }
 

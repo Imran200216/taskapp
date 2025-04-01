@@ -109,5 +109,18 @@
   "next": "Suivant",
   "getStarted": "Commencer",
   "onBoardingTitleThird": "Collaboration fluide et mises à jour en temps réel",
-  "onBoardingSubTitleThird": "Travaillez ensemble sans effort avec des notifications et des mises à jour en temps réel. Restez synchronisé avec votre équipe à tout moment, n'importe où."
+  "onBoardingSubTitleThird": "Travaillez ensemble sans effort avec des notifications et des mises à jour en temps réel. Restez synchronisé avec votre équipe à tout moment, n'importe où.",
+  "forgetPasswordSuccessTitle": "Vérifiez votre e-mail",
+  "forgetPasswordSuccessSubTitle": "Nous avons envoyé des instructions de récupération du mot de passe à votre e-mail",
+  "goToSignIn": "Aller à la connexion",
+  "skipLater": "Ignorer, je confirmerai plus tard",
+  "continueLanguage": "Confirmer la langue",
+  "languagePreferenceSettingsAppBarTitle": "Préférence de langue",
+  "languagePreferenceSettingsSubTitle": "Sélectionnez votre langue préférée pour une meilleure expérience.",
+  "changeLanguagePreferenceAlertDialogTitle": "Changer la préférence de langue",
+  "changeLanguagePreferenceAlertDialogSubTitle": "Êtes-vous sûr de vouloir changer la préférence de langue ?\nCette action est irréversible.",
+  "cancelDialogText": "Annuler",
+  "confirmDialogText": "Confirmer",
+  "appName": "Notification de Tâche",
+  "version": "Version"
 }

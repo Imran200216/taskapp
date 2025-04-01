@@ -45,6 +45,11 @@ class _AuthForgetPasswordScreenState extends State<AuthForgetPasswordScreen> {
               message: appLocalization.authForgetPasswordSentSuccessToast,
               isSuccess: true,
             );
+
+            // navigate to auth forget password success screen
+            GoRouter.of(
+              context,
+            ).pushReplacementNamed("authForgetPasswordSuccess");
           } else if (state is EmailPasswordAuthFailure) {
             // Show error message
             ToastHelper.showToast(

@@ -32,3 +32,10 @@ class GoogleAuthFailure extends GoogleAuthState {
   @override
   List<Object?> get props => [error];
 }
+
+class GoogleAuthSignOutSuccess extends GoogleAuthState{
+  @override
+  // TODO: implement props
+  List<Object?> get props => [];
+
+}

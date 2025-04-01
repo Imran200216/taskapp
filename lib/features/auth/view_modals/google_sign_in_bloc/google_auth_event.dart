@@ -24,8 +24,8 @@ class SignInWithGoogleEvent extends GoogleAuthEvent {
   List<Object?> get props => [userUid, userLanguagePreference];
 }
 
-class SignOutFromGoogleEvent extends GoogleAuthEvent {
-  final BuildContext context;
-
-  const SignOutFromGoogleEvent({required this.context});
+class GoogleAuthSignOutEvent extends GoogleAuthEvent {
+  @override
+  List<Object?> get props => [];
 }
+

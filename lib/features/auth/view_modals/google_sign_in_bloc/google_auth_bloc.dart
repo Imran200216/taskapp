@@ -13,7 +13,7 @@ class GoogleAuthBloc extends Bloc<GoogleAuthEvent, GoogleAuthState> {
 
   GoogleAuthBloc(this._googleAuthService) : super(GoogleAuthInitial()) {
     on<SignInWithGoogleEvent>(_onSignInWithGoogle);
-    on<SignOutFromGoogleEvent>(_onSignOutFromGoogle);
+    on<GoogleAuthSignOutEvent>(_onSignOutFromGoogle);
   }
 
   // sign in with google
@@ -41,13 +41,13 @@ class GoogleAuthBloc extends Bloc<GoogleAuthEvent, GoogleAuthState> {
 
   // sign out from google
   Future<void> _onSignOutFromGoogle(
-    SignOutFromGoogleEvent event,
+    GoogleAuthSignOutEvent event,
     Emitter<GoogleAuthState> emit,
   ) async {
     emit(GoogleAuthLoading());
     try {
       await _googleAuthService.signOutFromGoogle();
-      emit(GoogleAuthInitial());
+      emit(GoogleAuthSignOutSuccess()); // Updated state
     } catch (e) {
       emit(GoogleAuthFailure(e.toString()));
     }

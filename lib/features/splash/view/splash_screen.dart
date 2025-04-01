@@ -1,12 +1,15 @@
 import 'dart:async';
 import 'dart:math';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hive/hive.dart';
+import 'package:taskapp/features/splash/view_modals/app_version_bloc/app_version_bloc.dart';
 import 'package:taskapp/gen/assets.gen.dart';
 import 'package:taskapp/gen/colors.gen.dart';
+import 'package:taskapp/l10n/app_localizations.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -68,6 +71,9 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   Widget build(BuildContext context) {
+    // app localization
+    final appLocalization = AppLocalizations.of(context);
+
     return Scaffold(
       body: Container(
         height: double.infinity,
@@ -127,7 +133,7 @@ class _SplashScreenState extends State<SplashScreen> {
 
                   // App name
                   Text(
-                    "Tasify",
+                    appLocalization.appName,
                     style: Theme.of(context).textTheme.headlineMedium!.copyWith(
                       color: ColorName.primary,
                       fontWeight: FontWeight.w600,
@@ -138,18 +144,26 @@ class _SplashScreenState extends State<SplashScreen> {
             ),
 
             /// app version text
-            Align(
-              alignment: Alignment.bottomCenter,
-              child: Padding(
-                padding: EdgeInsets.only(bottom: 20.h),
-                child: Text(
-                  "Version 1.0",
-                  style: Theme.of(context).textTheme.bodySmall!.copyWith(
-                    color: ColorName.primary,
-                    fontWeight: FontWeight.w500,
-                  ),
-                ),
-              ),
+            BlocBuilder<AppVersionBloc, AppVersionState>(
+              builder: (context, state) {
+                if (state is AppVersionLoaded) {
+                  return Align(
+                    alignment: Alignment.bottomCenter,
+                    child: Padding(
+                      padding: EdgeInsets.only(bottom: 20.h),
+                      child: Text(
+                        "${appLocalization.version} ${state.version}",
+                        style: Theme.of(context).textTheme.bodySmall!.copyWith(
+                          color: ColorName.primary,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                    ),
+                  );
+                } else {
+                  return SizedBox();
+                }
+              },
             ),
           ],
         ),

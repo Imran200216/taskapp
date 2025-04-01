@@ -109,5 +109,19 @@
   "french": "French",
   "userLanguagePreferenceSettings": "Your language preference can be changed at any time in Settings.",
   "next": "Next",
-  "getStarted": "Get Started"
+  "getStarted": "Get Started",
+  "forgetPasswordSuccessTitle": "Check your mail",
+  "forgetPasswordSuccessSubTitle": "We have sent a password recover\ninstructions to your email",
+  "goToSignIn": "Go to Sign In",
+  "skipLater": "Skip, I'll confirm later",
+  "continueLanguage": "Confirm Language",
+  "languagePreferenceSettingsAppBarTitle": "Language Preference",
+  "languagePreferenceSettingsSubTitle": "Select your preferred language for a better experience.",
+  "changeLanguagePreferenceAlertDialogTitle": "Change Language Preference",
+  "changeLanguagePreferenceAlertDialogSubTitle": "Are you sure you want to change the language preference?\nThis action cannot be undone.",
+  "cancelDialogText": "Cancel",
+  "confirmDialogText": "Confirm",
+  "appName": "TaskNotify",
+  "version": "Version"
+
 }

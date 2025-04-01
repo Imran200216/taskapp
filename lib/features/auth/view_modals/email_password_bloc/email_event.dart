@@ -59,3 +59,9 @@ class ResetPasswordEvent extends EmailEvent {
   // TODO: implement props
   List<Object?> get props => [email];
 }
+
+class SignOutEvent extends EmailEvent {
+  @override
+  // TODO: implement props
+  List<Object?> get props => [];
+}

@@ -340,4 +340,43 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get getStarted => 'Get Started';
+
+  @override
+  String get forgetPasswordSuccessTitle => 'Check your mail';
+
+  @override
+  String get forgetPasswordSuccessSubTitle => 'We have sent a password recover\ninstructions to your email';
+
+  @override
+  String get goToSignIn => 'Go to Sign In';
+
+  @override
+  String get skipLater => 'Skip, I\'ll confirm later';
+
+  @override
+  String get continueLanguage => 'Confirm Language';
+
+  @override
+  String get languagePreferenceSettingsAppBarTitle => 'Language Preference';
+
+  @override
+  String get languagePreferenceSettingsSubTitle => 'Select your preferred language for a better experience.';
+
+  @override
+  String get changeLanguagePreferenceAlertDialogTitle => 'Change Language Preference';
+
+  @override
+  String get changeLanguagePreferenceAlertDialogSubTitle => 'Are you sure you want to change the language preference?\nThis action cannot be undone.';
+
+  @override
+  String get cancelDialogText => 'Cancel';
+
+  @override
+  String get confirmDialogText => 'Confirm';
+
+  @override
+  String get appName => 'TaskNotify';
+
+  @override
+  String get version => 'Version';
 }

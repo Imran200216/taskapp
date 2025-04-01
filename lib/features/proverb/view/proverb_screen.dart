@@ -70,7 +70,7 @@ class ProverbScreen extends StatelessWidget {
                         author: "",
                       );
                     }
-                    return const Text("Press the button to load a quote");
+                    return SizedBox();
                   },
                 ),
               ),

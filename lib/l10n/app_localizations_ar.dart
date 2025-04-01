@@ -340,4 +340,43 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get getStarted => 'ابدأ';
+
+  @override
+  String get forgetPasswordSuccessTitle => 'تحقق من بريدك الإلكتروني';
+
+  @override
+  String get forgetPasswordSuccessSubTitle => 'لقد أرسلنا تعليمات استعادة كلمة المرور إلى بريدك الإلكتروني';
+
+  @override
+  String get goToSignIn => 'انتقل إلى تسجيل الدخول';
+
+  @override
+  String get skipLater => 'تخطي، سأؤكد لاحقًا';
+
+  @override
+  String get continueLanguage => 'تأكيد اللغة';
+
+  @override
+  String get languagePreferenceSettingsAppBarTitle => 'تفضيل اللغة';
+
+  @override
+  String get languagePreferenceSettingsSubTitle => 'حدد لغتك المفضلة لتجربة أفضل.';
+
+  @override
+  String get changeLanguagePreferenceAlertDialogTitle => 'تغيير تفضيل اللغة';
+
+  @override
+  String get changeLanguagePreferenceAlertDialogSubTitle => 'هل أنت متأكد أنك تريد تغيير تفضيل اللغة؟\nلا يمكن التراجع عن هذا الإجراء.';
+
+  @override
+  String get cancelDialogText => 'إلغاء';
+
+  @override
+  String get confirmDialogText => 'تأكيد';
+
+  @override
+  String get appName => 'إشعار المهمة';
+
+  @override
+  String get version => 'الإصدار';
 }

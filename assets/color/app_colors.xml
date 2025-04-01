@@ -21,4 +21,9 @@
 
     <!-- Profile email bg color  -->
     <color name="profileEmailBgColor">#D0E1FD</color>
+
+    <!-- dialog btn bg colors   -->
+    <color name="deleteAlertDialogBgColor">#F34746</color>
+    <color name="cancelAlertDialogBgColor">#F0F1F1</color>
+
 </resources>

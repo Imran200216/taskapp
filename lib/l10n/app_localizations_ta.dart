@@ -340,4 +340,43 @@ class AppLocalizationsTa extends AppLocalizations {
 
   @override
   String get getStarted => 'தொடங்குங்கள்';
+
+  @override
+  String get forgetPasswordSuccessTitle => 'உங்கள் அஞ்சலைச் சரிபார்க்கவும்';
+
+  @override
+  String get forgetPasswordSuccessSubTitle => 'உங்கள் மின்னஞ்சலுக்கு கடவுச்சொல்லை மீட்டமைக்க வழிமுறைகள் அனுப்பியுள்ளோம்';
+
+  @override
+  String get goToSignIn => 'உள்நுழைய செல்லவும்';
+
+  @override
+  String get skipLater => 'தவிர்க்கவும், நான் பிறகு உறுதிப்படுத்துவேன்';
+
+  @override
+  String get continueLanguage => 'மொழியை உறுதிப்படுத்தவும்';
+
+  @override
+  String get languagePreferenceSettingsAppBarTitle => 'மொழி முன்னுரிமை';
+
+  @override
+  String get languagePreferenceSettingsSubTitle => 'மேலும் சிறந்த அனுபவத்திற்கு உங்கள் விருப்பமான மொழியைத் தேர்ந்தெடுக்கவும்.';
+
+  @override
+  String get changeLanguagePreferenceAlertDialogTitle => 'மொழி முன்னுரிமையை மாற்றவும்';
+
+  @override
+  String get changeLanguagePreferenceAlertDialogSubTitle => 'நீங்கள் மொழி முன்னுரிமையை மாற்ற விரும்புகிறீர்களா?\nஇந்த செயலை மீட்டமைக்க முடியாது.';
+
+  @override
+  String get cancelDialogText => 'ரத்து செய்';
+
+  @override
+  String get confirmDialogText => 'உறுதி செய்';
+
+  @override
+  String get appName => 'டாஸ்க் அறிவிப்பு';
+
+  @override
+  String get version => 'பதிப்பு';
 }

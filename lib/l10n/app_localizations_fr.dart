@@ -340,4 +340,43 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get getStarted => 'Commencer';
+
+  @override
+  String get forgetPasswordSuccessTitle => 'Vérifiez votre e-mail';
+
+  @override
+  String get forgetPasswordSuccessSubTitle => 'Nous avons envoyé des instructions de récupération du mot de passe à votre e-mail';
+
+  @override
+  String get goToSignIn => 'Aller à la connexion';
+
+  @override
+  String get skipLater => 'Ignorer, je confirmerai plus tard';
+
+  @override
+  String get continueLanguage => 'Confirmer la langue';
+
+  @override
+  String get languagePreferenceSettingsAppBarTitle => 'Préférence de langue';
+
+  @override
+  String get languagePreferenceSettingsSubTitle => 'Sélectionnez votre langue préférée pour une meilleure expérience.';
+
+  @override
+  String get changeLanguagePreferenceAlertDialogTitle => 'Changer la préférence de langue';
+
+  @override
+  String get changeLanguagePreferenceAlertDialogSubTitle => 'Êtes-vous sûr de vouloir changer la préférence de langue ?\nCette action est irréversible.';
+
+  @override
+  String get cancelDialogText => 'Annuler';
+
+  @override
+  String get confirmDialogText => 'Confirmer';
+
+  @override
+  String get appName => 'Notification de Tâche';
+
+  @override
+  String get version => 'Version';
 }

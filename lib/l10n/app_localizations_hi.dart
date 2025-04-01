@@ -340,4 +340,43 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get getStarted => 'शुरू करें';
+
+  @override
+  String get forgetPasswordSuccessTitle => 'अपना मेल जांचें';
+
+  @override
+  String get forgetPasswordSuccessSubTitle => 'हमने आपके ईमेल पर पासवर्ड पुनर्प्राप्ति निर्देश भेजे हैं';
+
+  @override
+  String get goToSignIn => 'साइन इन करने जाएं';
+
+  @override
+  String get skipLater => 'छोड़ें, मैं बाद में पुष्टि करूंगा';
+
+  @override
+  String get continueLanguage => 'भाषा की पुष्टि करें';
+
+  @override
+  String get languagePreferenceSettingsAppBarTitle => 'भाषा वरीयता';
+
+  @override
+  String get languagePreferenceSettingsSubTitle => 'बेहतर अनुभव के लिए अपनी पसंदीदा भाषा चुनें।';
+
+  @override
+  String get changeLanguagePreferenceAlertDialogTitle => 'भाषा वरीयता बदलें';
+
+  @override
+  String get changeLanguagePreferenceAlertDialogSubTitle => 'क्या आप वाकई भाषा वरीयता बदलना चाहते हैं?\nइस क्रिया को वापस नहीं लिया जा सकता।';
+
+  @override
+  String get cancelDialogText => 'रद्द करें';
+
+  @override
+  String get confirmDialogText => 'पुष्टि करें';
+
+  @override
+  String get appName => 'कार्यसूचना';
+
+  @override
+  String get version => 'संस्करण';
 }

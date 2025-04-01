@@ -9,6 +9,7 @@ import 'package:taskapp/features/bottom_nav/view_modal/bottom_nav_bloc.dart';
 import 'package:taskapp/features/on_boarding/view_modal/on_boarding_bloc.dart';
 import 'package:taskapp/features/profile/view_modals/auth_checker_provider/auth_checker_provider_bloc.dart';
 import 'package:taskapp/features/proverb/view_modal/quote_bloc/quote_bloc.dart';
+import 'package:taskapp/features/splash/view_modals/app_version_bloc/app_version_bloc.dart';
 import 'package:taskapp/gen/colors.gen.dart';
 import 'package:taskapp/gen/fonts.gen.dart';
 import 'package:taskapp/l10n/app_localizations.dart';
@@ -63,30 +64,37 @@ class MyApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         // on boarding bloc
-        BlocProvider(create: (context) => locator<OnBoardingBloc>()),
+        BlocProvider(create: (context) => locator.get<OnBoardingBloc>()),
 
         // bottom nav bloc
-        BlocProvider(create: (context) => locator<BottomNavBloc>()),
+        BlocProvider(create: (context) => locator.get<BottomNavBloc>()),
 
         // language preference bloc
         BlocProvider(
           create:
               (context) =>
-                  locator<LanguagePreferenceBloc>()
+                  locator.get<LanguagePreferenceBloc>()
                     ..add(ToggleLanguage(language: storedLang)),
         ),
 
         // quotes bloc
         BlocProvider(
-          create: (context) => locator<QuoteBloc>()..add(FetchQuote()),
+          create: (context) => locator.get<QuoteBloc>()..add(FetchQuote()),
         ),
 
         // auth checker provider bloc
-        BlocProvider<AuthCheckerProviderBloc>(
+        BlocProvider(
           create:
               (context) =>
                   locator.get<AuthCheckerProviderBloc>()
                     ..add(CheckAuthMethod()), // Dispatch the event once
+        ),
+
+        // app version bloc
+        BlocProvider(
+          create:
+              (context) =>
+                  locator.get<AppVersionBloc>()..add(FetchAppVersion()),
         ),
       ],
       child: BlocBuilder<LanguagePreferenceBloc, LanguagePreferenceState>(
@@ -129,11 +137,15 @@ class MyApp extends StatelessWidget {
                   /// App Theme
                   title: 'Task App',
                   theme: ThemeData(
+                    // scaffold bg color
                     scaffoldBackgroundColor: ColorName.white,
+                    // color scheme
                     colorScheme: ColorScheme.fromSeed(
                       seedColor: ColorName.primary,
                     ),
+                    // font family
                     fontFamily: FontFamily.poppins,
+                    // text theme
                     textTheme: TextTheme(
                       headlineLarge: AppTextStyles.headlineTextLarge,
                       headlineMedium: AppTextStyles.headlineTextMedium,

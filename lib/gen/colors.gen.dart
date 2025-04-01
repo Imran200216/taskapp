@@ -22,6 +22,12 @@ class ColorName {
   /// Color: #000000
   static const Color black = Color(0xFF000000);
 
+  /// Color: #F0F1F1
+  static const Color cancelAlertDialogBgColor = Color(0xFFF0F1F1);
+
+  /// Color: #F34746
+  static const Color deleteAlertDialogBgColor = Color(0xFFF34746);
+
   /// Color: #FF2D2D
   static const Color failureSnackBarColor = Color(0xFFFF2D2D);
 

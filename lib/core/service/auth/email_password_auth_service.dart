@@ -10,7 +10,7 @@ class EmailPasswordAuthService {
 
   /// **Create User with Email & Password**
   Future<UserCredential?> createPassword({
-    required BuildContext context, // Added context
+    required BuildContext context,
     required String email,
     required String password,
     required String name,
@@ -18,8 +18,10 @@ class EmailPasswordAuthService {
     required String userUid,
   }) async {
     try {
-      UserCredential userCredential = await _auth
-          .createUserWithEmailAndPassword(email: email, password: password);
+      UserCredential userCredential = await _auth.createUserWithEmailAndPassword(
+        email: email,
+        password: password,
+      );
 
       // Create user model
       UserModel user = UserModel(
@@ -34,13 +36,13 @@ class EmailPasswordAuthService {
 
       return userCredential;
     } on FirebaseAuthException catch (e) {
-      throw _handleFirebaseAuthError(context, e); // Pass context
+      throw _handleFirebaseAuthError(context, e);
     }
   }
 
   /// **Sign In with Email & Password**
   Future<UserCredential?> signInWithPassword({
-    required BuildContext context, // Added context
+    required BuildContext context,
     required String email,
     required String password,
   }) async {
@@ -51,25 +53,36 @@ class EmailPasswordAuthService {
       );
       return userCredential;
     } on FirebaseAuthException catch (e) {
-      throw _handleFirebaseAuthError(context, e); // Pass context
+      throw _handleFirebaseAuthError(context, e);
     }
   }
 
   /// **Send Password Reset Email**
   Future<void> sendPasswordResetEmail({
-    required BuildContext context, // Added context
+    required BuildContext context,
     required String email,
   }) async {
     try {
       await _auth.sendPasswordResetEmail(email: email);
     } on FirebaseAuthException catch (e) {
-      throw _handleFirebaseAuthError(context, e); // Pass context
+      throw _handleFirebaseAuthError(context, e);
+    }
+  }
+
+  /// **Sign Out**
+  Future<void> signOut() async {
+    try {
+      await _auth.signOut();
+      print("User signed out successfully");
+    } catch (e) {
+      print("Error signing out: $e");
+      throw Exception("Failed to sign out. Please try again.");
     }
   }
 
   /// **Handle Firebase Authentication Errors**
   String _handleFirebaseAuthError(BuildContext context, FirebaseAuthException e) {
-    final appLocalization = AppLocalizations.of(context); // Ensure non-null
+    final appLocalization = AppLocalizations.of(context);
 
     switch (e.code) {
       case 'email-already-in-use':
