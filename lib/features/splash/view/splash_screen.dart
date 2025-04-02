@@ -83,8 +83,8 @@ class _SplashScreenState extends State<SplashScreen> {
           children: [
             // top decoration
             Positioned(
-              top: -130,
-              left: -130,
+              top: -130.h,
+              left: -130.w,
               child: ClipRect(
                 // Clip overflowing content
                 child: SvgPicture.asset(
@@ -99,8 +99,8 @@ class _SplashScreenState extends State<SplashScreen> {
 
             // bottom decoration
             Positioned(
-              bottom: -130,
-              right: -130,
+              bottom: -130.h,
+              right: -130.w,
               child: ClipRect(
                 child: Transform.rotate(
                   angle: pi,

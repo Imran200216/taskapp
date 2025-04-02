@@ -3,12 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
+import 'package:hive/hive.dart';
 import 'package:taskapp/core/constants/app_constants.dart';
 import 'package:taskapp/core/helper/toast_helper.dart';
 import 'package:taskapp/core/locator/service_locator.dart';
 import 'package:taskapp/features/auth/view_modals/apple_sign_in_bloc/apple_auth_bloc.dart';
 import 'package:taskapp/features/auth/view_modals/email_password_bloc/email_bloc.dart';
 import 'package:taskapp/features/auth/view_modals/google_sign_in_bloc/google_auth_bloc.dart';
+import 'package:taskapp/features/language_preference_settings/view_modals/update_lang_preference_bloc/update_language_preference_bloc.dart';
 import 'package:taskapp/features/profile/view_modals/auth_checker_provider/auth_checker_provider_bloc.dart';
 import 'package:taskapp/features/profile/widgets/custom_email_person_avatar.dart';
 import 'package:taskapp/features/profile/widgets/custom_person_avatar.dart';
@@ -31,6 +33,73 @@ class ProfileScreen extends StatelessWidget {
     final currentUserName = currentUser?.displayName ?? "No Name";
     // current user email
     final currentUserEmail = currentUser?.email ?? "No Email";
+
+    // ✅ Handle user logout status
+    Future<void> handleUserLogout(BuildContext context) async {
+      // ✅ Open Hive box for language preference
+      final userLanguagePreferenceBox = await Hive.openBox(
+        "userLanguagePreferenceBox",
+      );
+
+      // ✅ Temporarily store the original selected language before logout
+      String originalLanguage = userLanguagePreferenceBox.get(
+        "selectedLanguage",
+        defaultValue: "English",
+      );
+
+      await userLanguagePreferenceBox.put(
+        "originalSelectedLanguage",
+        originalLanguage,
+      );
+      debugPrint("📢 Original Language Stored: $originalLanguage");
+
+      // ✅ Change selected language to English on logout
+      await userLanguagePreferenceBox.put("selectedLanguage", "English");
+
+      // ✅ Retrieve stored language and user ID for debugging
+      String storedLang = userLanguagePreferenceBox.get(
+        "selectedLanguage",
+        defaultValue: "English",
+      );
+      String storedUserId = userLanguagePreferenceBox.get(
+        "userId",
+        defaultValue: "NO UUID",
+      );
+
+      debugPrint("📢 Stored Language after logout: $storedLang");
+      debugPrint("📢 Stored UserId: $storedUserId");
+
+      // ✅ Dispatch event to update Firestore and Hive
+      context.read<UpdateLanguagePreferenceBloc>().add(
+        UpdateUserLanguagePreferenceEvent(
+          uid: storedUserId,
+          newLanguagePreference: "English",
+        ),
+      );
+
+      // ✅ Open Hive box for user authentication status
+      final userAuthBox = await Hive.openBox("userAuthStatusBox");
+      await userAuthBox.put("userAuthStatus", false);
+      debugPrint(
+        "📢 User Auth Status after logout: ${userAuthBox.get("userAuthStatus")}",
+      );
+
+      // ✅ Set user language preference status to false
+      await userLanguagePreferenceBox.put(
+        "userLanguagePreferenceStatus",
+        false,
+      );
+      debugPrint(
+        "📢 User Language Preference Status: ${userLanguagePreferenceBox.get("userLanguagePreferenceStatus")}",
+      );
+
+      // ✅ Open Hive box for user onboarding status and set it to false
+      final userOnBoardingBox = await Hive.openBox("userOnBoardingStatusBox");
+      await userOnBoardingBox.put("userOnBoardingStatus", false);
+      debugPrint(
+        "📢 User Onboarding Status: ${userOnBoardingBox.get("userOnBoardingStatus")}",
+      );
+    }
 
     return MultiBlocProvider(
       providers: [
@@ -178,167 +247,212 @@ class ProfileScreen extends StatelessWidget {
 
                     SizedBox(height: 40.h),
 
-                    Expanded(
-                      child: Container(
-                        width: double.infinity,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(25.r),
-                            topRight: Radius.circular(25.r),
-                          ),
-                          color: ColorName.white,
-                        ),
-                        child: Padding(
-                          padding: EdgeInsets.symmetric(
-                            horizontal: 20.w,
-                            vertical: 14.h,
-                          ),
-                          child: Column(
-                            children: [
-                              /// Scrollable content
-                              Expanded(
-                                child: SingleChildScrollView(
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.center,
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    children: [
-                                      /// personal info text
-                                      Text(
-                                        appLocalization.personalInfo,
-                                        style: Theme.of(
-                                          context,
-                                        ).textTheme.bodySmall!.copyWith(
-                                          color: ColorName.primary,
-                                          fontWeight: FontWeight.w500,
-                                          fontSize: 13.sp,
-                                        ),
-                                      ),
-                                      SizedBox(height: 20.h),
+                    BlocBuilder<
+                      UpdateLanguagePreferenceBloc,
+                      UpdateLanguagePreferenceState
+                    >(
+                      builder: (context, state) {
+                        return Expanded(
+                          child: Container(
+                            width: double.infinity,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.only(
+                                topLeft: Radius.circular(25.r),
+                                topRight: Radius.circular(25.r),
+                              ),
+                              color: ColorName.white,
+                            ),
+                            child: Padding(
+                              padding: EdgeInsets.symmetric(
+                                horizontal: 20.w,
+                                vertical: 14.h,
+                              ),
+                              child: Column(
+                                children: [
+                                  /// Scrollable content
+                                  Expanded(
+                                    child: SingleChildScrollView(
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
+                                        children: [
+                                          /// personal info text
+                                          Text(
+                                            appLocalization.personalInfo,
+                                            style: Theme.of(
+                                              context,
+                                            ).textTheme.bodySmall!.copyWith(
+                                              color: ColorName.primary,
+                                              fontWeight: FontWeight.w500,
+                                              fontSize: 13.sp,
+                                            ),
+                                          ),
+                                          SizedBox(height: 20.h),
 
-                                      // Name list tile (Only for Google/Apple Sign-In)
-                                      BlocBuilder<
-                                        AuthCheckerProviderBloc,
-                                        AuthCheckerProviderState
-                                      >(
-                                        builder: (context, state) {
-                                          if (state is AuthChecked &&
-                                              state.isEmailAuth) {
-                                            return SizedBox();
-                                          } else {
-                                            return CustomProfileListTile(
-                                              leadingIcon: Icons.person_outline,
-                                              title: appLocalization.yourName,
-                                              subtitle: currentUserName,
-                                              showTrailing: false,
-                                            );
-                                          }
-                                        },
-                                      ),
-
-                                      // Email list tile
-                                      CustomProfileListTile(
-                                        leadingIcon: Icons.alternate_email,
-                                        title: appLocalization.yourEmailAddress,
-                                        subtitle: currentUserEmail,
-                                        showTrailing: false,
-                                      ),
-
-                                      // Language preference list
-                                      CustomProfileListTile(
-                                        onTap: () {
-                                          // language preference settings screen
-                                          GoRouter.of(context).pushNamed(
-                                            "languagePreferenceSettings",
-                                          );
-                                        },
-                                        leadingIcon: Icons.language_outlined,
-                                        title: appLocalization.yourLanguage,
-                                        subtitle:
-                                            appLocalization
-                                                .yourLanguageSubTitle,
-                                      ),
-
-                                      // Log out list tile
-                                      BlocBuilder<
-                                        AuthCheckerProviderBloc,
-                                        AuthCheckerProviderState
-                                      >(
-                                        builder: (context, state) {
-                                          if (state is AuthChecked) {
-                                            if (state.isEmailAuth) {
-                                              // email auth logout
-                                              return CustomProfileListTile(
-                                                onTap: () {
-                                                  context.read<EmailBloc>().add(
-                                                    SignOutEvent(),
+                                          // Name list tile (Only for Google/Apple Sign-In)
+                                          BlocBuilder<
+                                            AuthCheckerProviderBloc,
+                                            AuthCheckerProviderState
+                                          >(
+                                            builder: (context, state) {
+                                              if (state is AuthChecked) {
+                                                if (state.isEmailAuth) {
+                                                  return SizedBox();
+                                                } else if (state.isAppleAuth) {
+                                                  return CustomProfileListTile(
+                                                    leadingIcon:
+                                                        Icons.person_outline,
+                                                    title:
+                                                        appLocalization
+                                                            .yourName,
+                                                    subtitle: currentUserName,
+                                                    showTrailing: false,
                                                   );
-                                                },
-                                                leadingIcon:
-                                                    Icons.logout_outlined,
-                                                title: appLocalization.logout,
-                                                subtitle:
-                                                    appLocalization
-                                                        .logoutSubTitle,
-                                              );
-                                            } else if (state.isGoogleAuth) {
-                                              // google auth logout
-                                              return CustomProfileListTile(
-                                                onTap: () {
-                                                  context
-                                                      .read<GoogleAuthBloc>()
-                                                      .add(
-                                                        GoogleAuthSignOutEvent(),
-                                                      );
-                                                },
-                                                leadingIcon:
-                                                    Icons.logout_outlined,
-                                                title: appLocalization.logout,
-                                                subtitle:
-                                                    appLocalization
-                                                        .logoutSubTitle,
-                                              );
-                                            } else if (state.isAppleAuth) {
-                                              // apple auth logout
-                                              return CustomProfileListTile(
-                                                onTap: () {
-                                                  context
-                                                      .read<AppleAuthBloc>()
-                                                      .add(
-                                                        AppleSignOutRequested(),
-                                                      );
-                                                },
-                                                leadingIcon:
-                                                    Icons.logout_outlined,
-                                                title: appLocalization.logout,
-                                                subtitle:
-                                                    appLocalization
-                                                        .logoutSubTitle,
-                                              );
-                                            }
-                                          }
+                                                } else if (state.isGoogleAuth) {
+                                                  return CustomProfileListTile(
+                                                    leadingIcon:
+                                                        Icons.person_outline,
+                                                    title:
+                                                        appLocalization
+                                                            .yourName,
+                                                    subtitle: currentUserName,
+                                                    showTrailing: false,
+                                                  );
+                                                }
+                                              }
 
-                                          return SizedBox();
-                                        },
+                                              return SizedBox();
+                                            },
+                                          ),
+
+                                          // Email list tile
+                                          CustomProfileListTile(
+                                            leadingIcon: Icons.alternate_email,
+                                            title:
+                                                appLocalization
+                                                    .yourEmailAddress,
+                                            subtitle: currentUserEmail,
+                                            showTrailing: false,
+                                          ),
+
+                                          // Language preference list
+                                          CustomProfileListTile(
+                                            onTap: () {
+                                              // language preference settings screen
+                                              GoRouter.of(context).pushNamed(
+                                                "languagePreferenceSettings",
+                                              );
+                                            },
+                                            leadingIcon:
+                                                Icons.language_outlined,
+                                            title: appLocalization.yourLanguage,
+                                            subtitle:
+                                                appLocalization
+                                                    .yourLanguageSubTitle,
+                                          ),
+
+                                          // Log out list tile
+                                          BlocBuilder<
+                                            AuthCheckerProviderBloc,
+                                            AuthCheckerProviderState
+                                          >(
+                                            builder: (context, state) {
+                                              if (state is AuthChecked) {
+                                                if (state.isEmailAuth) {
+                                                  // email auth logout
+                                                  return CustomProfileListTile(
+                                                    onTap: () async {
+                                                      // ✅ Email sign out functionality
+                                                      context
+                                                          .read<EmailBloc>()
+                                                          .add(SignOutEvent());
+
+                                                      // update the hive lang status
+                                                      handleUserLogout(context);
+                                                    },
+
+                                                    leadingIcon:
+                                                        Icons.logout_outlined,
+                                                    title:
+                                                        appLocalization.logout,
+                                                    subtitle:
+                                                        appLocalization
+                                                            .logoutSubTitle,
+                                                  );
+                                                } else if (state.isGoogleAuth) {
+                                                  // google auth logout
+                                                  return CustomProfileListTile(
+                                                    onTap: () {
+                                                      // google sign out functionality
+                                                      context
+                                                          .read<
+                                                            GoogleAuthBloc
+                                                          >()
+                                                          .add(
+                                                            GoogleAuthSignOutEvent(),
+                                                          );
+
+                                                      // update the hive lang status
+                                                      handleUserLogout(context);
+                                                    },
+                                                    leadingIcon:
+                                                        Icons.logout_outlined,
+                                                    title:
+                                                        appLocalization.logout,
+                                                    subtitle:
+                                                        appLocalization
+                                                            .logoutSubTitle,
+                                                  );
+                                                } else if (state.isAppleAuth) {
+                                                  // apple auth logout
+                                                  return CustomProfileListTile(
+                                                    onTap: () {
+                                                      // apple sign out functionality
+                                                      context
+                                                          .read<AppleAuthBloc>()
+                                                          .add(
+                                                            AppleSignOutRequested(),
+                                                          );
+
+                                                      // update the hive lang status
+                                                      handleUserLogout(context);
+                                                    },
+                                                    leadingIcon:
+                                                        Icons.logout_outlined,
+                                                    title:
+                                                        appLocalization.logout,
+                                                    subtitle:
+                                                        appLocalization
+                                                            .logoutSubTitle,
+                                                  );
+                                                }
+                                              }
+
+                                              return SizedBox();
+                                            },
+                                          ),
+                                        ],
                                       ),
-                                    ],
+                                    ),
                                   ),
-                                ),
-                              ),
 
-                              /// Thanks section
-                              Padding(
-                                padding: EdgeInsets.only(bottom: 10.h),
-                                child: CustomProfileThanksText(
-                                  developerName: appLocalization.imran,
-                                  developerPortfolio:
-                                      "https://linktr.ee/Imran_B",
-                                ),
+                                  /// Thanks section
+                                  Padding(
+                                    padding: EdgeInsets.only(bottom: 10.h),
+                                    child: CustomProfileThanksText(
+                                      developerName: appLocalization.imran,
+                                      developerPortfolio:
+                                          "https://linktr.ee/Imran_B",
+                                    ),
+                                  ),
+                                ],
                               ),
-                            ],
+                            ),
                           ),
-                        ),
-                      ),
+                        );
+                      },
                     ),
                   ],
                 ),

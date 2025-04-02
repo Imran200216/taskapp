@@ -6,7 +6,6 @@ import 'package:hive/hive.dart';
 import 'package:taskapp/commons/widgets/custom_alert_dialog.dart';
 import 'package:taskapp/commons/widgets/custom_icon_filled_btn.dart';
 import 'package:taskapp/core/helper/toast_helper.dart';
-import 'package:taskapp/features/bottom_nav/view_modal/bottom_nav_bloc.dart';
 import 'package:taskapp/features/language_preference/view_modal/lang_pref_bloc/language_preference_bloc.dart';
 import 'package:taskapp/features/language_preference/widgets/custom_lang_preference_List_tile.dart';
 import 'package:taskapp/features/language_preference_settings/view_modals/update_lang_preference_bloc/update_language_preference_bloc.dart';
@@ -36,12 +35,11 @@ class LanguagePreferenceSettingsScreen extends StatelessWidget {
           );
 
           if (context.mounted) {
-            GoRouter.of(context).pop(); // Close dialog
+            // Close dialog
+            GoRouter.of(context).pop();
 
-            /// Navigate to Profile Screen (Index 4)
-            context.read<BottomNavBloc>().add(SelectTab(index: 4));
-
-            debugPrint("Navigating to Profile Screen...");
+            // navigating to pop screen
+            GoRouter.of(context).pop();
           }
         } else if (state is UpdateLanguagePreferenceFailure) {
           // failure toast
@@ -124,7 +122,7 @@ class LanguagePreferenceSettingsScreen extends StatelessWidget {
                                     debugPrint("Stored Language: $storedLang");
                                     debugPrint("Stored UserId: $storedUserId");
 
-                                    /// Dispatch event to update Firestore
+                                    /// Dispatch event to update Firestore and hive
                                     context
                                         .read<UpdateLanguagePreferenceBloc>()
                                         .add(

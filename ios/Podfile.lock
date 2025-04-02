@@ -1221,6 +1221,8 @@ PODS:
   - Flutter (1.0.0)
   - flutter_contacts (0.0.1):
     - Flutter
+  - flutter_local_notifications (0.0.1):
+    - Flutter
   - flutter_localization (0.0.1):
     - Flutter
   - google_sign_in_ios (0.0.1):
@@ -1384,6 +1386,7 @@ DEPENDENCIES:
   - firebase_core (from `.symlinks/plugins/firebase_core/ios`)
   - Flutter (from `Flutter`)
   - flutter_contacts (from `.symlinks/plugins/flutter_contacts/ios`)
+  - flutter_local_notifications (from `.symlinks/plugins/flutter_local_notifications/ios`)
   - flutter_localization (from `.symlinks/plugins/flutter_localization/ios`)
   - google_sign_in_ios (from `.symlinks/plugins/google_sign_in_ios/darwin`)
   - package_info_plus (from `.symlinks/plugins/package_info_plus/ios`)
@@ -1432,6 +1435,8 @@ EXTERNAL SOURCES:
     :path: Flutter
   flutter_contacts:
     :path: ".symlinks/plugins/flutter_contacts/ios"
+  flutter_local_notifications:
+    :path: ".symlinks/plugins/flutter_local_notifications/ios"
   flutter_localization:
     :path: ".symlinks/plugins/flutter_localization/ios"
   google_sign_in_ios:
@@ -1471,6 +1476,7 @@ SPEC CHECKSUMS:
   FirebaseSharedSwift: 574e6a5602afe4397a55c8d4f767382d620285de
   Flutter: e0871f40cf51350855a761d2e70bf5af5b9b5de7
   flutter_contacts: edb1c5ce76aa433e20e6cb14c615f4c0b66e0983
+  flutter_local_notifications: ff50f8405aaa0ccdc7dcfb9022ca192e8ad9688f
   flutter_localization: f43b18844a2b3d2c71fd64f04ffd6b1e64dd54d4
   google_sign_in_ios: 4111e87aa5e24a4404f00ea13479f35e571969cc
   GoogleSignIn: d4281ab6cf21542b1cfaff85c191f230b399d2db

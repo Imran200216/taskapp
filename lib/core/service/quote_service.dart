@@ -4,10 +4,16 @@ import 'package:translator/translator.dart';
 import 'package:hive/hive.dart';
 
 class QuoteService {
+  // dio client
   final Dio _dio = Dio();
+
+  // translator
   final GoogleTranslator _translator = GoogleTranslator();
 
-  Future<Map<String, String>?> fetchDailyQuote() async {
+  // fetch daily quotes
+  Future<Map<String, String>?> fetchDailyQuote({
+    required String languageCode,
+  }) async {
     try {
       final response = await _dio.get('https://zenquotes.io/api/today');
 
@@ -16,13 +22,12 @@ class QuoteService {
         String originalQuote = quoteData['q'];
         String author = quoteData['a'];
 
-        // ✅ Close and Reopen Hive Box to get latest data
-        final box = await Hive.openBox("userLanguagePreferenceBox");
-        await box.close(); // Close the box first
-        final reopenedBox = await Hive.openBox(
-          "userLanguagePreferenceBox",
-        ); // Reopen it
-        String storedLang = reopenedBox.get("selectedLanguage") ?? "English";
+        // ✅ Ensure Hive box is initialized properly
+        if (!Hive.isBoxOpen("userLanguagePreferenceBox")) {
+          await Hive.openBox("userLanguagePreferenceBox");
+        }
+        final box = Hive.box("userLanguagePreferenceBox");
+        String storedLang = box.get("selectedLanguage") ?? "English";
 
         debugPrint("📢 Retrieved Language from Hive: $storedLang");
 
@@ -60,7 +65,7 @@ class QuoteService {
         return {"quote": originalQuote, "author": author};
       }
     } catch (e) {
-      print("Error fetching quote: $e");
+      debugPrint("❌ Error fetching quote: $e");
     }
     return null;
   }

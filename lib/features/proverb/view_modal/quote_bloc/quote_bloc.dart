@@ -5,6 +5,7 @@ import 'package:hive/hive.dart';
 import 'package:flutter/foundation.dart';
 
 part 'quote_event.dart';
+
 part 'quote_state.dart';
 
 class QuoteBloc extends Bloc<QuoteEvent, QuoteState> {
@@ -18,20 +19,28 @@ class QuoteBloc extends Bloc<QuoteEvent, QuoteState> {
     emit(QuoteLoading());
 
     try {
-      // ✅ Always get the latest stored language preference
-      final box = await Hive.openBox("userLanguagePreferenceBox");
-      String storedLang = box.get("selectedLanguage") ?? "English";
+      // ✅ Ensure Hive box is initialized
+      if (!Hive.isBoxOpen("userLanguagePreferenceBox")) {
+        await Hive.openBox("userLanguagePreferenceBox");
+      }
+      final box = Hive.box("userLanguagePreferenceBox");
+
+      // ✅ Retrieve the stored language
+      String storedLang = box.get("selectedLanguage", defaultValue: "English");
       debugPrint("📢 Current Language in Bloc: $storedLang");
 
-      final data = await quoteService.fetchDailyQuote();
+      // ✅ Pass the language to fetchDailyQuote()
+      final data = await quoteService.fetchDailyQuote(languageCode: storedLang);
+
       if (data != null && data.containsKey("quote") && data.containsKey("author")) {
         emit(QuoteLoaded(data["quote"]!, data["author"]!));
       } else {
         emit(QuoteError("Failed to load quote."));
       }
     } catch (e) {
-      debugPrint("❌ Error in QuoteBloc: $e"); // ✅ Debugging log
+      debugPrint("❌ Error in QuoteBloc: $e");
       emit(QuoteError("Error fetching quote."));
     }
   }
+
 }

@@ -1,11 +1,11 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:get_it/get_it.dart';
-import 'package:hive_flutter/adapters.dart';
 import 'package:taskapp/core/router/app_router.dart';
 import 'package:taskapp/core/service/add_task/add_task_service.dart';
 import 'package:taskapp/core/service/auth/apple_auth_service.dart';
 import 'package:taskapp/core/service/auth/email_password_auth_service.dart';
 import 'package:taskapp/core/service/auth/google_auth_service.dart';
+import 'package:taskapp/core/service/local_storage/hive_storage_service.dart';
 import 'package:taskapp/core/service/quote_service.dart';
 import 'package:taskapp/features/add_task/view_modals/add_task_bloc/add_task_bloc.dart';
 import 'package:taskapp/features/auth/view_modals/apple_sign_in_bloc/apple_auth_bloc.dart';
@@ -27,13 +27,15 @@ Future<void> setupLocator() async {
   /// Initialize Firebase
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
 
-  /// Initialize Hive
-  await Hive.initFlutter();
+  // Register HiveStorageService as an async singleton
+  locator.registerSingletonAsync<HiveStorageService>(() async {
+    final service = HiveStorageService();
+    await service.init();
+    return service;
+  });
 
-  /// Open Hive boxes
-  await Hive.openBox('userLanguagePreferenceBox');
-  await Hive.openBox('userOnBoardingStatusBox');
-  await Hive.openBox('userAuthStatusBox');
+  // Wait for the async registration to complete
+  await locator.allReady();
 
   /// Services
   locator.registerLazySingleton(() => QuoteService());

@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:taskapp/core/locator/service_locator.dart';
 import 'package:taskapp/core/router/app_router.dart';
+import 'package:taskapp/core/service/local_storage/hive_storage_service.dart';
 import 'package:taskapp/core/styles/app_text_styles.dart';
 import 'package:taskapp/features/bottom_nav/view_modal/bottom_nav_bloc.dart';
 import 'package:taskapp/features/language_preference_settings/view_modals/update_lang_preference_bloc/update_language_preference_bloc.dart';
@@ -55,10 +56,21 @@ Locale _mapLanguage(String storedLang) {
   }
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   final String storedLang;
 
   const MyApp({super.key, required this.storedLang});
+
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  @override
+  void dispose() {
+    locator<HiveStorageService>().closeHive();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -75,7 +87,7 @@ class MyApp extends StatelessWidget {
           create:
               (context) =>
                   locator.get<LanguagePreferenceBloc>()
-                    ..add(ToggleLanguage(language: storedLang)),
+                    ..add(ToggleLanguage(language: widget.storedLang)),
         ),
 
         // quotes bloc
@@ -106,7 +118,7 @@ class MyApp extends StatelessWidget {
       child: BlocBuilder<LanguagePreferenceBloc, LanguagePreferenceState>(
         builder: (context, state) {
           // stored lang
-          String langCode = storedLang;
+          String langCode = widget.storedLang;
           if (state is LangPreferenceSelected) {
             langCode = _mapLanguage(state.selectedLanguage).languageCode;
           }
@@ -127,6 +139,8 @@ class MyApp extends StatelessWidget {
                     GlobalWidgetsLocalizations.delegate,
                     GlobalCupertinoLocalizations.delegate,
                   ],
+
+                  // supported languages
                   supportedLocales: const [
                     Locale("ta"),
                     Locale("en"),

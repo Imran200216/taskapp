@@ -1,3 +1,4 @@
+import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -21,10 +22,10 @@ class ProverbScreen extends StatelessWidget {
           decoration: BoxDecoration(color: ColorName.white),
           child: Stack(
             children: [
-              // Top decoration
+              // Top left decoration
               Positioned(
-                top: -130,
-                left: -130,
+                top: -130.h,
+                left: -130.w,
                 child: ClipRect(
                   child: SvgPicture.asset(
                     Assets.img.svg.proverbTopDecoration,
@@ -35,15 +36,49 @@ class ProverbScreen extends StatelessWidget {
                 ),
               ),
 
-              // Bottom decoration
+              // Bottom right decoration
               Positioned(
-                bottom: -130,
-                right: -130,
+                bottom: -130.h,
+                right: -130.w,
                 child: SvgPicture.asset(
                   Assets.img.svg.proverbBottomDecoration,
                   height: 240.h,
                   width: 240.w,
                   fit: BoxFit.cover,
+                ),
+              ),
+
+              // top  right decoration
+              Positioned(
+                top: -130.h,
+                right: -130.w,
+                child: ClipRect(
+                  // Clip overflowing content
+                  child: SvgPicture.asset(
+                    Assets.img.svg.decorationTop,
+                    height: 240.h,
+                    width: 0.w,
+                    color: ColorName.primary,
+                    fit: BoxFit.cover,
+                  ),
+                ),
+              ),
+
+              // bottom  left decoration
+              Positioned(
+                bottom: -130.h,
+                left: -130.w,
+                child: ClipRect(
+                  child: Transform.rotate(
+                    angle: pi,
+                    child: SvgPicture.asset(
+                      Assets.img.svg.decorationTop,
+                      height: 240.h,
+                      width: 240.w,
+                      color: ColorName.primary,
+                      fit: BoxFit.cover,
+                    ),
+                  ),
                 ),
               ),
 
