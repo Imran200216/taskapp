@@ -379,4 +379,19 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get version => 'Version';
+
+  @override
+  String get tapAgainToExit => 'Appuyez à nouveau pour quitter!';
+
+  @override
+  String get authSignOutToastSuccess => 'Déconnexion réussie';
+
+  @override
+  String get languagePreferenceSettingFailureToast => 'Veuillez sélectionner une langue et appuyer sur \'Continuer\' pour appliquer les modifications.';
+
+  @override
+  String get updateLanguagePreferenceSuccessToast => 'Préférence de langue mise à jour avec succès';
+
+  @override
+  String get updateLanguagePreferenceFailureToast => 'La mise à jour de la préférence de langue a échoué. Veuillez réessayer.';
 }

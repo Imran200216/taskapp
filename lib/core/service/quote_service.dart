@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:flutter/material.dart';
 import 'package:translator/translator.dart';
 import 'package:hive/hive.dart';
 
@@ -15,9 +16,15 @@ class QuoteService {
         String originalQuote = quoteData['q'];
         String author = quoteData['a'];
 
-        // Retrieve user language preference from Hive
+        // ✅ Close and Reopen Hive Box to get latest data
         final box = await Hive.openBox("userLanguagePreferenceBox");
-        String storedLang = box.get("selectedLanguage") ?? "English";
+        await box.close(); // Close the box first
+        final reopenedBox = await Hive.openBox(
+          "userLanguagePreferenceBox",
+        ); // Reopen it
+        String storedLang = reopenedBox.get("selectedLanguage") ?? "English";
+
+        debugPrint("📢 Retrieved Language from Hive: $storedLang");
 
         // Language map
         Map<String, String> langMap = {
@@ -28,18 +35,16 @@ class QuoteService {
           "Hindi": "hi",
         };
 
-        // Check if translation is needed
+        // Translate only if needed
         if (storedLang != "English" && langMap.containsKey(storedLang)) {
           String targetLang = langMap[storedLang]!;
 
-          // Translate the quote
           var translatedQuote = await _translator.translate(
             originalQuote,
             from: "en",
             to: targetLang,
           );
 
-          // Translate the author's name (fallback to original if it fails)
           var translatedAuthor = await _translator.translate(
             author,
             from: "en",

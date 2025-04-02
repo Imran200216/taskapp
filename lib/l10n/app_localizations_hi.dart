@@ -379,4 +379,19 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get version => 'संस्करण';
+
+  @override
+  String get tapAgainToExit => 'बाहर निकलने के लिए फिर से टैप करें!';
+
+  @override
+  String get authSignOutToastSuccess => 'सफलतापूर्वक साइन आउट किया गया';
+
+  @override
+  String get languagePreferenceSettingFailureToast => 'कृपया एक भाषा चुनें और परिवर्तन लागू करने के लिए \'जारी रखें\' दबाएं।';
+
+  @override
+  String get updateLanguagePreferenceSuccessToast => 'भाषा वरीयता सफलतापूर्वक अपडेट की गई';
+
+  @override
+  String get updateLanguagePreferenceFailureToast => 'भाषा वरीयता अपडेट विफल हो गई। कृपया पुनः प्रयास करें।';
 }

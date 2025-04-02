@@ -379,4 +379,19 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get version => 'Version';
+
+  @override
+  String get tapAgainToExit => 'Tap again to exit!';
+
+  @override
+  String get authSignOutToastSuccess => 'Sign out successfully';
+
+  @override
+  String get languagePreferenceSettingFailureToast => 'Please select a language and press Continue to apply the changes.';
+
+  @override
+  String get updateLanguagePreferenceSuccessToast => 'Language preference updated successfully';
+
+  @override
+  String get updateLanguagePreferenceFailureToast => 'Language preference update failed. Please try again.';
 }

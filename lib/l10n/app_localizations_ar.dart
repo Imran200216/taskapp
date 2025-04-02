@@ -379,4 +379,19 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get version => 'الإصدار';
+
+  @override
+  String get tapAgainToExit => 'اضغط مرة أخرى للخروج!';
+
+  @override
+  String get authSignOutToastSuccess => 'تم تسجيل الخروج بنجاح';
+
+  @override
+  String get languagePreferenceSettingFailureToast => 'يرجى تحديد لغة والضغط على \'متابعة\' لتطبيق التغييرات.';
+
+  @override
+  String get updateLanguagePreferenceSuccessToast => 'تم تحديث تفضيل اللغة بنجاح';
+
+  @override
+  String get updateLanguagePreferenceFailureToast => 'فشل تحديث تفضيل اللغة. يرجى المحاولة مرة أخرى.';
 }

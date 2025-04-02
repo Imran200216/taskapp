@@ -1,5 +1,4 @@
 import 'package:go_router/go_router.dart';
-import 'package:taskapp/features/app_info/view/app_info_settings_screen.dart';
 import 'package:taskapp/features/auth/view/auth_forget_password_screen.dart';
 import 'package:taskapp/features/auth/view/auth_screen.dart';
 import 'package:taskapp/features/bottom_nav/view/bottom_nav.dart';
@@ -67,13 +66,6 @@ class AppRouter {
         path: "/languagePreferenceSettings",
         name: "languagePreferenceSettings",
         builder: (context, state) => const LanguagePreferenceSettingsScreen(),
-      ),
-
-      /// app info settings screen
-      GoRoute(
-        path: "/appInfoSettings",
-        name: "appInfoSettings",
-        builder: (context, state) => const AppInfoSettingsScreen(),
       ),
     ],
   );

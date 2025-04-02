@@ -6,6 +6,7 @@ import 'package:taskapp/core/locator/service_locator.dart';
 import 'package:taskapp/core/router/app_router.dart';
 import 'package:taskapp/core/styles/app_text_styles.dart';
 import 'package:taskapp/features/bottom_nav/view_modal/bottom_nav_bloc.dart';
+import 'package:taskapp/features/language_preference_settings/view_modals/update_lang_preference_bloc/update_language_preference_bloc.dart';
 import 'package:taskapp/features/on_boarding/view_modal/on_boarding_bloc.dart';
 import 'package:taskapp/features/profile/view_modals/auth_checker_provider/auth_checker_provider_bloc.dart';
 import 'package:taskapp/features/proverb/view_modal/quote_bloc/quote_bloc.dart';
@@ -96,9 +97,15 @@ class MyApp extends StatelessWidget {
               (context) =>
                   locator.get<AppVersionBloc>()..add(FetchAppVersion()),
         ),
+
+        // update user language preference bloc
+        BlocProvider(
+          create: (context) => locator.get<UpdateLanguagePreferenceBloc>(),
+        ),
       ],
       child: BlocBuilder<LanguagePreferenceBloc, LanguagePreferenceState>(
         builder: (context, state) {
+          // stored lang
           String langCode = storedLang;
           if (state is LangPreferenceSelected) {
             langCode = _mapLanguage(state.selectedLanguage).languageCode;

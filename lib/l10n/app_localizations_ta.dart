@@ -379,4 +379,19 @@ class AppLocalizationsTa extends AppLocalizations {
 
   @override
   String get version => 'பதிப்பு';
+
+  @override
+  String get tapAgainToExit => 'வெளியேற மீண்டும் தட்டவும்!';
+
+  @override
+  String get authSignOutToastSuccess => 'வெளியேறுதல் வெற்றிகரமாக முடிந்தது';
+
+  @override
+  String get languagePreferenceSettingFailureToast => 'தயவுசெய்து ஒரு மொழியை தேர்ந்தெடுத்து, மாற்றங்களை செயல்படுத்த \'தொடரவும்\' பொத்தானை அழுத்தவும்.';
+
+  @override
+  String get updateLanguagePreferenceSuccessToast => 'மொழி விருப்பம் வெற்றிகரமாக புதுப்பிக்கப்பட்டது';
+
+  @override
+  String get updateLanguagePreferenceFailureToast => 'மொழி விருப்பம் புதுப்பிக்க முடியவில்லை. மீண்டும் முயற்சிக்கவும்.';
 }

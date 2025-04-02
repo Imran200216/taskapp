@@ -52,7 +52,7 @@ class ProfileScreen extends StatelessWidget {
                 // Show success toast
                 ToastHelper.showToast(
                   context: context,
-                  message: "Sign out successfully",
+                  message: appLocalization.authSignOutToastSuccess,
                   isSuccess: true,
                 );
 
@@ -76,7 +76,7 @@ class ProfileScreen extends StatelessWidget {
                 // Show success toast
                 ToastHelper.showToast(
                   context: context,
-                  message: "Sign out successfully",
+                  message: appLocalization.authSignOutToastSuccess,
                   isSuccess: true,
                 );
 
@@ -100,7 +100,7 @@ class ProfileScreen extends StatelessWidget {
                 // Show success toast
                 ToastHelper.showToast(
                   context: context,
-                  message: "Sign out successfully",
+                  message: appLocalization.authSignOutToastSuccess,
                   isSuccess: true,
                 );
 
@@ -147,22 +147,32 @@ class ProfileScreen extends StatelessWidget {
                       builder: (context, state) {
                         print("BlocBuilder State: $state");
 
-                        if (state is AuthChecked && state.isEmailAuth) {
-                          String userEmailFirstLetter =
-                              currentUserEmail.isNotEmpty
-                                  ? currentUserEmail[0].toUpperCase()
-                                  : "?";
+                        if (state is AuthChecked) {
+                          if (state.isEmailAuth) {
+                            String userEmailFirstLetter =
+                                currentUserEmail.isNotEmpty
+                                    ? currentUserEmail[0].toUpperCase()
+                                    : "?";
 
-                          return CustomEmailPersonAvatar(
-                            userEmailFirstLetter: userEmailFirstLetter,
-                          );
-                        } else {
-                          return CustomPersonAvatar(
-                            imageUrl:
-                                currentUser?.photoURL ??
-                                AppConstants.personPlaceHolder,
-                          );
+                            return CustomEmailPersonAvatar(
+                              userEmailFirstLetter: userEmailFirstLetter,
+                            );
+                          } else if (state.isGoogleAuth) {
+                            return CustomPersonAvatar(
+                              imageUrl:
+                                  currentUser?.photoURL ??
+                                  AppConstants.personPlaceHolder,
+                            );
+                          } else if (state.isAppleAuth) {
+                            return CustomPersonAvatar(
+                              imageUrl:
+                                  currentUser?.photoURL ??
+                                  AppConstants.personPlaceHolder,
+                            );
+                          }
                         }
+
+                        return SizedBox();
                       },
                     ),
 
@@ -232,21 +242,6 @@ class ProfileScreen extends StatelessWidget {
                                         title: appLocalization.yourEmailAddress,
                                         subtitle: currentUserEmail,
                                         showTrailing: false,
-                                      ),
-
-                                      // App info tile
-                                      CustomProfileListTile(
-                                        onTap: () {
-                                          // app info settings screen
-                                          GoRouter.of(
-                                            context,
-                                          ).pushNamed("appInfoSettings");
-                                        },
-                                        leadingIcon: Icons.info_outline_rounded,
-                                        title: appLocalization.appInfo,
-                                        subtitle:
-                                            appLocalization
-                                                .taskNotifyAppInfoDescription,
                                       ),
 
                                       // Language preference list

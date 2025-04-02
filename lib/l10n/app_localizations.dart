@@ -844,6 +844,36 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Version'**
   String get version;
+
+  /// No description provided for @tapAgainToExit.
+  ///
+  /// In en, this message translates to:
+  /// **'Tap again to exit!'**
+  String get tapAgainToExit;
+
+  /// No description provided for @authSignOutToastSuccess.
+  ///
+  /// In en, this message translates to:
+  /// **'Sign out successfully'**
+  String get authSignOutToastSuccess;
+
+  /// No description provided for @languagePreferenceSettingFailureToast.
+  ///
+  /// In en, this message translates to:
+  /// **'Please select a language and press Continue to apply the changes.'**
+  String get languagePreferenceSettingFailureToast;
+
+  /// No description provided for @updateLanguagePreferenceSuccessToast.
+  ///
+  /// In en, this message translates to:
+  /// **'Language preference updated successfully'**
+  String get updateLanguagePreferenceSuccessToast;
+
+  /// No description provided for @updateLanguagePreferenceFailureToast.
+  ///
+  /// In en, this message translates to:
+  /// **'Language preference update failed. Please try again.'**
+  String get updateLanguagePreferenceFailureToast;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

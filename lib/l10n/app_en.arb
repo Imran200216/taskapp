@@ -122,6 +122,10 @@
   "cancelDialogText": "Cancel",
   "confirmDialogText": "Confirm",
   "appName": "TaskNotify",
-  "version": "Version"
-
+  "version": "Version",
+  "tapAgainToExit": "Tap again to exit!",
+  "authSignOutToastSuccess": "Sign out successfully",
+  "languagePreferenceSettingFailureToast": "Please select a language and press Continue to apply the changes.",
+  "updateLanguagePreferenceSuccessToast": "Language preference updated successfully",
+  "updateLanguagePreferenceFailureToast": "Language preference update failed. Please try again."
 }

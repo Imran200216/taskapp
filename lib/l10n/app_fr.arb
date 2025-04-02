@@ -122,5 +122,11 @@
   "cancelDialogText": "Annuler",
   "confirmDialogText": "Confirmer",
   "appName": "Notification de Tâche",
-  "version": "Version"
+  "version": "Version",
+  "tapAgainToExit": "Appuyez à nouveau pour quitter!",
+  "authSignOutToastSuccess": "Déconnexion réussie",
+  "languagePreferenceSettingFailureToast": "Veuillez sélectionner une langue et appuyer sur 'Continuer' pour appliquer les modifications.",
+  "updateLanguagePreferenceSuccessToast": "Préférence de langue mise à jour avec succès",
+
+  "updateLanguagePreferenceFailureToast": "La mise à jour de la préférence de langue a échoué. Veuillez réessayer."
 }

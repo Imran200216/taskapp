@@ -122,5 +122,11 @@
   "cancelDialogText": "إلغاء",
   "confirmDialogText": "تأكيد",
   "appName": "إشعار المهمة",
-  "version": "الإصدار"
+  "version": "الإصدار",
+  "tapAgainToExit": "اضغط مرة أخرى للخروج!",
+  "authSignOutToastSuccess": "تم تسجيل الخروج بنجاح",
+  "languagePreferenceSettingFailureToast": "يرجى تحديد لغة والضغط على 'متابعة' لتطبيق التغييرات.",
+  "updateLanguagePreferenceSuccessToast": "تم تحديث تفضيل اللغة بنجاح",
+
+  "updateLanguagePreferenceFailureToast": "فشل تحديث تفضيل اللغة. يرجى المحاولة مرة أخرى."
 }
