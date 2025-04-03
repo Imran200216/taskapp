@@ -394,4 +394,19 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get updateLanguagePreferenceFailureToast => 'فشل تحديث تفضيل اللغة. يرجى المحاولة مرة أخرى.';
+
+  @override
+  String get hello => 'مرحبا';
+
+  @override
+  String get haveANiceDay => 'أتمنى لك يوما سعيدا.';
+
+  @override
+  String get chipTaskCompleted => 'اكتملت المهمة';
+
+  @override
+  String get chipTaskInProgress => 'المهمة قيد التنفيذ';
+
+  @override
+  String get chipTaskOverDue => 'المهمة متأخرة';
 }

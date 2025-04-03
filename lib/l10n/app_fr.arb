@@ -127,6 +127,10 @@
   "authSignOutToastSuccess": "Déconnexion réussie",
   "languagePreferenceSettingFailureToast": "Veuillez sélectionner une langue et appuyer sur 'Continuer' pour appliquer les modifications.",
   "updateLanguagePreferenceSuccessToast": "Préférence de langue mise à jour avec succès",
-
-  "updateLanguagePreferenceFailureToast": "La mise à jour de la préférence de langue a échoué. Veuillez réessayer."
+  "updateLanguagePreferenceFailureToast": "La mise à jour de la préférence de langue a échoué. Veuillez réessayer.",
+  "hello": "Bonjour",
+  "haveANiceDay": "Passez une bonne journée.",
+  "chipTaskCompleted": "Tâche terminée",
+  "chipTaskInProgress": "Tâche en cours",
+  "chipTaskOverDue": "Tâche en retard"
 }

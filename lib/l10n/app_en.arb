@@ -127,5 +127,10 @@
   "authSignOutToastSuccess": "Sign out successfully",
   "languagePreferenceSettingFailureToast": "Please select a language and press Continue to apply the changes.",
   "updateLanguagePreferenceSuccessToast": "Language preference updated successfully",
-  "updateLanguagePreferenceFailureToast": "Language preference update failed. Please try again."
+  "updateLanguagePreferenceFailureToast": "Language preference update failed. Please try again.",
+  "hello": "Hello",
+  "haveANiceDay": "Have a nice day.",
+  "chipTaskCompleted": "Task Completed",
+  "chipTaskInProgress": "Task InProgress",
+  "chipTaskOverDue": "Task OverDue"
 }

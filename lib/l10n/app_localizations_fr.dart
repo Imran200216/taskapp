@@ -394,4 +394,19 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get updateLanguagePreferenceFailureToast => 'La mise à jour de la préférence de langue a échoué. Veuillez réessayer.';
+
+  @override
+  String get hello => 'Bonjour';
+
+  @override
+  String get haveANiceDay => 'Passez une bonne journée.';
+
+  @override
+  String get chipTaskCompleted => 'Tâche terminée';
+
+  @override
+  String get chipTaskInProgress => 'Tâche en cours';
+
+  @override
+  String get chipTaskOverDue => 'Tâche en retard';
 }

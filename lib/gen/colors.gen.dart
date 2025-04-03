@@ -25,6 +25,9 @@ class ColorName {
   /// Color: #F0F1F1
   static const Color cancelAlertDialogBgColor = Color(0xFFF0F1F1);
 
+  /// Color: #E0E0E0FF
+  static const Color chipBgColor = Color(0xE0E0E0FF);
+
   /// Color: #F34746
   static const Color deleteAlertDialogBgColor = Color(0xFFF34746);
 

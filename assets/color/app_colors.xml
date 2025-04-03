@@ -26,4 +26,7 @@
     <color name="deleteAlertDialogBgColor">#F34746</color>
     <color name="cancelAlertDialogBgColor">#F0F1F1</color>
 
+    <!-- Selection chip bg color -->
+    <color name="chipBgColor">#E0E0E0FF</color>
+
 </resources>

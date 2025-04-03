@@ -394,4 +394,19 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get updateLanguagePreferenceFailureToast => 'भाषा वरीयता अपडेट विफल हो गई। कृपया पुनः प्रयास करें।';
+
+  @override
+  String get hello => 'नमस्ते';
+
+  @override
+  String get haveANiceDay => 'आपका दिन शुभ हो।';
+
+  @override
+  String get chipTaskCompleted => 'कार्य पूरा हुआ';
+
+  @override
+  String get chipTaskInProgress => 'कार्य प्रगति पर है';
+
+  @override
+  String get chipTaskOverDue => 'कार्य अतिदेय हो गया';
 }

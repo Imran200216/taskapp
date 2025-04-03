@@ -7,6 +7,7 @@ import 'package:taskapp/features/language_preference/view/user_language_preferen
 import 'package:taskapp/features/language_preference_settings/view/language_preference_settings_screen.dart';
 import 'package:taskapp/features/on_boarding/view/on_boarding_screen.dart';
 import 'package:taskapp/features/splash/view/splash_screen.dart';
+import 'package:taskapp/features/task_description/view/task_description_screen.dart';
 
 class AppRouter {
   static final GoRouter _router = GoRouter(
@@ -66,6 +67,13 @@ class AppRouter {
         path: "/languagePreferenceSettings",
         name: "languagePreferenceSettings",
         builder: (context, state) => const LanguagePreferenceSettingsScreen(),
+      ),
+
+      /// task description screen
+      GoRoute(
+        path: "/taskDescription",
+        name: "taskDescription",
+        builder: (context, state) => const TaskDescriptionScreen(),
       ),
     ],
   );

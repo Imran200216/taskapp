@@ -127,6 +127,10 @@
   "authSignOutToastSuccess": "تم تسجيل الخروج بنجاح",
   "languagePreferenceSettingFailureToast": "يرجى تحديد لغة والضغط على 'متابعة' لتطبيق التغييرات.",
   "updateLanguagePreferenceSuccessToast": "تم تحديث تفضيل اللغة بنجاح",
-
-  "updateLanguagePreferenceFailureToast": "فشل تحديث تفضيل اللغة. يرجى المحاولة مرة أخرى."
+  "updateLanguagePreferenceFailureToast": "فشل تحديث تفضيل اللغة. يرجى المحاولة مرة أخرى.",
+  "hello": "مرحبا",
+  "haveANiceDay": "أتمنى لك يوما سعيدا.",
+  "chipTaskCompleted": "اكتملت المهمة",
+  "chipTaskInProgress": "المهمة قيد التنفيذ",
+  "chipTaskOverDue": "المهمة متأخرة"
 }

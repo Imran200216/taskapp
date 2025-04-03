@@ -874,6 +874,36 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Language preference update failed. Please try again.'**
   String get updateLanguagePreferenceFailureToast;
+
+  /// No description provided for @hello.
+  ///
+  /// In en, this message translates to:
+  /// **'Hello'**
+  String get hello;
+
+  /// No description provided for @haveANiceDay.
+  ///
+  /// In en, this message translates to:
+  /// **'Have a nice day.'**
+  String get haveANiceDay;
+
+  /// No description provided for @chipTaskCompleted.
+  ///
+  /// In en, this message translates to:
+  /// **'Task Completed'**
+  String get chipTaskCompleted;
+
+  /// No description provided for @chipTaskInProgress.
+  ///
+  /// In en, this message translates to:
+  /// **'Task InProgress'**
+  String get chipTaskInProgress;
+
+  /// No description provided for @chipTaskOverDue.
+  ///
+  /// In en, this message translates to:
+  /// **'Task OverDue'**
+  String get chipTaskOverDue;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

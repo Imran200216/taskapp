@@ -394,4 +394,19 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get updateLanguagePreferenceFailureToast => 'Language preference update failed. Please try again.';
+
+  @override
+  String get hello => 'Hello';
+
+  @override
+  String get haveANiceDay => 'Have a nice day.';
+
+  @override
+  String get chipTaskCompleted => 'Task Completed';
+
+  @override
+  String get chipTaskInProgress => 'Task InProgress';
+
+  @override
+  String get chipTaskOverDue => 'Task OverDue';
 }

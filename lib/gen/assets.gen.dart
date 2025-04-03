@@ -112,6 +112,9 @@ class $AssetsIconSvgGen {
   /// File path: assets/icon/svg/quote-starting.svg
   String get quoteStarting => 'assets/icon/svg/quote-starting.svg';
 
+  /// File path: assets/icon/svg/task-leading.svg
+  String get taskLeading => 'assets/icon/svg/task-leading.svg';
+
   /// List of all assets
   List<String> get values => [
     apple,
@@ -122,6 +125,7 @@ class $AssetsIconSvgGen {
     login,
     quoteEnding,
     quoteStarting,
+    taskLeading,
   ];
 }
 

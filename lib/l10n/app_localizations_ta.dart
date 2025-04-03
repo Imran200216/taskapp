@@ -394,4 +394,19 @@ class AppLocalizationsTa extends AppLocalizations {
 
   @override
   String get updateLanguagePreferenceFailureToast => 'மொழி விருப்பம் புதுப்பிக்க முடியவில்லை. மீண்டும் முயற்சிக்கவும்.';
+
+  @override
+  String get hello => 'வணக்கம்';
+
+  @override
+  String get haveANiceDay => 'நன்று ஒரு நாள் இருக்கட்டும்.';
+
+  @override
+  String get chipTaskCompleted => 'பணி முடிந்தது';
+
+  @override
+  String get chipTaskInProgress => 'பணி நடைமுறையில் உள்ளது';
+
+  @override
+  String get chipTaskOverDue => 'பணி காலாவதியானது';
 }
