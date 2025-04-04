@@ -132,5 +132,8 @@
   "haveANiceDay": "Have a nice day.",
   "chipTaskCompleted": "Task Completed",
   "chipTaskInProgress": "Task InProgress",
-  "chipTaskOverDue": "Task OverDue"
+  "chipTaskOverDue": "Task OverDue",
+
+  "internetFailureToast":  "Oops! It looks like you're offline. Please check your connection.",
+  "internetSuccessToast": "You are online now."
 }

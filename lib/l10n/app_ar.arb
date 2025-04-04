@@ -132,5 +132,8 @@
   "haveANiceDay": "أتمنى لك يوما سعيدا.",
   "chipTaskCompleted": "اكتملت المهمة",
   "chipTaskInProgress": "المهمة قيد التنفيذ",
-  "chipTaskOverDue": "المهمة متأخرة"
+  "chipTaskOverDue": "المهمة متأخرة",
+
+  "internetFailureToast":  "عذرًا! يبدو أنك غير متصل بالإنترنت. يرجى التحقق من الاتصال.",
+  "internetSuccessToast": "أنت متصل الآن بالإنترنت."
 }

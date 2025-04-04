@@ -409,4 +409,10 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get chipTaskOverDue => 'Tâche en retard';
+
+  @override
+  String get internetFailureToast => 'Oups ! Il semble que vous soyez hors ligne. Veuillez vérifier votre connexion.';
+
+  @override
+  String get internetSuccessToast => 'Vous êtes maintenant en ligne.';
 }

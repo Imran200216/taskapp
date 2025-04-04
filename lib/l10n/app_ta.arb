@@ -132,5 +132,11 @@
   "haveANiceDay": "நன்று ஒரு நாள் இருக்கட்டும்.",
   "chipTaskCompleted": "பணி முடிந்தது",
   "chipTaskInProgress": "பணி நடைமுறையில் உள்ளது",
-  "chipTaskOverDue": "பணி காலாவதியானது"
+  "chipTaskOverDue": "பணி காலாவதியானது",
+
+
+  "internetFailureToast": "ஓப்ஸ்! நீங்கள் இணையதளத்திற்கு இணைக்கப்படவில்லை. உங்கள் இணைப்பை சரிபார்க்கவும்.",
+  "internetSuccessToast":  "நீங்கள் இப்போது ஆன்லைன் உள்ளீர்கள்."
+
+
 }

@@ -904,6 +904,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Task OverDue'**
   String get chipTaskOverDue;
+
+  /// No description provided for @internetFailureToast.
+  ///
+  /// In en, this message translates to:
+  /// **'Oops! It looks like you\'re offline. Please check your connection.'**
+  String get internetFailureToast;
+
+  /// No description provided for @internetSuccessToast.
+  ///
+  /// In en, this message translates to:
+  /// **'You are online now.'**
+  String get internetSuccessToast;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

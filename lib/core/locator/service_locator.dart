@@ -1,5 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:get_it/get_it.dart';
+import 'package:taskapp/core/bloc/network_checker_bloc/network_bloc.dart';
 import 'package:taskapp/core/router/app_router.dart';
 import 'package:taskapp/core/service/add_task/add_task_service.dart';
 import 'package:taskapp/core/service/auth/apple_auth_service.dart';
@@ -70,6 +71,10 @@ Future<void> setupLocator() async {
 
   // Selection chip Bloc
   locator.registerFactory(() => SelectionChipBloc());
+
+  // Internet Checker Bloc
+
+  locator.registerLazySingleton(() => NetworkBloc());
 
   /// Router
   locator.registerLazySingleton<AppRouter>(() => AppRouter());

@@ -409,4 +409,10 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get chipTaskOverDue => 'कार्य अतिदेय हो गया';
+
+  @override
+  String get internetFailureToast => 'ओह! ऐसा लगता है कि आप ऑफलाइन हैं। कृपया अपना कनेक्शन जांचें।';
+
+  @override
+  String get internetSuccessToast => 'अब आप ऑनलाइन हैं।';
 }

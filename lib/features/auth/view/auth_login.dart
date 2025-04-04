@@ -7,6 +7,8 @@ import 'package:hive/hive.dart';
 import 'package:taskapp/commons/widgets/custom_auth_social_btn.dart';
 import 'package:taskapp/commons/widgets/custom_icon_filled_btn.dart';
 import 'package:taskapp/commons/widgets/custom_text_field.dart';
+import 'package:taskapp/core/bloc/network_checker_bloc/network_bloc.dart';
+import 'package:taskapp/core/helper/snack_bar_helper.dart';
 import 'package:taskapp/core/helper/toast_helper.dart';
 import 'package:taskapp/core/locator/service_locator.dart';
 import 'package:taskapp/core/validator/app_validator.dart';
@@ -100,7 +102,7 @@ class _AuthLoginState extends State<AuthLogin> {
                 // Show success message
                 ToastHelper.showToast(
                   context: context,
-                  message:appLocalization.authSignInSuccessToast,
+                  message: appLocalization.authSignInSuccessToast,
                   isSuccess: true,
                 );
               } else if (state is GoogleAuthFailure) {
@@ -164,6 +166,25 @@ class _AuthLoginState extends State<AuthLogin> {
                           return CustomAuthSocialBtn(
                             isLoading: state is AppleAuthLoading,
                             onTap: () async {
+                              // network state
+                              final networkState =
+                                  context.read<NetworkBloc>().state;
+
+                              if (networkState is NetworkFailure) {
+                                // error toast
+                                SnackBarHelper.showSnackBar(
+                                  context: context,
+                                  message: appLocalization.internetFailureToast,
+                                  backgroundColor: ColorName.toastErrorColor,
+                                  textColor: ColorName.white,
+                                  leadingIcon:
+                                      Icons
+                                          .signal_cellular_connected_no_internet_4_bar_sharp,
+                                );
+
+                                return;
+                              }
+
                               // user language preference hive box
                               final box = await Hive.openBox(
                                 "userLanguagePreferenceBox",
@@ -197,6 +218,25 @@ class _AuthLoginState extends State<AuthLogin> {
                       return CustomAuthSocialBtn(
                         isLoading: state is GoogleAuthLoading,
                         onTap: () async {
+                          // network state
+                          final networkState =
+                              context.read<NetworkBloc>().state;
+
+                          if (networkState is NetworkFailure) {
+                            // error toast
+                            SnackBarHelper.showSnackBar(
+                              context: context,
+                              message: appLocalization.internetFailureToast,
+                              backgroundColor: ColorName.toastErrorColor,
+                              textColor: ColorName.white,
+                              leadingIcon:
+                                  Icons
+                                      .signal_cellular_connected_no_internet_4_bar_sharp,
+                            );
+
+                            return;
+                          }
+
                           // user language preference hive box
                           final box = await Hive.openBox(
                             "userLanguagePreferenceBox",
@@ -284,6 +324,25 @@ class _AuthLoginState extends State<AuthLogin> {
                     builder: (context, state) {
                       return CustomIconFilledBtn(
                         onTap: () {
+                          // network state
+                          final networkState =
+                              context.read<NetworkBloc>().state;
+
+                          if (networkState is NetworkFailure) {
+                            // error toast
+                            SnackBarHelper.showSnackBar(
+                              context: context,
+                              message: appLocalization.internetFailureToast,
+                              backgroundColor: ColorName.toastErrorColor,
+                              textColor: ColorName.white,
+                              leadingIcon:
+                                  Icons
+                                      .signal_cellular_connected_no_internet_4_bar_sharp,
+                            );
+
+                            return;
+                          }
+
                           if (formKey.currentState!.validate()) {
                             //  Sign In functionality
                             context.read<EmailBloc>().add(

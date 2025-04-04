@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hive_flutter/adapters.dart';
+import 'package:taskapp/core/bloc/network_checker_bloc/network_bloc.dart';
 import 'package:taskapp/core/locator/service_locator.dart';
 import 'package:taskapp/core/router/app_router.dart';
 import 'package:taskapp/core/service/local_storage/hive_storage_service.dart';
@@ -118,6 +119,13 @@ class _MyAppState extends State<MyApp> {
 
         // selection chip bloc
         BlocProvider(create: (context) => locator.get<SelectionChipBloc>()),
+
+        // network checker bloc
+        BlocProvider(
+          create:
+              (context) => locator.get<NetworkBloc>()..add(NetworkObserve()),
+          lazy: false,
+        ),
       ],
       child: BlocBuilder<LanguagePreferenceBloc, LanguagePreferenceState>(
         builder: (context, state) {

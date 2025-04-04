@@ -132,5 +132,8 @@
   "haveANiceDay": "Passez une bonne journée.",
   "chipTaskCompleted": "Tâche terminée",
   "chipTaskInProgress": "Tâche en cours",
-  "chipTaskOverDue": "Tâche en retard"
+  "chipTaskOverDue": "Tâche en retard",
+
+  "internetFailureToast":  "Oups ! Il semble que vous soyez hors ligne. Veuillez vérifier votre connexion.",
+  "internetSuccessToast": "Vous êtes maintenant en ligne."
 }

@@ -409,4 +409,10 @@ class AppLocalizationsTa extends AppLocalizations {
 
   @override
   String get chipTaskOverDue => 'பணி காலாவதியானது';
+
+  @override
+  String get internetFailureToast => 'ஓப்ஸ்! நீங்கள் இணையதளத்திற்கு இணைக்கப்படவில்லை. உங்கள் இணைப்பை சரிபார்க்கவும்.';
+
+  @override
+  String get internetSuccessToast => 'நீங்கள் இப்போது ஆன்லைன் உள்ளீர்கள்.';
 }

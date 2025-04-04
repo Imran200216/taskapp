@@ -132,6 +132,9 @@
   "haveANiceDay": "आपका दिन शुभ हो।",
   "chipTaskCompleted": "कार्य पूरा हुआ",
   "chipTaskInProgress": "कार्य प्रगति पर है",
-  "chipTaskOverDue": "कार्य अतिदेय हो गया"
+  "chipTaskOverDue": "कार्य अतिदेय हो गया",
+
+  "internetFailureToast": "ओह! ऐसा लगता है कि आप ऑफलाइन हैं। कृपया अपना कनेक्शन जांचें।",
+  "internetSuccessToast":  "अब आप ऑनलाइन हैं।"
 }
 

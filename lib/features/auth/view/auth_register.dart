@@ -5,6 +5,8 @@ import 'package:go_router/go_router.dart';
 import 'package:hive/hive.dart';
 import 'package:taskapp/commons/widgets/custom_icon_filled_btn.dart';
 import 'package:taskapp/commons/widgets/custom_text_field.dart';
+import 'package:taskapp/core/bloc/network_checker_bloc/network_bloc.dart';
+import 'package:taskapp/core/helper/snack_bar_helper.dart';
 import 'package:taskapp/core/helper/toast_helper.dart';
 import 'package:taskapp/core/locator/service_locator.dart';
 import 'package:taskapp/core/validator/app_validator.dart';
@@ -46,36 +48,44 @@ class _AuthRegisterState extends State<AuthRegister> {
   Widget build(BuildContext context) {
     final appLocalization = AppLocalizations.of(context);
 
-    return BlocProvider(
-      create: (context) => locator<EmailBloc>(),
-      child: BlocListener<EmailBloc, EmailState>(
-        listener: (context, state) async {
-          if (state is EmailPasswordAuthSuccess) {
-            // Save auth status in Hive
-            var box = Hive.box('userAuthStatusBox');
-            await box.put('userAuthStatus', true);
+    return MultiBlocProvider(
+      providers: [
+        // email auth bloc
+        BlocProvider(create: (context) => locator<EmailBloc>()),
+      ],
+      child: MultiBlocListener(
+        listeners: [
+          // email auth bloc
+          BlocListener<EmailBloc, EmailState>(
+            listener: (context, state) async {
+              if (state is EmailPasswordAuthSuccess) {
+                // Save auth status in Hive
+                var box = Hive.box('userAuthStatusBox');
+                await box.put('userAuthStatus', true);
 
-            // Navigate to bottom navigation screen
-            GoRouter.of(context).pushReplacementNamed("bottomNav");
+                // Navigate to bottom navigation screen
+                GoRouter.of(context).pushReplacementNamed("bottomNav");
 
-            // Show success message
-            ToastHelper.showToast(
-              context: context,
-              message: appLocalization.authSignUpSuccessToast,
-              isSuccess: true,
-            );
-          } else if (state is EmailPasswordAuthFailure) {
-            // Close loading dialog
-            Navigator.of(context).pop();
+                // Show success message
+                ToastHelper.showToast(
+                  context: context,
+                  message: appLocalization.authSignUpSuccessToast,
+                  isSuccess: true,
+                );
+              } else if (state is EmailPasswordAuthFailure) {
+                // Close loading dialog
+                Navigator.of(context).pop();
 
-            // Show error message
-            ToastHelper.showToast(
-              context: context,
-              message: state.error,
-              isSuccess: false,
-            );
-          }
-        },
+                // Show error message
+                ToastHelper.showToast(
+                  context: context,
+                  message: state.error,
+                  isSuccess: false,
+                );
+              }
+            },
+          ),
+        ],
         child: Container(
           decoration: BoxDecoration(color: ColorName.authTabBarBgColor),
           child: Container(
@@ -145,6 +155,25 @@ class _AuthRegisterState extends State<AuthRegister> {
                       return CustomIconFilledBtn(
                         isLoading: state is EmailPasswordAuthLoading,
                         onTap: () async {
+                          // network state
+                          final networkState =
+                              context.read<NetworkBloc>().state;
+
+                          if (networkState is NetworkFailure) {
+                            // error toast
+                            SnackBarHelper.showSnackBar(
+                              context: context,
+                              message: appLocalization.internetFailureToast,
+                              backgroundColor: ColorName.toastErrorColor,
+                              textColor: ColorName.white,
+                              leadingIcon:
+                                  Icons
+                                      .signal_cellular_connected_no_internet_4_bar_sharp,
+                            );
+
+                            return;
+                          }
+
                           if (formKey.currentState!.validate()) {
                             // user language preference hive box
                             final box = await Hive.openBox(

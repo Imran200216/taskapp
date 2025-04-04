@@ -409,4 +409,10 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get chipTaskOverDue => 'المهمة متأخرة';
+
+  @override
+  String get internetFailureToast => 'عذرًا! يبدو أنك غير متصل بالإنترنت. يرجى التحقق من الاتصال.';
+
+  @override
+  String get internetSuccessToast => 'أنت متصل الآن بالإنترنت.';
 }
