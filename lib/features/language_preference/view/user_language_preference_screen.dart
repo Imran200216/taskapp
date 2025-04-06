@@ -209,9 +209,14 @@ class _UserLanguagePreferenceScreenState
                                 context.read<LanguagePreferenceBloc>().add(
                                   LanguagePreferenceValidationFailed(),
                                 );
+                                // Add a small delay to ensure the toast appears
+                                await Future.delayed(
+                                  Duration(milliseconds: 100),
+                                );
                                 return;
                               }
 
+                              // This code should only run if a language is selected
                               final box = await Hive.openBox(
                                 "userLanguagePreferenceBox",
                               );
