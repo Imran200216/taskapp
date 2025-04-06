@@ -42,7 +42,9 @@ class _AuthForgetPasswordScreenState extends State<AuthForgetPasswordScreen> {
         BlocProvider(create: (context) => locator<EmailBloc>()),
 
         // internet checker bloc
-        BlocProvider(create: (context) => locator<NetworkBloc>()),
+        BlocProvider(
+          create: (context) => locator<NetworkBloc>()..add(NetworkObserve()),
+        ),
       ],
       child: MultiBlocListener(
         listeners: [
@@ -173,9 +175,7 @@ class _AuthForgetPasswordScreenState extends State<AuthForgetPasswordScreen> {
                                 onTap: () {
                                   // network state
                                   final networkState =
-                                      context
-                                          .read<NetworkBloc>()
-                                          .state;
+                                      context.read<NetworkBloc>().state;
 
                                   if (networkState is NetworkFailure) {
                                     // error toast

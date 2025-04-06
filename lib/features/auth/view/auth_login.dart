@@ -147,6 +147,32 @@ class _AuthLoginState extends State<AuthLogin> {
               }
             },
           ),
+
+          // network bloc
+          BlocListener<NetworkBloc, NetworkState>(
+            listener: (context, state) {
+              if (state is NetworkSuccess) {
+                // network success snack bar
+                SnackBarHelper.showSnackBar(
+                  context: context,
+                  message: appLocalization.internetSuccessToast,
+                  backgroundColor: ColorName.toastSuccessColor,
+                  textColor: ColorName.white,
+                  leadingIcon: Icons.signal_cellular_alt,
+                );
+              } else if (state is NetworkFailure) {
+                // network failure snack bar
+                SnackBarHelper.showSnackBar(
+                  context: context,
+                  message: appLocalization.internetFailureToast,
+                  backgroundColor: ColorName.toastErrorColor,
+                  textColor: ColorName.white,
+                  leadingIcon:
+                      Icons.signal_cellular_connected_no_internet_4_bar_sharp,
+                );
+              }
+            },
+          ),
         ],
 
         child: Container(

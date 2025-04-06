@@ -3,25 +3,55 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
+import 'package:hive/hive.dart';
+import 'package:intl/intl.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 import 'package:taskapp/core/bloc/network_checker_bloc/network_bloc.dart';
 import 'package:taskapp/core/helper/snack_bar_helper.dart';
 import 'package:taskapp/core/locator/service_locator.dart';
-import 'package:taskapp/features/home/view_modals/selection_chip_bloc.dart';
+import 'package:taskapp/features/home/view_modals/selection_chip_bloc/selection_chip_bloc.dart';
+import 'package:taskapp/features/home/view_modals/view_task_bloc/view_task_bloc.dart';
 import 'package:taskapp/features/home/widgets/custom_choice_chip.dart';
 import 'package:taskapp/features/home/widgets/custom_task_list_tile.dart';
 import 'package:taskapp/gen/assets.gen.dart';
 import 'package:taskapp/gen/colors.gen.dart';
 import 'package:taskapp/l10n/app_localizations.dart';
+import 'dart:ui' as lang;
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  @override
+  void initState() {
+    super.initState();
+    loadAndDispatchUserId();
+  }
+
+  // user uid
+  Future<void> loadAndDispatchUserId() async {
+    final box = await Hive.openBox("userLanguagePreferenceBox");
+    final storedUserId = box.get("userId");
+
+    if (storedUserId != null) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        context.read<ViewTaskBloc>().add(FetchUserTasks(storedUserId));
+        print(
+          " =========== Dispatched FetchUserTasks with userId: $storedUserId ===========",
+        );
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     // App localization
     final appLocalization = AppLocalizations.of(context);
-    final isRTL = Directionality.of(context) == TextDirection.rtl;
+    final isRTL = Directionality.of(context) == lang.TextDirection.rtl;
 
     return MultiBlocProvider(
       providers: [
@@ -29,7 +59,13 @@ class HomeScreen extends StatelessWidget {
         BlocProvider(create: (context) => locator.get<SelectionChipBloc>()),
 
         // internet checker bloc
-        BlocProvider(create: (context) => locator<NetworkBloc>()),
+        BlocProvider(
+          create:
+              (context) => locator.get<NetworkBloc>()..add(NetworkObserve()),
+        ),
+
+        // View task bloc
+        BlocProvider(create: (context) => locator.get<ViewTaskBloc>()),
       ],
       child: MultiBlocListener(
         listeners: [
@@ -61,7 +97,8 @@ class HomeScreen extends StatelessWidget {
         ],
         child: SafeArea(
           child: Directionality(
-            textDirection: isRTL ? TextDirection.rtl : TextDirection.ltr,
+            textDirection:
+                isRTL ? lang.TextDirection.rtl : lang.TextDirection.ltr,
             child: Scaffold(
               backgroundColor: ColorName.white,
               body: SingleChildScrollView(
@@ -164,24 +201,21 @@ class HomeScreen extends StatelessWidget {
 
                       SizedBox(height: 20.h),
 
-                      // list of task (Task completed, Task InProgress, Task OverDue)
                       BlocBuilder<NetworkBloc, NetworkState>(
-                        builder: (context, state) {
-                          if (state is NetworkInitial) {
+                        builder: (context, networkState) {
+                          if (networkState is NetworkInitial) {
                             return Skeletonizer(
                               child: ListView.separated(
                                 physics: const NeverScrollableScrollPhysics(),
                                 shrinkWrap: true,
                                 itemCount: 12,
-                                separatorBuilder: (context, index) {
-                                  return SizedBox(height: 12.h);
-                                },
+                                separatorBuilder:
+                                    (context, index) => SizedBox(height: 12.h),
                                 itemBuilder: (context, index) {
                                   return CustomTaskListTile(
                                     taskTitle: "Design Changes",
                                     taskDescription: "2 Days ago",
                                     onTap: () {
-                                      // task description screen
                                       GoRouter.of(
                                         context,
                                       ).pushNamed("taskDescription");
@@ -190,21 +224,18 @@ class HomeScreen extends StatelessWidget {
                                 },
                               ),
                             );
-                          } else if (state is NetworkFailure) {
+                          } else if (networkState is NetworkFailure) {
                             return Center(
                               child: Column(
-                                spacing: 10.h,
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
-                                  // no internet svg
                                   SvgPicture.asset(
                                     Assets.img.svg.noInternetConnection,
                                     height: 0.4.sh,
                                     fit: BoxFit.cover,
                                   ),
-
-                                  // no internet text
+                                  SizedBox(height: 16.h),
                                   Text(
                                     "No Internet Connection",
                                     textAlign: TextAlign.center,
@@ -219,30 +250,75 @@ class HomeScreen extends StatelessWidget {
                                 ],
                               ),
                             );
-                          } else if (state is NetworkSuccess) {
-                            return ListView.separated(
-                              physics: const NeverScrollableScrollPhysics(),
-                              shrinkWrap: true,
-                              itemCount: 20,
-                              separatorBuilder: (context, index) {
-                                return SizedBox(height: 12.h);
-                              },
-                              itemBuilder: (context, index) {
-                                return CustomTaskListTile(
-                                  taskTitle: "Design Changes",
-                                  taskDescription: "2 Days ago",
-                                  onTap: () {
-                                    // task description screen
-                                    GoRouter.of(
-                                      context,
-                                    ).pushNamed("taskDescription");
-                                  },
-                                );
+                          } else if (networkState is NetworkSuccess) {
+                            return BlocBuilder<ViewTaskBloc, ViewTaskState>(
+                              builder: (context, taskState) {
+                                if (taskState is ViewTaskLoading) {
+                                  return const Center(
+                                    child: CircularProgressIndicator(),
+                                  );
+                                } else if (taskState is ViewTaskLoaded) {
+                                  final tasks = taskState.tasks;
+
+                                  if (tasks.isEmpty) {
+                                    return Center(
+                                      child: Text("No tasks available"),
+                                    );
+                                  }
+
+                                  return ListView.separated(
+                                    physics:
+                                        const NeverScrollableScrollPhysics(),
+                                    shrinkWrap: true,
+                                    itemCount: tasks.length,
+                                    separatorBuilder:
+                                        (context, index) =>
+                                            SizedBox(height: 12.h),
+                                    itemBuilder: (context, index) {
+                                      final task = tasks[index];
+                                      final taskName =
+                                          task["taskName"] ?? "No Name";
+
+                                      // Extract and format due date
+                                      String taskDueDate = "No Due Date";
+                                      if (task["dateRange"] != null &&
+                                          task["dateRange"] is List &&
+                                          task["dateRange"].length > 1) {
+                                        try {
+                                          final rawDate = task["dateRange"][1];
+                                          final parsedDate = DateTime.parse(
+                                            rawDate,
+                                          );
+                                          taskDueDate = DateFormat.yMMMd()
+                                              .format(parsedDate);
+                                        } catch (e) {
+                                          taskDueDate = "Invalid Date";
+                                        }
+                                      }
+
+                                      return CustomTaskListTile(
+                                        taskTitle: taskName,
+                                        taskDescription: taskDueDate,
+                                        onTap: () {
+                                          GoRouter.of(
+                                            context,
+                                          ).pushNamed("taskDescription");
+                                        },
+                                      );
+                                    },
+                                  );
+                                } else if (taskState is ViewTaskError) {
+                                  return Center(
+                                    child: Text("Error: ${taskState.message}"),
+                                  );
+                                }
+
+                                return const SizedBox(); // Fallback
                               },
                             );
                           }
 
-                          return SizedBox();
+                          return const SizedBox(); // Fallback for other states
                         },
                       ),
                     ],

@@ -13,7 +13,8 @@ import 'package:taskapp/features/auth/view_modals/apple_sign_in_bloc/apple_auth_
 import 'package:taskapp/features/auth/view_modals/email_password_bloc/email_bloc.dart';
 import 'package:taskapp/features/auth/view_modals/google_sign_in_bloc/google_auth_bloc.dart';
 import 'package:taskapp/features/bottom_nav/view_modal/bottom_nav_bloc.dart';
-import 'package:taskapp/features/home/view_modals/selection_chip_bloc.dart';
+import 'package:taskapp/features/home/view_modals/selection_chip_bloc/selection_chip_bloc.dart';
+import 'package:taskapp/features/home/view_modals/view_task_bloc/view_task_bloc.dart';
 import 'package:taskapp/features/language_preference/view_modal/lang_pref_bloc/language_preference_bloc.dart';
 import 'package:taskapp/features/language_preference_settings/view_modals/update_lang_preference_bloc/update_language_preference_bloc.dart';
 import 'package:taskapp/features/on_boarding/view_modal/on_boarding_bloc.dart';
@@ -73,8 +74,10 @@ Future<void> setupLocator() async {
   locator.registerFactory(() => SelectionChipBloc());
 
   // Internet Checker Bloc
-
   locator.registerLazySingleton(() => NetworkBloc());
+
+  // View task Bloc
+  locator.registerFactory(() => ViewTaskBloc());
 
   /// Router
   locator.registerLazySingleton<AppRouter>(() => AppRouter());

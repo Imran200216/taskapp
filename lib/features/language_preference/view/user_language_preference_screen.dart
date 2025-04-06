@@ -14,39 +14,49 @@ import 'package:taskapp/gen/colors.gen.dart';
 import 'package:taskapp/l10n/app_localizations.dart';
 import 'package:uuid/uuid.dart';
 
-class UserLanguagePreferenceScreen extends StatelessWidget {
+class UserLanguagePreferenceScreen extends StatefulWidget {
   const UserLanguagePreferenceScreen({super.key});
 
   @override
+  State<UserLanguagePreferenceScreen> createState() =>
+      _UserLanguagePreferenceScreenState();
+}
+
+class _UserLanguagePreferenceScreenState
+    extends State<UserLanguagePreferenceScreen> {
+  @override
+  void initState() {
+    super.initState();
+    context.read<LanguagePreferenceBloc>().add(LoadLanguagePreference());
+  }
+
+  @override
   Widget build(BuildContext context) {
-    // app localization
     final appLocalization = AppLocalizations.of(context);
 
     return SafeArea(
       child: Scaffold(
         body: Container(
-          height: double.infinity,
           width: double.infinity,
-          decoration: BoxDecoration(color: ColorName.white),
+          height: double.infinity,
+          color: ColorName.white,
           child: Stack(
             children: [
-              // top decoration
+              // Top decoration
               Positioned(
                 top: -130,
                 left: -130,
                 child: ClipRect(
-                  // Clip overflowing content
                   child: SvgPicture.asset(
                     Assets.img.svg.decorationTop,
                     height: 240.h,
-                    width: 0.w,
                     color: ColorName.primary,
                     fit: BoxFit.cover,
                   ),
                 ),
               ),
 
-              // bottom decoration
+              // Bottom decoration
               Positioned(
                 bottom: -130,
                 right: -130,
@@ -64,21 +74,27 @@ class UserLanguagePreferenceScreen extends StatelessWidget {
                 ),
               ),
 
-              /// app version text
-              BlocBuilder<LanguagePreferenceBloc, LanguagePreferenceState>(
-                builder: (context, state) {
-                  String? selectedLanguage;
-                  if (state is LangPreferenceSelected) {
-                    selectedLanguage = state.selectedLanguage;
+              BlocConsumer<LanguagePreferenceBloc, LanguagePreferenceState>(
+                listener: (context, state) {
+                  if (state is LanguagePreferenceFailure) {
+                    ToastHelper.showToast(
+                      context: context,
+                      message: appLocalization.languagePreferenceFailureToast,
+                      isSuccess: false,
+                    );
                   }
+                },
+                builder: (context, state) {
+                  final selectedLang =
+                      state is LangPreferenceSelected
+                          ? state.selectedLanguage
+                          : null;
 
                   return Align(
                     alignment: Alignment.bottomCenter,
                     child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        // Welcome text
                         Text(
                           appLocalization.authTitle,
                           style: Theme.of(
@@ -89,10 +105,7 @@ class UserLanguagePreferenceScreen extends StatelessWidget {
                             fontSize: 18.sp,
                           ),
                         ),
-
                         SizedBox(height: 12.h),
-
-                        // Choose your language
                         Text(
                           appLocalization.userLanguagePreferenceSubTitle,
                           style: Theme.of(
@@ -103,72 +116,62 @@ class UserLanguagePreferenceScreen extends StatelessWidget {
                             fontSize: 13.sp,
                           ),
                         ),
-
                         SizedBox(height: 30.h),
 
+                        // Language list
                         Container(
                           margin: EdgeInsets.symmetric(horizontal: 80.w),
                           child: Column(
-                            spacing: 12.h,
                             children: [
-                              /// tamil list tile
                               CustomLangPreferenceListTile(
                                 title: appLocalization.tamil,
-                                isChecked: selectedLanguage == "Tamil",
-                                onChanged: (bool? value) {
-                                  if (value == true) {
+                                isChecked: selectedLang == "Tamil",
+                                onChanged: (val) {
+                                  if (val == true) {
                                     context.read<LanguagePreferenceBloc>().add(
                                       ToggleLanguage(language: "Tamil"),
                                     );
                                   }
                                 },
                               ),
-
-                              /// english list tile
                               CustomLangPreferenceListTile(
                                 title: appLocalization.english,
-                                isChecked: selectedLanguage == "English",
-                                onChanged: (bool? value) {
-                                  if (value == true) {
+                                isChecked: selectedLang == "English",
+                                onChanged: (val) {
+                                  if (val == true) {
                                     context.read<LanguagePreferenceBloc>().add(
                                       ToggleLanguage(language: "English"),
                                     );
                                   }
                                 },
                               ),
-
-                              /// hindi list tile
                               CustomLangPreferenceListTile(
                                 title: appLocalization.hindi,
-                                isChecked: selectedLanguage == "Hindi",
-                                onChanged: (bool? value) {
-                                  if (value == true) {
+                                isChecked: selectedLang == "Hindi",
+                                onChanged: (val) {
+                                  if (val == true) {
                                     context.read<LanguagePreferenceBloc>().add(
                                       ToggleLanguage(language: "Hindi"),
                                     );
                                   }
                                 },
                               ),
-
-                              /// arabic list tile
                               CustomLangPreferenceListTile(
                                 title: appLocalization.arabic,
-                                isChecked: selectedLanguage == "Arabic",
-                                onChanged: (bool? value) {
-                                  if (value == true) {
+                                isChecked: selectedLang == "Arabic",
+                                onChanged: (val) {
+                                  if (val == true) {
                                     context.read<LanguagePreferenceBloc>().add(
                                       ToggleLanguage(language: "Arabic"),
                                     );
                                   }
                                 },
                               ),
-
-                              /// french list tile
                               CustomLangPreferenceListTile(
                                 title: appLocalization.french,
-                                isChecked: selectedLanguage == "French",
-                                onChanged: (bool? value) {
-                                  if (value == true) {
+                                isChecked: selectedLang == "French",
+                                onChanged: (val) {
+                                  if (val == true) {
                                     context.read<LanguagePreferenceBloc>().add(
                                       ToggleLanguage(language: "French"),
                                     );
@@ -178,15 +181,14 @@ class UserLanguagePreferenceScreen extends StatelessWidget {
                             ],
                           ),
                         ),
-
                         SizedBox(height: 30.h),
 
-                        // Choose your language
+                        // Info text
                         Padding(
                           padding: EdgeInsets.symmetric(horizontal: 44.w),
                           child: Text(
-                            textAlign: TextAlign.center,
                             appLocalization.userLanguagePreferenceSettings,
+                            textAlign: TextAlign.center,
                             style: Theme.of(
                               context,
                             ).textTheme.headlineMedium!.copyWith(
@@ -198,59 +200,28 @@ class UserLanguagePreferenceScreen extends StatelessWidget {
                         ),
                         SizedBox(height: 30.h),
 
-                        // continue btn
+                        // Continue button
                         Padding(
                           padding: EdgeInsets.symmetric(horizontal: 44.w),
                           child: CustomIconFilledBtn(
                             onTap: () async {
-                              if (selectedLanguage == null) {
-                                // Show error if no language is selected
-                                ToastHelper.showToast(
-                                  context: context,
-                                  message:
-                                      appLocalization
-                                          .languagePreferenceFailureToast,
-                                  isSuccess: false,
+                              if (selectedLang == null) {
+                                context.read<LanguagePreferenceBloc>().add(
+                                  LanguagePreferenceValidationFailed(),
                                 );
                                 return;
                               }
 
-                              /// Generating the UUID
-                              const uuid = Uuid();
-                              String userId = uuid.v4();
-
-                              /// Open the Hive box and store values
                               final box = await Hive.openBox(
                                 "userLanguagePreferenceBox",
                               );
-                              await box.put(
-                                "selectedLanguage",
-                                selectedLanguage,
-                              );
+                              final userId = const Uuid().v4();
                               await box.put("userId", userId);
                               await box.put(
                                 "userLanguagePreferenceStatus",
                                 true,
-                              ); // Default is false
-
-                              /// Retrieve and print stored data
-                              String storedLang = box.get("selectedLanguage");
-                              String storedUserId = box.get("userId");
-                              bool storedStatus = box.get(
-                                "userLanguagePreferenceStatus",
                               );
 
-                              print(
-                                "=========== Stored Language: $storedLang =========",
-                              );
-                              print(
-                                "=========== Stored User ID: $storedUserId =========",
-                              );
-                              print(
-                                "=========== Language Preference Status: $storedStatus =========",
-                              );
-
-                              // Show success toast
                               ToastHelper.showToast(
                                 context: context,
                                 message:
@@ -259,7 +230,6 @@ class UserLanguagePreferenceScreen extends StatelessWidget {
                                 isSuccess: true,
                               );
 
-                              // Navigate to Onboarding Screen
                               GoRouter.of(
                                 context,
                               ).pushReplacementNamed("onBoarding");

@@ -82,6 +82,36 @@ class ProverbScreen extends StatelessWidget {
                 ),
               ),
 
+              // top  right decoration
+              Positioned(
+                top: 20,
+                right: 20,
+                child: Tooltip(
+                  message: "Quotes are displayed only in English",
+
+                  textStyle: Theme.of(context).textTheme.bodySmall!.copyWith(
+                    fontSize: 10.sp,
+                    color: ColorName.white,
+                    fontWeight: FontWeight.w500,
+                  ),
+                  decoration: BoxDecoration(
+                    color: Colors.black87,
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  waitDuration: Duration(milliseconds: 300),
+                  showDuration: Duration(seconds: 2),
+                  child: Container(
+                    width: 40.0,
+                    height: 40.0,
+                    decoration: const BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: ColorName.primary,
+                    ),
+                    child: const Icon(Icons.info, color: ColorName.white),
+                  ),
+                ),
+              ),
+
               // Quote Display
               Align(
                 alignment: Alignment.center,

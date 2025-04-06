@@ -4,6 +4,11 @@ sealed class LanguagePreferenceEvent extends Equatable {
   const LanguagePreferenceEvent();
 }
 
+class LoadLanguagePreference extends LanguagePreferenceEvent {
+  @override
+  List<Object?> get props => [];
+}
+
 class ToggleLanguage extends LanguagePreferenceEvent {
   final String language;
 
@@ -11,4 +16,9 @@ class ToggleLanguage extends LanguagePreferenceEvent {
 
   @override
   List<Object> get props => [language];
+}
+
+class LanguagePreferenceValidationFailed extends LanguagePreferenceEvent {
+  @override
+  List<Object?> get props => [];
 }

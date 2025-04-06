@@ -17,3 +17,12 @@ final class LangPreferenceSelected extends LanguagePreferenceState {
   @override
   List<Object?> get props => [selectedLanguage];
 }
+
+class LanguagePreferenceFailure extends LanguagePreferenceState {
+  final DateTime timestamp;
+
+  LanguagePreferenceFailure() : timestamp = DateTime.now();
+
+  @override
+  List<Object?> get props => [timestamp];
+}

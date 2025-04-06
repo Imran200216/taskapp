@@ -40,7 +40,9 @@ class _AuthScreenState extends State<AuthScreen>
     return MultiBlocProvider(
       providers: [
         // network bloc
-        BlocProvider(create: (context) => locator<NetworkBloc>()),
+        BlocProvider(
+          create: (context) => locator<NetworkBloc>()..add(NetworkObserve()),
+        ),
       ],
       child: MultiBlocListener(
         listeners: [

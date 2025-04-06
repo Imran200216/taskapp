@@ -9,3 +9,9 @@ class FetchQuote extends QuoteEvent {
   // TODO: implement props
   List<Object?> get props => throw UnimplementedError();
 }
+
+class UpdateQuote extends QuoteEvent {
+  @override
+  // TODO: implement props
+  List<Object?> get props => [];
+}

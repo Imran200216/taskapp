@@ -12,9 +12,14 @@ class QuoteBloc extends Bloc<QuoteEvent, QuoteState> {
   final QuoteService quoteService;
 
   QuoteBloc(this.quoteService) : super(QuoteInitial()) {
+    // fetch quotes
     on<FetchQuote>(_onFetchQuote);
+
+    // update quotes
+    on<UpdateQuote>(_onUpdateQuote);
   }
 
+  // fetch quotes
   Future<void> _onFetchQuote(FetchQuote event, Emitter<QuoteState> emit) async {
     emit(QuoteLoading());
 
@@ -32,7 +37,9 @@ class QuoteBloc extends Bloc<QuoteEvent, QuoteState> {
       // ✅ Pass the language to fetchDailyQuote()
       final data = await quoteService.fetchDailyQuote(languageCode: storedLang);
 
-      if (data != null && data.containsKey("quote") && data.containsKey("author")) {
+      if (data != null &&
+          data.containsKey("quote") &&
+          data.containsKey("author")) {
         emit(QuoteLoaded(data["quote"]!, data["author"]!));
       } else {
         emit(QuoteError("Failed to load quote."));
@@ -43,4 +50,11 @@ class QuoteBloc extends Bloc<QuoteEvent, QuoteState> {
     }
   }
 
+  // update quotes
+  Future<void> _onUpdateQuote(
+    UpdateQuote event,
+    Emitter<QuoteState> emit,
+  ) async {
+    await _onFetchQuote(FetchQuote(), emit); // reuse the logic by calling it
+  }
 }
