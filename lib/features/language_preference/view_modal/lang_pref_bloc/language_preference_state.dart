@@ -11,11 +11,15 @@ final class LanguagePreferenceInitial extends LanguagePreferenceState {
 
 final class LangPreferenceSelected extends LanguagePreferenceState {
   final String selectedLanguage;
+  final bool isUserSelected;
 
-  const LangPreferenceSelected({required this.selectedLanguage});
+  const LangPreferenceSelected({
+    required this.selectedLanguage,
+    required this.isUserSelected,
+  });
 
   @override
-  List<Object?> get props => [selectedLanguage];
+  List<Object?> get props => [selectedLanguage, isUserSelected];
 }
 
 class LanguagePreferenceFailure extends LanguagePreferenceState {

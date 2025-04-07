@@ -11,11 +11,12 @@ class LoadLanguagePreference extends LanguagePreferenceEvent {
 
 class ToggleLanguage extends LanguagePreferenceEvent {
   final String language;
+  final bool isUserSelected;
 
-  const ToggleLanguage({required this.language});
+  const ToggleLanguage({required this.language, required this.isUserSelected});
 
   @override
-  List<Object> get props => [language];
+  List<Object> get props => [language, isUserSelected];
 }
 
 class LanguagePreferenceValidationFailed extends LanguagePreferenceEvent {

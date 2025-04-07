@@ -27,16 +27,15 @@ void main() async {
   /// Setup the service locator
   await setupLocator();
 
-  /// Retrieve stored language, default to "en"
+  /// Retrieve stored language, fallback to null
   final box = Hive.box('userLanguagePreferenceBox');
-  String storedLang = box.get("selectedLanguage", defaultValue: "en") as String;
-  storedLang = mapLanguage(storedLang).languageCode;
+  final String? storedLang = box.get("selectedLanguage");
 
   runApp(MyApp(storedLang: storedLang));
 }
 
 class MyApp extends StatefulWidget {
-  final String storedLang;
+  final String? storedLang;
 
   const MyApp({super.key, required this.storedLang});
 
@@ -53,64 +52,67 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
+    final String initialLangCode =
+        widget.storedLang != null
+            ? mapLanguage(widget.storedLang!).languageCode
+            : "en";
+
     return MultiBlocProvider(
       providers: [
-        // on boarding bloc
         BlocProvider(create: (context) => locator.get<OnBoardingBloc>()),
-
-        // bottom nav bloc
         BlocProvider(create: (context) => locator.get<BottomNavBloc>()),
 
-        // language preference bloc
+        /// Language Preference Bloc
         BlocProvider(
-          create:
-              (context) =>
-                  locator.get<LanguagePreferenceBloc>()
-                    ..add(ToggleLanguage(language: widget.storedLang)),
+          create: (context) {
+            final bloc = locator.get<LanguagePreferenceBloc>();
+            if (widget.storedLang != null) {
+              bloc.add(
+                ToggleLanguage(
+                  language: widget.storedLang!,
+                  isUserSelected: false,
+                ),
+              );
+            }
+            return bloc;
+          },
         ),
 
-        // quotes bloc
         BlocProvider(
           create: (context) => locator.get<QuoteBloc>()..add(FetchQuote()),
         ),
 
-        // auth checker provider bloc
         BlocProvider(
           create:
               (context) =>
                   locator.get<AuthCheckerProviderBloc>()
-                    ..add(CheckAuthMethod()), // Dispatch the event once
+                    ..add(CheckAuthMethod()),
         ),
 
-        // app version bloc
         BlocProvider(
           create:
               (context) =>
                   locator.get<AppVersionBloc>()..add(FetchAppVersion()),
         ),
 
-        // update user language preference bloc
         BlocProvider(
           create: (context) => locator.get<UpdateLanguagePreferenceBloc>(),
         ),
 
-        // selection chip bloc
         BlocProvider(create: (context) => locator.get<SelectionChipBloc>()),
 
-        // network checker bloc
         BlocProvider(
           create:
               (context) => locator.get<NetworkBloc>()..add(NetworkObserve()),
           lazy: false,
         ),
 
-        // View task bloc
         BlocProvider(create: (context) => locator.get<ViewTaskBloc>()),
       ],
       child: BlocBuilder<LanguagePreferenceBloc, LanguagePreferenceState>(
         builder: (context, state) {
-          // stored lang
-          String langCode = widget.storedLang;
+          String langCode = initialLangCode;
+
           if (state is LangPreferenceSelected) {
             langCode = mapLanguage(state.selectedLanguage).languageCode;
           }
@@ -123,25 +125,15 @@ class _MyAppState extends State<MyApp> {
               return ToastificationWrapper(
                 child: MaterialApp.router(
                   debugShowCheckedModeBanner: false,
-
-                  /// App Localization
                   localizationsDelegates: [
                     AppLocalizations.delegate,
                     GlobalMaterialLocalizations.delegate,
                     GlobalWidgetsLocalizations.delegate,
                     GlobalCupertinoLocalizations.delegate,
                   ],
-
-                  // supported languages
                   supportedLocales: supportedLocales,
-
-                  /// Set the current locale
                   locale: Locale(langCode),
-
-                  /// Router
                   routerConfig: locator<AppRouter>().config,
-
-                  /// App Theme
                   title: 'Task App',
                   theme: AppTheme.lightTheme,
                 ),

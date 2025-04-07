@@ -74,7 +74,7 @@ Future<void> setupLocator() async {
   locator.registerFactory(() => SelectionChipBloc());
 
   // Internet Checker Bloc
-  locator.registerLazySingleton(() => NetworkBloc());
+  locator.registerLazySingleton<NetworkBloc>(() => NetworkBloc());
 
   // View task Bloc
   locator.registerFactory(() => ViewTaskBloc());

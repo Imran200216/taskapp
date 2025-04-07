@@ -268,7 +268,10 @@ class LanguagePreferenceSettingsScreen extends StatelessWidget {
                             onChanged: (bool? value) {
                               if (value == true) {
                                 context.read<LanguagePreferenceBloc>().add(
-                                  ToggleLanguage(language: "Tamil"),
+                                  ToggleLanguage(
+                                    language: "Tamil",
+                                    isUserSelected: true,
+                                  ),
                                 );
                               }
                             },
@@ -281,7 +284,10 @@ class LanguagePreferenceSettingsScreen extends StatelessWidget {
                             onChanged: (bool? value) {
                               if (value == true) {
                                 context.read<LanguagePreferenceBloc>().add(
-                                  ToggleLanguage(language: "English"),
+                                  ToggleLanguage(
+                                    language: "English",
+                                    isUserSelected: true,
+                                  ),
                                 );
                               }
                             },
@@ -294,7 +300,10 @@ class LanguagePreferenceSettingsScreen extends StatelessWidget {
                             onChanged: (bool? value) {
                               if (value == true) {
                                 context.read<LanguagePreferenceBloc>().add(
-                                  ToggleLanguage(language: "Hindi"),
+                                  ToggleLanguage(
+                                    language: "Hindi",
+                                    isUserSelected: true,
+                                  ),
                                 );
                               }
                             },
@@ -307,7 +316,10 @@ class LanguagePreferenceSettingsScreen extends StatelessWidget {
                             onChanged: (bool? value) {
                               if (value == true) {
                                 context.read<LanguagePreferenceBloc>().add(
-                                  ToggleLanguage(language: "Arabic"),
+                                  ToggleLanguage(
+                                    language: "Arabic",
+                                    isUserSelected: true,
+                                  ),
                                 );
                               }
                             },
@@ -320,7 +332,10 @@ class LanguagePreferenceSettingsScreen extends StatelessWidget {
                             onChanged: (bool? value) {
                               if (value == true) {
                                 context.read<LanguagePreferenceBloc>().add(
-                                  ToggleLanguage(language: "French"),
+                                  ToggleLanguage(
+                                    language: "French",
+                                    isUserSelected: true,
+                                  ),
                                 );
                               }
                             },

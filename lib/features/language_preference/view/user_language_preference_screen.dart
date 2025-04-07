@@ -129,7 +129,10 @@ class _UserLanguagePreferenceScreenState
                                 onChanged: (val) {
                                   if (val == true) {
                                     context.read<LanguagePreferenceBloc>().add(
-                                      ToggleLanguage(language: "Tamil"),
+                                      ToggleLanguage(
+                                        language: "Tamil",
+                                        isUserSelected: true,
+                                      ),
                                     );
                                   }
                                 },
@@ -140,7 +143,10 @@ class _UserLanguagePreferenceScreenState
                                 onChanged: (val) {
                                   if (val == true) {
                                     context.read<LanguagePreferenceBloc>().add(
-                                      ToggleLanguage(language: "English"),
+                                      ToggleLanguage(
+                                        language: "English",
+                                        isUserSelected: true,
+                                      ),
                                     );
                                   }
                                 },
@@ -151,7 +157,10 @@ class _UserLanguagePreferenceScreenState
                                 onChanged: (val) {
                                   if (val == true) {
                                     context.read<LanguagePreferenceBloc>().add(
-                                      ToggleLanguage(language: "Hindi"),
+                                      ToggleLanguage(
+                                        language: "Hindi",
+                                        isUserSelected: true,
+                                      ),
                                     );
                                   }
                                 },
@@ -162,7 +171,10 @@ class _UserLanguagePreferenceScreenState
                                 onChanged: (val) {
                                   if (val == true) {
                                     context.read<LanguagePreferenceBloc>().add(
-                                      ToggleLanguage(language: "Arabic"),
+                                      ToggleLanguage(
+                                        language: "Arabic",
+                                        isUserSelected: true,
+                                      ),
                                     );
                                   }
                                 },
@@ -173,7 +185,10 @@ class _UserLanguagePreferenceScreenState
                                 onChanged: (val) {
                                   if (val == true) {
                                     context.read<LanguagePreferenceBloc>().add(
-                                      ToggleLanguage(language: "French"),
+                                      ToggleLanguage(
+                                        language: "French",
+                                        isUserSelected: true,
+                                      ),
                                     );
                                   }
                                 },
@@ -205,28 +220,36 @@ class _UserLanguagePreferenceScreenState
                           padding: EdgeInsets.symmetric(horizontal: 44.w),
                           child: CustomIconFilledBtn(
                             onTap: () async {
-                              if (selectedLang == null) {
+                              if (selectedLang == null ||
+                                  selectedLang.isEmpty) {
                                 context.read<LanguagePreferenceBloc>().add(
                                   LanguagePreferenceValidationFailed(),
-                                );
-                                // Add a small delay to ensure the toast appears
-                                await Future.delayed(
-                                  Duration(milliseconds: 100),
                                 );
                                 return;
                               }
 
-                              // This code should only run if a language is selected
+                              // user language status in hive
                               final box = await Hive.openBox(
                                 "userLanguagePreferenceBox",
                               );
-                              final userId = const Uuid().v4();
-                              await box.put("userId", userId);
                               await box.put(
-                                "userLanguagePreferenceStatus",
+                                'userLanguagePreferenceStatus',
                                 true,
                               );
 
+                              // Save user ID once if not present
+                              String? existingId = box.get("userId");
+                              final userId = existingId ?? const Uuid().v4();
+                              if (existingId == null) {
+                                await box.put("userId", userId);
+                              }
+
+                              print(
+                                "=========Selected Language: $selectedLang===========",
+                              );
+                              print("=========User ID: $userId===========");
+
+                              // success toast
                               ToastHelper.showToast(
                                 context: context,
                                 message:
@@ -235,6 +258,7 @@ class _UserLanguagePreferenceScreenState
                                 isSuccess: true,
                               );
 
+                              // on boarding screen
                               GoRouter.of(
                                 context,
                               ).pushReplacementNamed("onBoarding");

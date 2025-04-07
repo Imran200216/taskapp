@@ -63,6 +63,9 @@ class _SplashScreenState extends State<SplashScreen> {
     } else if (userLanguagePreferenceStatus && userOnBoardingStatus) {
       /// Navigate to auth screen
       GoRouter.of(context).pushReplacementNamed("auth");
+    } else if (userLanguagePreferenceStatus) {
+      /// Navigate to on boarding screen
+      GoRouter.of(context).pushReplacementNamed("onBoarding");
     } else {
       /// Navigate to user language preference screen
       GoRouter.of(context).pushReplacementNamed("userLangPreference");
