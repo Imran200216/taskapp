@@ -7,7 +7,8 @@ import 'package:taskapp/core/service/auth/apple_auth_service.dart';
 import 'package:taskapp/core/service/auth/email_password_auth_service.dart';
 import 'package:taskapp/core/service/auth/google_auth_service.dart';
 import 'package:taskapp/core/service/local_storage/hive_storage_service.dart';
-import 'package:taskapp/core/service/quote_service.dart';
+import 'package:taskapp/core/service/network/network_service.dart';
+import 'package:taskapp/core/service/quote_api_service/quote_service.dart';
 import 'package:taskapp/features/add_task/view_modals/add_task_bloc/add_task_bloc.dart';
 import 'package:taskapp/features/auth/view_modals/apple_sign_in_bloc/apple_auth_bloc.dart';
 import 'package:taskapp/features/auth/view_modals/email_password_bloc/email_bloc.dart';
@@ -40,9 +41,13 @@ Future<void> setupLocator() async {
   // Wait for the async registration to complete
   await locator.allReady();
 
-  /// Services
+  // quotes service
   locator.registerLazySingleton(() => QuoteService());
+  // Add Task Service
   locator.registerLazySingleton(() => AddTaskService());
+
+  // network service
+  locator.registerLazySingleton(() => NetworkService());
 
   /// Auth Services
   locator.registerLazySingleton(() => EmailPasswordAuthService());

@@ -1,8 +1,10 @@
 import 'package:bloc/bloc.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:equatable/equatable.dart';
+import 'package:hive/hive.dart';
 
 part 'view_task_event.dart';
+
 part 'view_task_state.dart';
 
 class ViewTaskBloc extends Bloc<ViewTaskEvent, ViewTaskState> {
@@ -13,24 +15,32 @@ class ViewTaskBloc extends Bloc<ViewTaskEvent, ViewTaskState> {
   }
 
   Future<void> _onFetchUserTasks(
-      FetchUserTasks event,
-      Emitter<ViewTaskState> emit,
-      ) async {
+    FetchUserTasks event,
+    Emitter<ViewTaskState> emit,
+  ) async {
     emit(ViewTaskLoading());
     try {
-      final querySnapshot = await _firestore
-          .collection('tasks')
-          .where('userUid', isEqualTo: event.userUid)
-          .get();
+      // Open the Hive box for user preferences
+      final box = await Hive.openBox("userLanguagePreferenceBox");
 
-      final taskList = querySnapshot.docs.map((doc) {
-        final data = doc.data();
-        // Ensure 'taskId' exists and matches doc.id
-        if (!data.containsKey('taskId') || data['taskId'] != doc.id) {
-          data['taskId'] = doc.id; // assign it just in case
-        }
-        return data;
-      }).toList();
+      // Retrieve the stored user UID
+      String userId = box.get("userId");
+
+      final querySnapshot =
+          await _firestore
+              .collection('tasks')
+              .where('userUid', isEqualTo: userId)
+              .get();
+
+      final taskList =
+          querySnapshot.docs.map((doc) {
+            final data = doc.data();
+            // Ensure 'taskId' exists and matches doc.id
+            if (!data.containsKey('taskId') || data['taskId'] != doc.id) {
+              data['taskId'] = doc.id; // assign it just in case
+            }
+            return data;
+          }).toList();
 
       emit(ViewTaskLoaded(taskList));
     } catch (e) {

@@ -4,6 +4,7 @@ import 'package:equatable/equatable.dart';
 import 'package:taskapp/core/service/network/network_service.dart';
 
 part 'network_event.dart';
+
 part 'network_state.dart';
 
 class NetworkBloc extends Bloc<NetworkEvent, NetworkState> {
@@ -22,7 +23,12 @@ class NetworkBloc extends Bloc<NetworkEvent, NetworkState> {
     // Guard to ensure we don't reinitialize
     if (_isSubscribed) return;
 
-    _networkSubscription = NetworkService().connectionStream.listen((isConnected) {
+    // ✅ Start monitoring connectivity
+    NetworkService().startMonitoring();
+
+    _networkSubscription = NetworkService().connectionStream.listen((
+      isConnected,
+    ) {
       add(NetworkNotify(isConnected: isConnected));
     });
 
@@ -38,6 +44,7 @@ class NetworkBloc extends Bloc<NetworkEvent, NetworkState> {
   @override
   Future<void> close() {
     _networkSubscription.cancel();
+    NetworkService().stopMonitoring();
     return super.close();
   }
 }

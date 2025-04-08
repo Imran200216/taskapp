@@ -1,6 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:taskapp/core/service/quote_service.dart';
+import 'package:taskapp/core/service/quote_api_service/quote_service.dart';
 import 'package:hive/hive.dart';
 import 'package:flutter/foundation.dart';
 

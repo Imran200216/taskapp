@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:taskapp/commons/widgets/custom_alert_dialog_btn.dart';
-import 'package:taskapp/core/service/haptic_feedback_service.dart';
+import 'package:taskapp/core/service/haptics/haptic_feedback_service.dart';
 import 'package:taskapp/gen/assets.gen.dart';
 import 'package:taskapp/gen/colors.gen.dart';
 

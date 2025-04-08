@@ -24,6 +24,9 @@ class _AuthScreenState extends State<AuthScreen>
   void initState() {
     super.initState();
     _tabController = TabController(length: 2, vsync: this);
+
+    // Dispatch the network observe event
+    locator<NetworkBloc>().add(NetworkObserve());
   }
 
   @override
@@ -39,9 +42,13 @@ class _AuthScreenState extends State<AuthScreen>
 
     return MultiBlocProvider(
       providers: [
-        // network bloc
+        // internet checker bloc
         BlocProvider(
-          create: (context) => locator<NetworkBloc>()..add(NetworkObserve()),
+          create: (context) {
+            final bloc = locator<NetworkBloc>();
+            bloc.add(NetworkObserve());
+            return bloc;
+          },
         ),
       ],
       child: MultiBlocListener(

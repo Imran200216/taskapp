@@ -9,21 +9,21 @@ class NetworkService {
   NetworkService._internal();
 
   final StreamController<bool> _connectionStreamController =
-  StreamController<bool>.broadcast();
-  StreamSubscription? _subscription;
+      StreamController<bool>.broadcast();
+
+  StreamSubscription<List<ConnectivityResult>>? _subscription;
 
   Stream<bool> get connectionStream => _connectionStreamController.stream;
 
   void startMonitoring() {
     _subscription?.cancel();
 
-    _subscription = Stream.periodic(const Duration(seconds: 1))
-        .asyncMap((_) => Connectivity().checkConnectivity())
-        .listen((connectivityResult) {
-      final isConnected =
-          connectivityResult == ConnectivityResult.wifi ||
-              connectivityResult == ConnectivityResult.mobile;
-      _connectionStreamController.add(isConnected);
+    _subscription = Connectivity().onConnectivityChanged.listen((results) {
+      // Handle the list of results
+      final hasConnection =
+          results.contains(ConnectivityResult.mobile) ||
+          results.contains(ConnectivityResult.wifi);
+      _connectionStreamController.add(hasConnection);
     });
   }
 

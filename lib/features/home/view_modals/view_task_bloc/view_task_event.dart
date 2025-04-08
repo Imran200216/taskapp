@@ -5,10 +5,8 @@ sealed class ViewTaskEvent extends Equatable {
 }
 
 class FetchUserTasks extends ViewTaskEvent {
-  final String userUid;
-
-  const FetchUserTasks(this.userUid);
+  const FetchUserTasks();
 
   @override
-  List<Object> get props => [userUid];
+  List<Object> get props => [];
 }

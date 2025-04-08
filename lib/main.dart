@@ -59,7 +59,10 @@ class _MyAppState extends State<MyApp> {
 
     return MultiBlocProvider(
       providers: [
+        // on boarding bloc
         BlocProvider(create: (context) => locator.get<OnBoardingBloc>()),
+
+        // bottom bloc
         BlocProvider(create: (context) => locator.get<BottomNavBloc>()),
 
         /// Language Preference Bloc
@@ -78,10 +81,12 @@ class _MyAppState extends State<MyApp> {
           },
         ),
 
+        // quote bloc
         BlocProvider(
           create: (context) => locator.get<QuoteBloc>()..add(FetchQuote()),
         ),
 
+        // check auth method
         BlocProvider(
           create:
               (context) =>
@@ -89,24 +94,29 @@ class _MyAppState extends State<MyApp> {
                     ..add(CheckAuthMethod()),
         ),
 
+        // fetch app version bloc
         BlocProvider(
           create:
               (context) =>
                   locator.get<AppVersionBloc>()..add(FetchAppVersion()),
         ),
 
+        // update lang pref bloc
         BlocProvider(
           create: (context) => locator.get<UpdateLanguagePreferenceBloc>(),
         ),
 
+        // selection chip bloc
         BlocProvider(create: (context) => locator.get<SelectionChipBloc>()),
 
+        // network bloc
         BlocProvider(
           create:
               (context) => locator.get<NetworkBloc>()..add(NetworkObserve()),
           lazy: false,
         ),
 
+        // view task bloc
         BlocProvider(create: (context) => locator.get<ViewTaskBloc>()),
       ],
       child: BlocBuilder<LanguagePreferenceBloc, LanguagePreferenceState>(

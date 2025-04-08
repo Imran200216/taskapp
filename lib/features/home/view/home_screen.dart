@@ -4,8 +4,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:taskapp/core/bloc/network_checker_bloc/network_bloc.dart';
 import 'package:taskapp/core/helper/snack_bar_helper.dart';
 import 'package:taskapp/core/locator/service_locator.dart';
-import 'package:taskapp/core/service/network/network_service.dart';
 import 'package:taskapp/features/home/view_modals/selection_chip_bloc/selection_chip_bloc.dart';
+import 'package:taskapp/features/home/view_modals/view_task_bloc/view_task_bloc.dart';
 import 'package:taskapp/features/home/widgets/custom_choice_chip.dart';
 import 'package:taskapp/gen/colors.gen.dart';
 import 'package:taskapp/l10n/app_localizations.dart';
@@ -20,37 +20,28 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   @override
-  void initState() {
-    super.initState();
-
-    // Start monitoring network changes
-    NetworkService().startMonitoring();
-
-    // Start observing in the NetworkBloc
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      context.read<NetworkBloc>().add(NetworkObserve());
-    });
-  }
-
-  @override
   Widget build(BuildContext context) {
+    // app localization
     final appLocalization = AppLocalizations.of(context);
     final isRTL = Directionality.of(context) == lang.TextDirection.rtl;
 
     return MultiBlocProvider(
       providers: [
-        // selection chip bloc
+        // Selection chip bloc
         BlocProvider(create: (context) => locator.get<SelectionChipBloc>()),
 
-        // network bloc
-        BlocProvider(create: (context) => locator.get<NetworkBloc>()),
-        //
-        // // view task bloc
-        // BlocProvider(create: (context) => locator.get<ViewTaskBloc>()),
+        // Network checker bloc
+        BlocProvider(create: (context) => NetworkBloc()),
+
+        // View task bloc with initial fetch
+        BlocProvider(
+          create:
+              (context) => locator.get<ViewTaskBloc>()..add(FetchUserTasks()),
+        ),
       ],
       child: MultiBlocListener(
         listeners: [
-          // network failure
+          // Listen for internet status changes
           BlocListener<NetworkBloc, NetworkState>(
             listener: (context, state) {
               if (state is NetworkFailure) {
@@ -92,6 +83,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             ? CrossAxisAlignment.end
                             : CrossAxisAlignment.start,
                     children: [
+                      // Greeting section
                       Align(
                         alignment:
                             isRTL
@@ -128,6 +120,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                       SizedBox(height: 20.h),
 
+                      // Choice chips for task filter
                       BlocBuilder<SelectionChipBloc, SelectionChipState>(
                         builder: (context, state) {
                           final options = [
@@ -167,17 +160,69 @@ class _HomeScreenState extends State<HomeScreen> {
 
                       SizedBox(height: 20.h),
 
-                      BlocBuilder<NetworkBloc, NetworkState>(
+                      // Task list
+                      BlocBuilder<ViewTaskBloc, ViewTaskState>(
                         builder: (context, state) {
-                          if (state is NetworkInitial) {
-                            return Text('Checking connectivity...');
-                          } else if (state is NetworkSuccess) {
-                            return Text('Connected');
-                          } else if (state is NetworkFailure) {
-                            return Text("not connected");
-                          }
+                          if (state is ViewTaskLoading) {
+                            return const Center(
+                              child: CircularProgressIndicator(),
+                            );
+                          } else if (state is ViewTaskLoaded) {
+                            final tasks = state.tasks;
 
-                          return SizedBox();
+                            if (tasks.isEmpty) {
+                              return Text(
+                                "No task found",
+                                style: Theme.of(context).textTheme.bodyMedium,
+                              );
+                            }
+
+                            return ListView.builder(
+                              shrinkWrap: true,
+                              physics: const NeverScrollableScrollPhysics(),
+                              itemCount: tasks.length,
+                              itemBuilder: (context, index) {
+                                final task = tasks[index];
+
+                                return Card(
+                                  margin: EdgeInsets.symmetric(vertical: 8.h),
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(12.r),
+                                  ),
+                                  elevation: 2,
+                                  child: ListTile(
+                                    title: Text(
+                                      task['taskName'] ?? 'Unnamed Task',
+                                      style:
+                                          Theme.of(context).textTheme.bodyLarge,
+                                    ),
+                                    subtitle: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          "Description: ${task['taskDescription'] ?? '-'}",
+                                        ),
+                                        Text(
+                                          "Priority: ${task['taskPriority'] ?? '-'}",
+                                        ),
+                                        Text(
+                                          "Status: ${task['taskStatus'] ?? '-'}",
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                );
+                              },
+                            );
+                          } else if (state is ViewTaskError) {
+                            return Text(
+                              state.message,
+                              style: const TextStyle(color: Colors.red),
+                            );
+                          } else {
+                            return const SizedBox();
+                          }
                         },
                       ),
                     ],
