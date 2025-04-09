@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 import 'package:taskapp/core/bloc/network_checker_bloc/network_bloc.dart';
 import 'package:taskapp/core/helper/snack_bar_helper.dart';
 import 'package:taskapp/core/locator/service_locator.dart';
 import 'package:taskapp/features/home/view_modals/selection_chip_bloc/selection_chip_bloc.dart';
 import 'package:taskapp/features/home/view_modals/view_task_bloc/view_task_bloc.dart';
 import 'package:taskapp/features/home/widgets/custom_choice_chip.dart';
+import 'package:taskapp/features/home/widgets/custom_task_list_tile.dart';
 import 'package:taskapp/gen/colors.gen.dart';
 import 'package:taskapp/l10n/app_localizations.dart';
 import 'dart:ui' as lang;
@@ -31,7 +33,7 @@ class _HomeScreenState extends State<HomeScreen> {
         BlocProvider(create: (context) => locator.get<SelectionChipBloc>()),
 
         // Network checker bloc
-        BlocProvider(create: (context) => NetworkBloc()),
+        BlocProvider(create: (context) => locator.get<NetworkBloc>()),
 
         // View task bloc with initial fetch
         BlocProvider(
@@ -184,34 +186,26 @@ class _HomeScreenState extends State<HomeScreen> {
                               itemBuilder: (context, index) {
                                 final task = tasks[index];
 
-                                return Card(
-                                  margin: EdgeInsets.symmetric(vertical: 8.h),
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(12.r),
-                                  ),
-                                  elevation: 2,
-                                  child: ListTile(
-                                    title: Text(
-                                      task['taskName'] ?? 'Unnamed Task',
-                                      style:
-                                          Theme.of(context).textTheme.bodyLarge,
-                                    ),
-                                    subtitle: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                          "Description: ${task['taskDescription'] ?? '-'}",
-                                        ),
-                                        Text(
-                                          "Priority: ${task['taskPriority'] ?? '-'}",
-                                        ),
-                                        Text(
-                                          "Status: ${task['taskStatus'] ?? '-'}",
-                                        ),
-                                      ],
-                                    ),
-                                  ),
+                                return CustomTaskListTile(
+                                  taskTitle: task["taskName"],
+                                  taskDescription: task["taskDescription"],
+                                  onTap: () {
+                                    // task description screen
+                                    GoRouter.of(context).pushNamed(
+                                      "taskDescription",
+                                      extra: {
+                                        "taskId": task["taskId"],
+                                        "taskPriority": task["taskPriority"],
+                                        "taskStatus": task["taskStatus"],
+                                        "taskName": task["taskName"],
+                                        "taskDescription":
+                                            task["taskDescription"],
+                                        "notificationAlert":
+                                            task["notificationAlert"] ?? false,
+                                        "dateRange": task["dateRange"] ?? [],
+                                      },
+                                    );
+                                  },
                                 );
                               },
                             );

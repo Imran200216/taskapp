@@ -52,6 +52,7 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
+    // lang code
     final String initialLangCode =
         widget.storedLang != null
             ? mapLanguage(widget.storedLang!).languageCode

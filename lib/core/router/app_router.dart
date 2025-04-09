@@ -73,7 +73,18 @@ class AppRouter {
       GoRoute(
         path: "/taskDescription",
         name: "taskDescription",
-        builder: (context, state) => const TaskDescriptionScreen(),
+        builder: (context, state) {
+          final task = state.extra as Map<String, dynamic>;
+          return TaskDescriptionScreen(
+            taskId: task['taskId'],
+            taskPriority: task['taskPriority'],
+            taskStatus: task['taskStatus'],
+            taskName: task['taskName'],
+            taskDescription: task['taskDescription'],
+            notificationAlertStatus: task['notificationAlert'] ?? false,
+            dateRange: List<String>.from(task['dateRange']),
+          );
+        },
       ),
     ],
   );

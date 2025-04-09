@@ -29,11 +29,7 @@ class _AuthScreenState extends State<AuthScreen>
     locator<NetworkBloc>().add(NetworkObserve());
   }
 
-  @override
-  void dispose() {
-    _tabController.dispose();
-    super.dispose();
-  }
+
 
   @override
   Widget build(BuildContext context) {

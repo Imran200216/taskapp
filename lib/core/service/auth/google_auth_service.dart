@@ -17,6 +17,19 @@ class GoogleAuthService {
     String userLanguagePreference,
   ) async {
     try {
+      // 🔍 Check if already signed in with Google
+      final currentUser = FirebaseAuth.instance.currentUser;
+      if (currentUser != null) {
+        final isGoogleUser = currentUser.providerData.any(
+          (info) => info.providerId == 'google.com',
+        );
+
+        if (isGoogleUser) {
+          print("Already signed in with Google");
+          return null; // or return existing UserCredential if needed
+        }
+      }
+
       // Trigger Google Sign-In
       final GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
       if (googleUser == null) return null;
@@ -25,20 +38,18 @@ class GoogleAuthService {
       final GoogleSignInAuthentication googleAuth =
           await googleUser.authentication;
 
-      // Create credential for Firebase authentication
       final OAuthCredential credential = GoogleAuthProvider.credential(
         accessToken: googleAuth.accessToken,
         idToken: googleAuth.idToken,
       );
 
-      // Sign in to Firebase with the Google credentials
       UserCredential userCredential = await _auth.signInWithCredential(
         credential,
       );
+
       User? user = userCredential.user;
 
       if (user != null) {
-        // save to firestore
         await _saveUserToFirestore(user, userUid, userLanguagePreference);
       }
 
