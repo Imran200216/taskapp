@@ -133,7 +133,8 @@
   "chipTaskCompleted": "Tâche terminée",
   "chipTaskInProgress": "Tâche en cours",
   "chipTaskOverDue": "Tâche en retard",
-
-  "internetFailureToast":  "Oups ! Il semble que vous soyez hors ligne. Veuillez vérifier votre connexion.",
-  "internetSuccessToast": "Vous êtes maintenant en ligne."
+  "internetFailureToast": "Oups ! Il semble que vous soyez hors ligne. Veuillez vérifier votre connexion.",
+  "internetSuccessToast": "Vous êtes maintenant en ligne.",
+  "noTaskFound": "Aucune tâche trouvée",
+  "yourTaskHasBeenScheduledSuccessNotification": "Votre tâche a été planifiée avec succès"
 }

@@ -13,6 +13,7 @@ import 'package:taskapp/core/bloc/network_checker_bloc/network_bloc.dart';
 import 'package:taskapp/core/helper/snack_bar_helper.dart';
 import 'package:taskapp/core/helper/toast_helper.dart';
 import 'package:taskapp/core/locator/service_locator.dart';
+import 'package:taskapp/core/service/notification/local_notification.dart';
 import 'package:taskapp/core/validator/app_validator.dart';
 import 'package:taskapp/features/add_task/view_modals/add_task_bloc/add_task_bloc.dart';
 import 'package:taskapp/features/bottom_nav/view_modal/bottom_nav_bloc.dart';
@@ -42,6 +43,10 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
   String? dateRange;
   String? taskStatus;
   String? taskPriority;
+
+  // schedule date for notification purpose
+  late String taskName;
+  DateTime? scheduleDate;
 
   /// Notification on and off text field
   bool notificationAlert = false;
@@ -95,7 +100,21 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                 // home screen
                 context.read<BottomNavBloc>().add(SelectTab(index: 0));
 
-                // clear all task data
+                // ✅ Show notifications only if `notificationAlert` is true
+                // if (notificationAlert) {
+                  // Instant notification
+                  locator.get<NotificationService>().showInstantNotification(
+                    taskName,
+                    appLocalization.yourTaskHasBeenScheduledSuccessNotification,
+                  );
+
+                  // Scheduled notification
+                  locator.get<NotificationService>().scheduledNotification(
+                    taskName,
+                    appLocalization.yourTaskHasBeenScheduledSuccessNotification,
+                    scheduleDate!,
+                  );
+                // }
               } else if (state is AddTaskFailure) {
                 // Failure toast
                 ToastHelper.showToast(
@@ -311,18 +330,16 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
 
                                 SizedBox(height: 12.h),
 
-                                // Add Task Button
+                                /// add task btn
                                 BlocBuilder<AddTaskBloc, AddTaskState>(
                                   builder: (context, state) {
                                     return CustomIconFilledBtn(
                                       isLoading: state is AddTaskLoading,
                                       onTap: () async {
-                                        // network state
                                         final networkState =
                                             context.read<NetworkBloc>().state;
 
                                         if (networkState is NetworkFailure) {
-                                          // error toast
                                           SnackBarHelper.showSnackBar(
                                             context: context,
                                             message:
@@ -335,27 +352,20 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                                                 Icons
                                                     .signal_cellular_connected_no_internet_4_bar_sharp,
                                           );
-
                                           return;
                                         }
 
-                                        // form validation
                                         if (formKey.currentState!.validate()) {
-                                          /// Generating the UUID
                                           const uuid = Uuid();
                                           String taskId = uuid.v4();
 
-                                          // Open the Hive box for user preferences
                                           final box = await Hive.openBox(
                                             "userLanguagePreferenceBox",
                                           );
-
-                                          // Retrieve the stored user UID
                                           String storedUserId = box.get(
                                             "userId",
                                           );
 
-                                          // ✅ Ensure `dateRange` is not null
                                           if (dateRange == null ||
                                               !dateRange!.contains(" - ")) {
                                             print("Invalid or null date range");
@@ -366,14 +376,12 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                                           try {
                                             dateRangeList =
                                                 dateRange!
-                                                    .split(
-                                                      " - ",
-                                                    ) // ✅ Correctly split by " - "
+                                                    .split(" - ")
                                                     .map(
                                                       (date) => DateTime.parse(
                                                         date.trim(),
                                                       ),
-                                                    ) // ✅ Parse each date
+                                                    )
                                                     .toList();
                                           } catch (e) {
                                             print(
@@ -382,19 +390,20 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                                             return;
                                           }
 
-                                          // Dispatch the event to the Bloc
+                                          /// ✅ Store values locally for use in BlocListener
+                                          taskName =
+                                              taskNameController.text.trim();
+                                          scheduleDate = dateRangeList[1];
+
                                           context.read<AddTaskBloc>().add(
                                             AddTask(
                                               taskId: taskId,
                                               userUid: storedUserId,
-                                              taskName:
-                                                  taskNameController.text
-                                                      .trim(),
+                                              taskName: taskName,
                                               taskDescription:
                                                   taskDescriptionController.text
                                                       .trim(),
                                               dateRange: dateRangeList,
-                                              // ✅ Correctly formatted List<DateTime>
                                               notificationAlert:
                                                   notificationAlert,
                                               taskStatus: taskStatus!,
@@ -403,7 +412,6 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                                             ),
                                           );
 
-                                          // Clear all task data
                                           _clearTaskData();
                                         }
                                       },

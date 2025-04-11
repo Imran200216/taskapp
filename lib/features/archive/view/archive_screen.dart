@@ -73,7 +73,7 @@ class _ArchiveScreenState extends State<ArchiveScreen> {
 
                 /// no task found
                 CustomNoTaskFound(
-                  svgPath: Assets.img.svg.noTask,
+                  svgPath: Assets.img.svg.noArchive,
                   text: appLocalization.noArchiveFound,
                 ),
 

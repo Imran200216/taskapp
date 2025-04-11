@@ -153,6 +153,9 @@ class $AssetsImgSvgGen {
   /// File path: assets/img/svg/decoration-top.svg
   String get decorationTop => 'assets/img/svg/decoration-top.svg';
 
+  /// File path: assets/img/svg/error-found.svg
+  String get errorFound => 'assets/img/svg/error-found.svg';
+
   /// File path: assets/img/svg/forget-password-success.svg
   String get forgetPasswordSuccess =>
       'assets/img/svg/forget-password-success.svg';
@@ -162,6 +165,9 @@ class $AssetsImgSvgGen {
 
   /// File path: assets/img/svg/leaf.svg
   String get leaf => 'assets/img/svg/leaf.svg';
+
+  /// File path: assets/img/svg/no-archive.svg
+  String get noArchive => 'assets/img/svg/no-archive.svg';
 
   /// File path: assets/img/svg/no-internet-connection.svg
   String get noInternetConnection =>
@@ -182,9 +188,11 @@ class $AssetsImgSvgGen {
   List<String> get values => [
     addTask,
     decorationTop,
+    errorFound,
     forgetPasswordSuccess,
     forgetPassword,
     leaf,
+    noArchive,
     noInternetConnection,
     noTask,
     proverbBottomDecoration,

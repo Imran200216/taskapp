@@ -1,21 +1,17 @@
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:timezone/data/latest_all.dart' as tz;
-import 'package:timezone/standalone.dart' as tz;
+import 'package:timezone/timezone.dart' as tz;
 
 class NotificationService {
   /// Flutter Local Notifications Plugin
-  static final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
+  final FlutterLocalNotificationsPlugin _flutterLocalNotificationsPlugin =
       FlutterLocalNotificationsPlugin();
 
-  /// Handles Notification Click Events
-  static Future<void> onDidReceiveNotificationResponse(
-    NotificationResponse notificationResponse,
-  ) async {
-    // Handle notification click here
-  }
-
   /// Initialize Notification Service
-  static Future<void> init() async {
+  Future<void> init() async {
+    /// Initialize Timezones (once)
+    tz.initializeTimeZones();
+
     /// Android Initialization Settings
     const AndroidInitializationSettings androidInitializationSettings =
         AndroidInitializationSettings("@mipmap/ic_launcher");
@@ -31,16 +27,31 @@ class NotificationService {
           iOS: iosInitializationSettings,
         );
 
+    /// Create Notification Channel (for Android 8.0+)
+    const AndroidNotificationChannel androidNotificationChannel =
+        AndroidNotificationChannel(
+          "channel_Id", // same as in your NotificationDetails
+          "channel_Name",
+          description: "This channel is used for task notifications.",
+          importance: Importance.high,
+        );
+
+    await _flutterLocalNotificationsPlugin
+        .resolvePlatformSpecificImplementation<
+          AndroidFlutterLocalNotificationsPlugin
+        >()
+        ?.createNotificationChannel(androidNotificationChannel);
+
     /// Initialize Plugin
-    await flutterLocalNotificationsPlugin.initialize(
+    await _flutterLocalNotificationsPlugin.initialize(
       initializationSettings,
-      onDidReceiveNotificationResponse: onDidReceiveNotificationResponse,
+      onDidReceiveNotificationResponse: _onDidReceiveNotificationResponse,
       onDidReceiveBackgroundNotificationResponse:
-          onDidReceiveNotificationResponse,
+          _onDidReceiveNotificationResponse,
     );
 
-    /// Request Notification Permission (For Android 13+)
-    await flutterLocalNotificationsPlugin
+    /// Request Notification Permission (Android 13+)
+    await _flutterLocalNotificationsPlugin
         .resolvePlatformSpecificImplementation<
           AndroidFlutterLocalNotificationsPlugin
         >()
@@ -48,7 +59,7 @@ class NotificationService {
   }
 
   /// Show Instant Notification
-  static Future<void> showInstantNotification(String title, String body) async {
+  Future<void> showInstantNotification(String title, String body) async {
     const NotificationDetails platformChannelSpecifics = NotificationDetails(
       android: AndroidNotificationDetails(
         "channel_Id",
@@ -59,7 +70,7 @@ class NotificationService {
       iOS: DarwinNotificationDetails(),
     );
 
-    await flutterLocalNotificationsPlugin.show(
+    await _flutterLocalNotificationsPlugin.show(
       0,
       title,
       body,
@@ -68,19 +79,14 @@ class NotificationService {
   }
 
   /// Show a Scheduled Notification
-  static Future<void> scheduledNotification(
+  Future<void> scheduledNotification(
     String title,
     String body,
     DateTime scheduleDate,
   ) async {
-    /// Initialize Timezones
-    tz.initializeTimeZones();
-
-    /// Get the Local Timezone
     final location = tz.getLocation('Asia/Kolkata');
     final scheduledTime = tz.TZDateTime.from(scheduleDate, location);
 
-    /// Define Notification Details
     const NotificationDetails platformChannelSpecifics = NotificationDetails(
       android: AndroidNotificationDetails(
         "channel_Id",
@@ -91,7 +97,7 @@ class NotificationService {
       iOS: DarwinNotificationDetails(),
     );
 
-    await flutterLocalNotificationsPlugin.zonedSchedule(
+    await _flutterLocalNotificationsPlugin.zonedSchedule(
       0,
       title,
       body,
@@ -100,5 +106,13 @@ class NotificationService {
       androidScheduleMode: AndroidScheduleMode.exact,
       matchDateTimeComponents: DateTimeComponents.dateAndTime,
     );
+  }
+
+  /// Handles Notification Click Events
+  Future<void> _onDidReceiveNotificationResponse(
+    NotificationResponse notificationResponse,
+  ) async {
+    // Handle notification click (e.g., navigate to screen)
+    print("Notification clicked with payload: ${notificationResponse.payload}");
   }
 }

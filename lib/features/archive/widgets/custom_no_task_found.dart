@@ -6,35 +6,34 @@ import 'package:taskapp/gen/colors.gen.dart';
 class CustomNoTaskFound extends StatelessWidget {
   final String svgPath;
   final String text;
+  final double? imgHeight;
+  final double? imgWidth;
 
-  const CustomNoTaskFound(
-      {super.key, required this.svgPath, required this.text});
+  const CustomNoTaskFound({
+    super.key,
+    required this.svgPath,
+    required this.text,
+    this.imgHeight,
+    this.imgWidth,
+  });
 
   @override
   Widget build(BuildContext context) {
     return Center(
       child: Column(
-        spacing: 12.h,
-        crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          // svg image
           SvgPicture.asset(
             svgPath,
-            height: 240.h,
-            width: 240.w,
+            height: imgHeight ?? 240.h,
+            width: imgWidth ?? 240.w,
             fit: BoxFit.cover,
           ),
-
-          //   no task found
+          SizedBox(height: 12.h),
           Text(
-            textAlign: TextAlign.start,
             text,
-            style: Theme
-                .of(context)
-                .textTheme
-                .bodySmall!
-                .copyWith(
+            textAlign: TextAlign.center,
+            style: Theme.of(context).textTheme.bodySmall!.copyWith(
               color: ColorName.grey,
               fontWeight: FontWeight.w500,
               fontSize: 12.4.sp,
@@ -43,6 +42,5 @@ class CustomNoTaskFound extends StatelessWidget {
         ],
       ),
     );
-
   }
 }

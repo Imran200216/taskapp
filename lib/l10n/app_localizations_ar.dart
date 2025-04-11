@@ -415,4 +415,10 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get internetSuccessToast => 'أنت متصل الآن بالإنترنت.';
+
+  @override
+  String get noTaskFound => 'لم يتم العثور على مهمة';
+
+  @override
+  String get yourTaskHasBeenScheduledSuccessNotification => 'تمت جدولة مهمتك بنجاح';
 }

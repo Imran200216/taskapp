@@ -133,8 +133,9 @@
   "chipTaskCompleted": "कार्य पूरा हुआ",
   "chipTaskInProgress": "कार्य प्रगति पर है",
   "chipTaskOverDue": "कार्य अतिदेय हो गया",
-
   "internetFailureToast": "ओह! ऐसा लगता है कि आप ऑफलाइन हैं। कृपया अपना कनेक्शन जांचें।",
-  "internetSuccessToast":  "अब आप ऑनलाइन हैं।"
+  "internetSuccessToast": "अब आप ऑनलाइन हैं।",
+  "noTaskFound": "कोई कार्य नहीं मिला",
+  "yourTaskHasBeenScheduledSuccessNotification": "आपका कार्य सफलतापूर्वक निर्धारित किया गया है"
 }
 

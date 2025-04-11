@@ -25,8 +25,8 @@ class _AuthScreenState extends State<AuthScreen>
     super.initState();
     _tabController = TabController(length: 2, vsync: this);
 
-    // Dispatch the network observe event
-    locator<NetworkBloc>().add(NetworkObserve());
+    // // Dispatch the network observe event
+    // locator<NetworkBloc>().add(NetworkObserve());
   }
 
 

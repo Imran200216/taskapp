@@ -8,6 +8,7 @@ import 'package:taskapp/core/service/auth/email_password_auth_service.dart';
 import 'package:taskapp/core/service/auth/google_auth_service.dart';
 import 'package:taskapp/core/service/local_storage/hive_storage_service.dart';
 import 'package:taskapp/core/service/network/network_service.dart';
+import 'package:taskapp/core/service/notification/local_notification.dart';
 import 'package:taskapp/core/service/quote_api_service/quote_service.dart';
 import 'package:taskapp/features/add_task/view_modals/add_task_bloc/add_task_bloc.dart';
 import 'package:taskapp/features/auth/view_modals/apple_sign_in_bloc/apple_auth_bloc.dart';
@@ -23,6 +24,7 @@ import 'package:taskapp/features/profile/view_modals/auth_checker_provider/auth_
 import 'package:taskapp/features/proverb/view_modal/quote_bloc/quote_bloc.dart';
 import 'package:taskapp/features/splash/view_modals/app_version_bloc/app_version_bloc.dart';
 import 'package:taskapp/firebase_options.dart';
+import 'package:timezone/data/latest_all.dart' as tz;
 
 /// locator of get it
 final GetIt locator = GetIt.instance;
@@ -30,6 +32,17 @@ final GetIt locator = GetIt.instance;
 Future<void> setupLocator() async {
   /// Initialize Firebase
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+
+  /// Initialize Timezones FIRST
+  tz.initializeTimeZones();
+
+  /// Register services AFTER timezone setup
+  locator.registerLazySingleton<NotificationService>(
+    () => NotificationService(),
+  );
+
+  /// Optionally: initialize services immediately after registering
+
 
   // Register HiveStorageService as an async singleton
   locator.registerSingletonAsync<HiveStorageService>(() async {
@@ -43,6 +56,7 @@ Future<void> setupLocator() async {
 
   // quotes service
   locator.registerLazySingleton(() => QuoteService());
+
   // Add Task Service
   locator.registerLazySingleton(() => AddTaskService());
 

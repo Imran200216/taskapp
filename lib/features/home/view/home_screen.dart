@@ -2,13 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 import 'package:taskapp/core/bloc/network_checker_bloc/network_bloc.dart';
 import 'package:taskapp/core/helper/snack_bar_helper.dart';
 import 'package:taskapp/core/locator/service_locator.dart';
+import 'package:taskapp/features/archive/widgets/custom_no_task_found.dart';
 import 'package:taskapp/features/home/view_modals/selection_chip_bloc/selection_chip_bloc.dart';
 import 'package:taskapp/features/home/view_modals/view_task_bloc/view_task_bloc.dart';
 import 'package:taskapp/features/home/widgets/custom_choice_chip.dart';
 import 'package:taskapp/features/home/widgets/custom_task_list_tile.dart';
+import 'package:taskapp/gen/assets.gen.dart';
 import 'package:taskapp/gen/colors.gen.dart';
 import 'package:taskapp/l10n/app_localizations.dart';
 import 'dart:ui' as lang;
@@ -166,16 +169,26 @@ class _HomeScreenState extends State<HomeScreen> {
                       BlocBuilder<ViewTaskBloc, ViewTaskState>(
                         builder: (context, state) {
                           if (state is ViewTaskLoading) {
-                            return const Center(
-                              child: CircularProgressIndicator(),
+                            // shimmer effect when task is loading
+                            return Skeletonizer(
+                              enabled: true,
+                              enableSwitchAnimation: true,
+                              child: CustomTaskListTile(
+                                taskTitle: "No task",
+                                taskDescription: "No Description",
+                                onTap: () {},
+                              ),
                             );
                           } else if (state is ViewTaskLoaded) {
                             final tasks = state.tasks;
 
                             if (tasks.isEmpty) {
-                              return Text(
-                                "No task found",
-                                style: Theme.of(context).textTheme.bodyMedium,
+                              // no task found  widget
+                              return CustomNoTaskFound(
+                                svgPath: Assets.img.svg.noTask,
+                                text: appLocalization.noTaskFound,
+                                imgHeight: 180.h,
+                                imgWidth: 180.w,
                               );
                             }
 
@@ -186,6 +199,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               itemBuilder: (context, index) {
                                 final task = tasks[index];
 
+                                // task widget
                                 return CustomTaskListTile(
                                   taskTitle: task["taskName"],
                                   taskDescription: task["taskDescription"],
@@ -210,9 +224,12 @@ class _HomeScreenState extends State<HomeScreen> {
                               },
                             );
                           } else if (state is ViewTaskError) {
-                            return Text(
-                              state.message,
-                              style: const TextStyle(color: Colors.red),
+                            // error widget
+                            return CustomNoTaskFound(
+                              svgPath: Assets.img.svg.errorFound,
+                              text: state.message,
+                              imgHeight: 180.h,
+                              imgWidth: 180.w,
                             );
                           } else {
                             return const SizedBox();

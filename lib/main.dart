@@ -145,7 +145,7 @@ class _MyAppState extends State<MyApp> {
                   supportedLocales: supportedLocales,
                   locale: Locale(langCode),
                   routerConfig: locator<AppRouter>().config,
-                  title: 'Task App',
+                  title: 'TaskNotify',
                   theme: AppTheme.lightTheme,
                 ),
               );

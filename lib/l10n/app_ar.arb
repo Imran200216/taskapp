@@ -133,7 +133,8 @@
   "chipTaskCompleted": "اكتملت المهمة",
   "chipTaskInProgress": "المهمة قيد التنفيذ",
   "chipTaskOverDue": "المهمة متأخرة",
-
-  "internetFailureToast":  "عذرًا! يبدو أنك غير متصل بالإنترنت. يرجى التحقق من الاتصال.",
-  "internetSuccessToast": "أنت متصل الآن بالإنترنت."
+  "internetFailureToast": "عذرًا! يبدو أنك غير متصل بالإنترنت. يرجى التحقق من الاتصال.",
+  "internetSuccessToast": "أنت متصل الآن بالإنترنت.",
+  "noTaskFound": "لم يتم العثور على مهمة",
+  "yourTaskHasBeenScheduledSuccessNotification": "تمت جدولة مهمتك بنجاح"
 }

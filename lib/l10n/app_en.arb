@@ -133,7 +133,8 @@
   "chipTaskCompleted": "Task Completed",
   "chipTaskInProgress": "Task InProgress",
   "chipTaskOverDue": "Task OverDue",
-
-  "internetFailureToast":  "Oops! It looks like you're offline. Please check your connection.",
-  "internetSuccessToast": "You are online now."
+  "internetFailureToast": "Oops! It looks like you're offline. Please check your connection.",
+  "internetSuccessToast": "You are online now.",
+  "noTaskFound": "No task found",
+  "yourTaskHasBeenScheduledSuccessNotification": "Your task has been scheduled successfully"
 }

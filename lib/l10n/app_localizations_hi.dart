@@ -415,4 +415,10 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get internetSuccessToast => 'अब आप ऑनलाइन हैं।';
+
+  @override
+  String get noTaskFound => 'कोई कार्य नहीं मिला';
+
+  @override
+  String get yourTaskHasBeenScheduledSuccessNotification => 'आपका कार्य सफलतापूर्वक निर्धारित किया गया है';
 }

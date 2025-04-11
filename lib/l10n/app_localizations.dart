@@ -916,6 +916,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'You are online now.'**
   String get internetSuccessToast;
+
+  /// No description provided for @noTaskFound.
+  ///
+  /// In en, this message translates to:
+  /// **'No task found'**
+  String get noTaskFound;
+
+  /// No description provided for @yourTaskHasBeenScheduledSuccessNotification.
+  ///
+  /// In en, this message translates to:
+  /// **'Your task has been scheduled successfully'**
+  String get yourTaskHasBeenScheduledSuccessNotification;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

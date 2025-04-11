@@ -415,4 +415,10 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get internetSuccessToast => 'You are online now.';
+
+  @override
+  String get noTaskFound => 'No task found';
+
+  @override
+  String get yourTaskHasBeenScheduledSuccessNotification => 'Your task has been scheduled successfully';
 }

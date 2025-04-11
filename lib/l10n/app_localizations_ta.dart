@@ -415,4 +415,10 @@ class AppLocalizationsTa extends AppLocalizations {
 
   @override
   String get internetSuccessToast => 'நீங்கள் இப்போது ஆன்லைன் உள்ளீர்கள்.';
+
+  @override
+  String get noTaskFound => 'வேலை எதுவும் கிடைக்கவில்லை';
+
+  @override
+  String get yourTaskHasBeenScheduledSuccessNotification => 'உங்கள் பணி வெற்றிகரமாக திட்டமிடப்பட்டுள்ளது';
 }
