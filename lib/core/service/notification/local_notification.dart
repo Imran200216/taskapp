@@ -1,76 +1,64 @@
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-import 'package:timezone/data/latest_all.dart' as tz;
-import 'package:timezone/timezone.dart' as tz;
+import 'package:timezone/data/latest.dart' as tz show initializeTimeZones;
+import 'package:timezone/standalone.dart' as tz;
 
 class NotificationService {
-  /// Flutter Local Notifications Plugin
-  final FlutterLocalNotificationsPlugin _flutterLocalNotificationsPlugin =
+  /// initialize the flutter local notification service
+  static final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
       FlutterLocalNotificationsPlugin();
 
-  /// Initialize Notification Service
-  Future<void> init() async {
-    /// Initialize Timezones (once)
-    tz.initializeTimeZones();
+  ///
+  static Future<void> onDidReceiveNotificationResponse(
+    NotificationResponse notificationResponse,
+  ) async {}
 
-    /// Android Initialization Settings
+  /// initialize the notification plugin
+  static Future<void> init() async {
+    /// define the android initialization settings
     const AndroidInitializationSettings androidInitializationSettings =
         AndroidInitializationSettings("@mipmap/ic_launcher");
 
-    /// iOS Initialization Settings
+    /// define the ios initialization settings
     const DarwinInitializationSettings iosInitializationSettings =
         DarwinInitializationSettings();
 
-    /// Combined Initialization Settings
+    /// combine android and ios initialization settings
     const InitializationSettings initializationSettings =
         InitializationSettings(
           android: androidInitializationSettings,
           iOS: iosInitializationSettings,
         );
 
-    /// Create Notification Channel (for Android 8.0+)
-    const AndroidNotificationChannel androidNotificationChannel =
-        AndroidNotificationChannel(
-          "channel_Id", // same as in your NotificationDetails
-          "channel_Name",
-          description: "This channel is used for task notifications.",
-          importance: Importance.high,
-        );
-
-    await _flutterLocalNotificationsPlugin
-        .resolvePlatformSpecificImplementation<
-          AndroidFlutterLocalNotificationsPlugin
-        >()
-        ?.createNotificationChannel(androidNotificationChannel);
-
-    /// Initialize Plugin
-    await _flutterLocalNotificationsPlugin.initialize(
+    /// initialize the plugin with the specified settings
+    await flutterLocalNotificationsPlugin.initialize(
       initializationSettings,
-      onDidReceiveNotificationResponse: _onDidReceiveNotificationResponse,
+      onDidReceiveNotificationResponse: onDidReceiveNotificationResponse,
       onDidReceiveBackgroundNotificationResponse:
-          _onDidReceiveNotificationResponse,
+          onDidReceiveNotificationResponse,
     );
 
-    /// Request Notification Permission (Android 13+)
-    await _flutterLocalNotificationsPlugin
+    /// request notification permission for android
+    await flutterLocalNotificationsPlugin
         .resolvePlatformSpecificImplementation<
           AndroidFlutterLocalNotificationsPlugin
         >()
         ?.requestNotificationsPermission();
   }
 
-  /// Show Instant Notification
-  Future<void> showInstantNotification(String title, String body) async {
+  /// show an instant notification
+  static Future<void> showInstantNotification(String title, String body) async {
+    /// define the notification detials
     const NotificationDetails platformChannelSpecifics = NotificationDetails(
       android: AndroidNotificationDetails(
         "channel_Id",
-        "channel_Name",
+        " channel_Name",
         importance: Importance.high,
         priority: Priority.high,
       ),
       iOS: DarwinNotificationDetails(),
     );
 
-    await _flutterLocalNotificationsPlugin.show(
+    await flutterLocalNotificationsPlugin.show(
       0,
       title,
       body,
@@ -78,15 +66,20 @@ class NotificationService {
     );
   }
 
-  /// Show a Scheduled Notification
-  Future<void> scheduledNotification(
+  /// show a scheduled notification
+  static Future<void> scheduledNotification(
     String title,
     String body,
     DateTime scheduleDate,
   ) async {
+    /// Ensure the timezone is initialized before using tz.local
+    tz.initializeTimeZones();
+
+    /// Get the local timezone
     final location = tz.getLocation('Asia/Kolkata');
     final scheduledTime = tz.TZDateTime.from(scheduleDate, location);
 
+    /// Define notification details
     const NotificationDetails platformChannelSpecifics = NotificationDetails(
       android: AndroidNotificationDetails(
         "channel_Id",
@@ -97,7 +90,7 @@ class NotificationService {
       iOS: DarwinNotificationDetails(),
     );
 
-    await _flutterLocalNotificationsPlugin.zonedSchedule(
+    await flutterLocalNotificationsPlugin.zonedSchedule(
       0,
       title,
       body,
@@ -106,13 +99,5 @@ class NotificationService {
       androidScheduleMode: AndroidScheduleMode.exact,
       matchDateTimeComponents: DateTimeComponents.dateAndTime,
     );
-  }
-
-  /// Handles Notification Click Events
-  Future<void> _onDidReceiveNotificationResponse(
-    NotificationResponse notificationResponse,
-  ) async {
-    // Handle notification click (e.g., navigate to screen)
-    print("Notification clicked with payload: ${notificationResponse.payload}");
   }
 }

@@ -170,14 +170,27 @@ class _HomeScreenState extends State<HomeScreen> {
                         builder: (context, state) {
                           if (state is ViewTaskLoading) {
                             // shimmer effect when task is loading
-                            return Skeletonizer(
-                              enabled: true,
-                              enableSwitchAnimation: true,
-                              child: CustomTaskListTile(
-                                taskTitle: "No task",
-                                taskDescription: "No Description",
-                                onTap: () {},
-                              ),
+                            return ListView.builder(
+                              shrinkWrap: true,
+                              physics: const NeverScrollableScrollPhysics(),
+                              itemCount: 12,
+                              itemBuilder: (context, index) {
+                                return Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                    horizontal: 16,
+                                    vertical: 8,
+                                  ),
+                                  child: Skeletonizer(
+                                    enabled: true,
+                                    enableSwitchAnimation: true,
+                                    child: CustomTaskListTile(
+                                      taskTitle: "No task",
+                                      taskDescription: "No Description",
+                                      onTap: () {},
+                                    ),
+                                  ),
+                                );
+                              },
                             );
                           } else if (state is ViewTaskLoaded) {
                             final tasks = state.tasks;

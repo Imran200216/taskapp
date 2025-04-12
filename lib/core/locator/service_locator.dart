@@ -36,14 +36,6 @@ Future<void> setupLocator() async {
   /// Initialize Timezones FIRST
   tz.initializeTimeZones();
 
-  /// Register services AFTER timezone setup
-  locator.registerLazySingleton<NotificationService>(
-    () => NotificationService(),
-  );
-
-  /// Optionally: initialize services immediately after registering
-
-
   // Register HiveStorageService as an async singleton
   locator.registerSingletonAsync<HiveStorageService>(() async {
     final service = HiveStorageService();

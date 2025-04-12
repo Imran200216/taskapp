@@ -102,18 +102,18 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
 
                 // ✅ Show notifications only if `notificationAlert` is true
                 // if (notificationAlert) {
-                  // Instant notification
-                  locator.get<NotificationService>().showInstantNotification(
-                    taskName,
-                    appLocalization.yourTaskHasBeenScheduledSuccessNotification,
-                  );
+                // Instant notification
+                NotificationService.showInstantNotification(
+                  taskName,
+                  appLocalization.yourTaskHasBeenScheduledSuccessNotification,
+                );
 
-                  // Scheduled notification
-                  locator.get<NotificationService>().scheduledNotification(
-                    taskName,
-                    appLocalization.yourTaskHasBeenScheduledSuccessNotification,
-                    scheduleDate!,
-                  );
+                // Scheduled notification
+                NotificationService.scheduledNotification(
+                  taskName,
+                  appLocalization.yourTaskHasBeenScheduledSuccessNotification,
+                  scheduleDate!,
+                );
                 // }
               } else if (state is AddTaskFailure) {
                 // Failure toast

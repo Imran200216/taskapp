@@ -7,6 +7,7 @@ import 'package:taskapp/core/language/language_mapper.dart';
 import 'package:taskapp/core/locator/service_locator.dart';
 import 'package:taskapp/core/router/app_router.dart';
 import 'package:taskapp/core/service/local_storage/hive_storage_service.dart';
+import 'package:taskapp/core/service/notification/local_notification.dart';
 import 'package:taskapp/core/theme/app_theme.dart';
 import 'package:taskapp/features/bottom_nav/view_modal/bottom_nav_bloc.dart';
 import 'package:taskapp/features/home/view_modals/selection_chip_bloc/selection_chip_bloc.dart';
@@ -26,6 +27,9 @@ void main() async {
 
   /// Setup the service locator
   await setupLocator();
+
+  // notification init
+  await NotificationService.init();
 
   /// Retrieve stored language, fallback to null
   final box = Hive.box('userLanguagePreferenceBox');
