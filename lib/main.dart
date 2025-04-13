@@ -28,7 +28,7 @@ void main() async {
   /// Setup the service locator
   await setupLocator();
 
-  // notification init
+  // local notification init
   await NotificationService.init();
 
   /// Retrieve stored language, fallback to null

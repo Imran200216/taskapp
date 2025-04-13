@@ -1,13 +1,5 @@
 import 'package:go_router/go_router.dart';
-import 'package:taskapp/features/auth/view/auth_forget_password_screen.dart';
-import 'package:taskapp/features/auth/view/auth_screen.dart';
-import 'package:taskapp/features/bottom_nav/view/bottom_nav.dart';
-import 'package:taskapp/features/auth/view/auth_forget_password_success_screen.dart';
-import 'package:taskapp/features/language_preference/view/user_language_preference_screen.dart';
-import 'package:taskapp/features/language_preference_settings/view/language_preference_settings_screen.dart';
-import 'package:taskapp/features/on_boarding/view/on_boarding_screen.dart';
-import 'package:taskapp/features/splash/view/splash_screen.dart';
-import 'package:taskapp/features/task_description/view/task_description_screen.dart';
+import 'package:taskapp/exports/exports.dart';
 
 class AppRouter {
   static final GoRouter _router = GoRouter(

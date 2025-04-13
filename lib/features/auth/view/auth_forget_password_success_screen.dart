@@ -75,7 +75,7 @@ class AuthForgetPasswordSuccessScreen extends StatelessWidget {
                   child: Text(
                     appLocalization.skipLater,
                     style: Theme.of(context).textTheme.bodySmall!.copyWith(
-                      fontSize: 8.sp,
+                      fontSize: 12.sp,
                       color: ColorName.grey,
                       fontWeight: FontWeight.w500,
                     ),

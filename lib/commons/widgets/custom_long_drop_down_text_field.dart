@@ -41,7 +41,7 @@ class _CustomDropDownTextFieldState extends State<CustomDropDownTextField> {
   @override
   Widget build(BuildContext context) {
     return DropdownButtonFormField<String>(
-      validator: widget.validator, // Using the validator parameter
+      validator: widget.validator,
       value: _selectedValue,
       style: Theme.of(context).textTheme.bodySmall!.copyWith(
         color: ColorName.black,

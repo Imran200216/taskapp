@@ -32,13 +32,6 @@ class _AuthForgetPasswordScreenState extends State<AuthForgetPasswordScreen> {
   final formKey = GlobalKey<FormState>();
 
   @override
-  void initState() {
-    super.initState();
-    // Dispatch the network observe event
-    locator<NetworkBloc>().add(NetworkObserve());
-  }
-
-  @override
   Widget build(BuildContext context) {
     // app localization
     final appLocalization = AppLocalizations.of(context);
@@ -49,13 +42,7 @@ class _AuthForgetPasswordScreenState extends State<AuthForgetPasswordScreen> {
         BlocProvider(create: (context) => locator<EmailBloc>()),
 
         // internet checker bloc
-        BlocProvider(
-          create: (context) {
-            final bloc = locator<NetworkBloc>();
-            bloc.add(NetworkObserve());
-            return bloc;
-          },
-        ),
+        BlocProvider(create: (context) => locator<NetworkBloc>()),
       ],
       child: MultiBlocListener(
         listeners: [
