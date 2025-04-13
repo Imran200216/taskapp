@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:taskapp/core/bloc/network_checker_bloc/network_bloc.dart';
-import 'package:taskapp/core/helper/snack_bar_helper.dart';
-import 'package:taskapp/core/locator/service_locator.dart';
-import 'package:taskapp/features/auth/view/auth_login.dart';
-import 'package:taskapp/features/auth/view/auth_register.dart';
+import 'package:taskapp/core/exports/core_exports.dart';
+import 'package:taskapp/features/auth/exports/auth_exports.dart';
 import 'package:taskapp/gen/colors.gen.dart';
 import 'package:taskapp/l10n/app_localizations.dart';
 

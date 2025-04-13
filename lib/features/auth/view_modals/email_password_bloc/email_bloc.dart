@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
-import 'package:taskapp/core/service/auth/email_password_auth_service.dart';
+import 'package:taskapp/core/exports/core_exports.dart';
 
 part 'email_event.dart';
 

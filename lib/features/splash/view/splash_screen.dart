@@ -6,10 +6,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hive/hive.dart';
-import 'package:taskapp/features/splash/view_modals/app_version_bloc/app_version_bloc.dart';
 import 'package:taskapp/gen/assets.gen.dart';
 import 'package:taskapp/gen/colors.gen.dart';
 import 'package:taskapp/l10n/app_localizations.dart';
+import 'package:taskapp/features/splash/exports/splash_exports.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});

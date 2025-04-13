@@ -3,17 +3,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hive/hive.dart';
-import 'package:taskapp/commons/widgets/custom_alert_dialog.dart';
-import 'package:taskapp/commons/widgets/custom_icon_filled_btn.dart';
-import 'package:taskapp/core/helper/toast_helper.dart';
-import 'package:taskapp/core/locator/service_locator.dart';
-import 'package:taskapp/features/language_preference/view_modal/lang_pref_bloc/language_preference_bloc.dart';
-import 'package:taskapp/features/language_preference/widgets/custom_lang_preference_List_tile.dart';
-import 'package:taskapp/features/language_preference_settings/view_modals/update_lang_preference_bloc/update_language_preference_bloc.dart';
-import 'package:taskapp/features/proverb/view_modal/quote_bloc/quote_bloc.dart';
+import 'package:taskapp/commons/exports/common_widgets_exports.dart';
+import 'package:taskapp/core/exports/core_exports.dart';
+import 'package:taskapp/features/language_preference_settings/exports/language_preference_settings_export.dart';
 import 'package:taskapp/gen/assets.gen.dart';
 import 'package:taskapp/gen/colors.gen.dart';
 import 'package:taskapp/l10n/app_localizations.dart';
+import 'package:taskapp/features/language_preference/exports/language_preference_exports.dart';
+import 'package:taskapp/features/proverb/exports/proverb_exports.dart';
 
 class LanguagePreferenceSettingsScreen extends StatelessWidget {
   const LanguagePreferenceSettingsScreen({super.key});

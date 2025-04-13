@@ -18,7 +18,7 @@ import 'package:taskapp/features/home/view_modals/selection_chip_bloc/selection_
 import 'package:taskapp/features/home/view_modals/view_task_bloc/view_task_bloc.dart';
 import 'package:taskapp/features/language_preference/view_modal/lang_pref_bloc/language_preference_bloc.dart';
 import 'package:taskapp/features/language_preference_settings/view_modals/update_lang_preference_bloc/update_language_preference_bloc.dart';
-import 'package:taskapp/features/on_boarding/view_modal/on_boarding_bloc.dart';
+import 'package:taskapp/features/on_boarding/view_modal/on_boarding_bloc/on_boarding_bloc.dart';
 import 'package:taskapp/features/profile/view_modals/auth_checker_provider/auth_checker_provider_bloc.dart';
 import 'package:taskapp/features/proverb/view_modal/quote_bloc/quote_bloc.dart';
 import 'package:taskapp/features/splash/view_modals/app_version_bloc/app_version_bloc.dart';

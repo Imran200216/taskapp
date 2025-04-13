@@ -2,7 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:taskapp/core/service/auth/google_auth_service.dart';
+import 'package:taskapp/core/exports/core_exports.dart';
 
 part 'google_auth_event.dart';
 

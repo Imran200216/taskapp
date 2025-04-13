@@ -1,8 +1,8 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
-import 'package:taskapp/core/service/add_task/add_task_service.dart';
-import 'package:taskapp/features/add_task/modals/add_task_modal.dart';
+import 'package:taskapp/features/add_task/exports/add_task_exports.dart';
+import 'package:taskapp/core/exports/core_exports.dart';
 
 part 'add_task_event.dart';
 

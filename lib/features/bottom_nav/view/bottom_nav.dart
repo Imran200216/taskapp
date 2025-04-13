@@ -2,18 +2,15 @@ import 'package:double_tap_to_exit/double_tap_to_exit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:taskapp/core/locator/service_locator.dart';
-import 'package:taskapp/core/service/haptics/haptic_feedback_service.dart';
-import 'package:taskapp/core/bloc/network_checker_bloc/network_bloc.dart';
-import 'package:taskapp/core/helper/snack_bar_helper.dart';
-import 'package:taskapp/features/add_task/view/add_task_screen.dart';
-import 'package:taskapp/features/archive/view/archive_screen.dart';
-import 'package:taskapp/features/bottom_nav/view_modal/bottom_nav_bloc.dart';
-import 'package:taskapp/features/home/view/home_screen.dart';
-import 'package:taskapp/features/profile/view/profile_screen.dart';
-import 'package:taskapp/features/proverb/view/proverb_screen.dart';
+import 'package:taskapp/core/exports/core_exports.dart';
+import 'package:taskapp/features/add_task/exports/add_task_exports.dart';
+import 'package:taskapp/features/archive/exports/archive_exports.dart';
+import 'package:taskapp/features/home/exports/home_exports.dart';
+import 'package:taskapp/features/profile/exports/profile_exports.dart';
+import 'package:taskapp/features/proverb/exports/proverb_exports.dart';
 import 'package:taskapp/gen/colors.gen.dart';
 import 'package:taskapp/l10n/app_localizations.dart';
+import 'package:taskapp/features/bottom_nav/exports/bottom_nav_exports.dart';
 
 class BottomNav extends StatefulWidget {
   const BottomNav({super.key});

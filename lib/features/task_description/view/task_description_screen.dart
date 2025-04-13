@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
-import 'package:taskapp/features/task_description/widgets/custom_task_description_label_text_field.dart';
+import 'package:taskapp/features/task_description/exports/task_description_exports.dart';
 import 'package:taskapp/gen/colors.gen.dart';
 
 class TaskDescriptionScreen extends StatelessWidget {

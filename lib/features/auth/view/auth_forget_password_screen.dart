@@ -3,17 +3,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
-import 'package:taskapp/commons/widgets/custom_icon_filled_btn.dart';
-import 'package:taskapp/commons/widgets/custom_text_field.dart';
-import 'package:taskapp/core/bloc/network_checker_bloc/network_bloc.dart';
-import 'package:taskapp/core/helper/snack_bar_helper.dart';
-import 'package:taskapp/core/helper/toast_helper.dart';
-import 'package:taskapp/core/locator/service_locator.dart';
-import 'package:taskapp/core/validator/app_validator.dart';
-import 'package:taskapp/features/auth/view_modals/email_password_bloc/email_bloc.dart';
+import 'package:taskapp/core/exports/core_exports.dart';
+import 'package:taskapp/commons/exports/common_widgets_exports.dart';
 import 'package:taskapp/gen/assets.gen.dart';
 import 'package:taskapp/gen/colors.gen.dart';
 import 'package:taskapp/l10n/app_localizations.dart';
+import 'package:taskapp/features/auth/exports/auth_exports.dart';
 
 class AuthForgetPasswordScreen extends StatefulWidget {
   const AuthForgetPasswordScreen({super.key});

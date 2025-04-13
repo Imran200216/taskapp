@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:taskapp/core/bloc/network_checker_bloc/network_bloc.dart';
-import 'package:taskapp/core/helper/snack_bar_helper.dart';
-import 'package:taskapp/features/archive/widgets/custom_no_task_found.dart';
+import 'package:taskapp/core/exports/core_exports.dart';
 import 'package:taskapp/gen/assets.gen.dart';
 import 'package:taskapp/gen/colors.gen.dart';
 import 'package:taskapp/l10n/app_localizations.dart';
+import 'package:taskapp/features/archive/exports/archive_exports.dart';
 
 class ArchiveScreen extends StatefulWidget {
   const ArchiveScreen({super.key});
