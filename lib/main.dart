@@ -5,15 +5,15 @@ import 'package:hive/hive.dart';
 import 'package:taskapp/core/exports/core_exports.dart';
 import 'package:taskapp/l10n/app_localizations.dart';
 import 'package:toastification/toastification.dart';
+import 'package:taskapp/features/bottom_nav/exports/bottom_nav_exports.dart';
+import 'package:taskapp/features/home/exports/home_exports.dart';
+import 'package:taskapp/features/language_preference/exports/language_preference_exports.dart';
+import 'package:taskapp/features/language_preference_settings/exports/language_preference_settings_export.dart';
+import 'package:taskapp/features/on_boarding/exports/on_boarding_exports.dart';
+import 'package:taskapp/features/profile/exports/profile_exports.dart';
+import 'package:taskapp/features/proverb/exports/proverb_exports.dart';
+import 'package:taskapp/features/splash/exports/splash_exports.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'features/bottom_nav/exports/bottom_nav_exports.dart';
-import 'features/home/exports/home_exports.dart';
-import 'features/language_preference/exports/language_preference_exports.dart';
-import 'features/language_preference_settings/exports/language_preference_settings_export.dart';
-import 'features/on_boarding/exports/on_boarding_exports.dart';
-import 'features/profile/exports/profile_exports.dart';
-import 'features/proverb/exports/proverb_exports.dart';
-import 'features/splash/exports/splash_exports.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
