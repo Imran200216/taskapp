@@ -1,26 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:hive_flutter/adapters.dart';
-import 'package:taskapp/core/bloc/network_checker_bloc/network_bloc.dart';
-import 'package:taskapp/core/language/language_mapper.dart';
-import 'package:taskapp/core/locator/service_locator.dart';
-import 'package:taskapp/core/router/app_router.dart';
-import 'package:taskapp/core/service/local_storage/hive_storage_service.dart';
-import 'package:taskapp/core/service/notification/local_notification.dart';
-import 'package:taskapp/core/theme/app_theme.dart';
-import 'package:taskapp/features/bottom_nav/view_modal/bottom_nav_bloc.dart';
-import 'package:taskapp/features/home/view_modals/selection_chip_bloc/selection_chip_bloc.dart';
-import 'package:taskapp/features/home/view_modals/view_task_bloc/view_task_bloc.dart';
-import 'package:taskapp/features/language_preference_settings/view_modals/update_lang_preference_bloc/update_language_preference_bloc.dart';
-import 'package:taskapp/features/on_boarding/view_modal/on_boarding_bloc/on_boarding_bloc.dart';
-import 'package:taskapp/features/profile/view_modals/auth_checker_provider/auth_checker_provider_bloc.dart';
-import 'package:taskapp/features/proverb/view_modal/quote_bloc/quote_bloc.dart';
-import 'package:taskapp/features/splash/view_modals/app_version_bloc/app_version_bloc.dart';
+import 'package:hive/hive.dart';
+import 'package:taskapp/core/exports/core_exports.dart';
 import 'package:taskapp/l10n/app_localizations.dart';
 import 'package:toastification/toastification.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:taskapp/features/language_preference/view_modal/lang_pref_bloc/language_preference_bloc.dart';
+import 'features/bottom_nav/exports/bottom_nav_exports.dart';
+import 'features/home/exports/home_exports.dart';
+import 'features/language_preference/exports/language_preference_exports.dart';
+import 'features/language_preference_settings/exports/language_preference_settings_export.dart';
+import 'features/on_boarding/exports/on_boarding_exports.dart';
+import 'features/profile/exports/profile_exports.dart';
+import 'features/proverb/exports/proverb_exports.dart';
+import 'features/splash/exports/splash_exports.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
