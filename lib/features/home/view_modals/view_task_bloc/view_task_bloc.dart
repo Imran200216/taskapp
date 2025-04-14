@@ -26,23 +26,25 @@ class ViewTaskBloc extends Bloc<ViewTaskEvent, ViewTaskState> {
       // Retrieve the stored user UID
       String userId = box.get("userId");
 
-      final querySnapshot =
-          await _firestore
+      // Use Firestore snapshots for real-time updates
+      await for (var querySnapshot
+          in _firestore
               .collection('tasks')
               .where('userUid', isEqualTo: userId)
-              .get();
+              .snapshots()) {
+        final taskList =
+            querySnapshot.docs.map((doc) {
+              final data = doc.data();
+              // Ensure 'taskId' exists and matches doc.id
+              if (!data.containsKey('taskId') || data['taskId'] != doc.id) {
+                data['taskId'] = doc.id; // assign it just in case
+              }
+              return data;
+            }).toList();
 
-      final taskList =
-          querySnapshot.docs.map((doc) {
-            final data = doc.data();
-            // Ensure 'taskId' exists and matches doc.id
-            if (!data.containsKey('taskId') || data['taskId'] != doc.id) {
-              data['taskId'] = doc.id; // assign it just in case
-            }
-            return data;
-          }).toList();
-
-      emit(ViewTaskLoaded(taskList));
+        // Emit the loaded task list when new data arrives
+        emit(ViewTaskLoaded(taskList));
+      }
     } catch (e) {
       emit(ViewTaskError('Failed to load tasks: ${e.toString()}'));
     }

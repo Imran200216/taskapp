@@ -1,29 +1,20 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:get_it/get_it.dart';
-import 'package:taskapp/core/bloc/network_checker_bloc/network_bloc.dart';
-import 'package:taskapp/core/router/app_router.dart';
-import 'package:taskapp/core/service/add_task/add_task_service.dart';
-import 'package:taskapp/core/service/auth/apple_auth_service.dart';
-import 'package:taskapp/core/service/auth/email_password_auth_service.dart';
-import 'package:taskapp/core/service/auth/google_auth_service.dart';
-import 'package:taskapp/core/service/local_storage/hive_storage_service.dart';
-import 'package:taskapp/core/service/network/network_service.dart';
-import 'package:taskapp/core/service/quote_api_service/quote_service.dart';
-import 'package:taskapp/features/add_task/view_modals/add_task_bloc/add_task_bloc.dart';
-import 'package:taskapp/features/auth/view_modals/apple_sign_in_bloc/apple_auth_bloc.dart';
-import 'package:taskapp/features/auth/view_modals/email_password_bloc/email_bloc.dart';
-import 'package:taskapp/features/auth/view_modals/google_sign_in_bloc/google_auth_bloc.dart';
-import 'package:taskapp/features/bottom_nav/view_modal/bottom_nav_bloc.dart';
-import 'package:taskapp/features/home/view_modals/selection_chip_bloc/selection_chip_bloc.dart';
-import 'package:taskapp/features/home/view_modals/view_task_bloc/view_task_bloc.dart';
-import 'package:taskapp/features/language_preference/view_modal/lang_pref_bloc/language_preference_bloc.dart';
-import 'package:taskapp/features/language_preference_settings/view_modals/update_lang_preference_bloc/update_language_preference_bloc.dart';
-import 'package:taskapp/features/on_boarding/view_modal/on_boarding_bloc/on_boarding_bloc.dart';
-import 'package:taskapp/features/profile/view_modals/auth_checker_provider/auth_checker_provider_bloc.dart';
-import 'package:taskapp/features/proverb/view_modal/quote_bloc/quote_bloc.dart';
-import 'package:taskapp/features/splash/view_modals/app_version_bloc/app_version_bloc.dart';
+import 'package:taskapp/features/archive/archive_exports.dart';
+import 'package:taskapp/features/task_description/task_description_exports.dart';
 import 'package:taskapp/firebase_options.dart';
 import 'package:timezone/data/latest_all.dart' as tz;
+import 'package:taskapp/core/core_exports.dart';
+import 'package:taskapp/features/add_task/add_task_exports.dart';
+import 'package:taskapp/features/auth/auth_exports.dart';
+import 'package:taskapp/features/bottom_nav/bottom_nav_exports.dart';
+import 'package:taskapp/features/home/home_exports.dart';
+import 'package:taskapp/features/language_preference/language_preference_exports.dart';
+import 'package:taskapp/features/language_preference_settings/language_preference_settings_export.dart';
+import 'package:taskapp/features/on_boarding/on_boarding_exports.dart';
+import 'package:taskapp/features/profile/profile_exports.dart';
+import 'package:taskapp/features/proverb/proverb_exports.dart';
+import 'package:taskapp/features/splash/splash_exports.dart';
 
 /// locator of get it
 final GetIt locator = GetIt.instance;
@@ -49,7 +40,7 @@ Future<void> setupLocator() async {
   locator.registerLazySingleton(() => QuoteService());
 
   // Add Task Service
-  locator.registerLazySingleton(() => AddTaskService());
+  locator.registerLazySingleton(() => TaskService());
 
   // network service
   locator.registerLazySingleton(() => NetworkService());
@@ -72,7 +63,7 @@ Future<void> setupLocator() async {
   locator.registerFactory(() => AuthCheckerProviderBloc());
 
   // Add Task Bloc
-  locator.registerFactory(() => AddTaskBloc(locator<AddTaskService>()));
+  locator.registerFactory(() => AddTaskBloc(locator<TaskService>()));
 
   // App version Bloc
   locator.registerFactory(() => AppVersionBloc());
@@ -88,6 +79,12 @@ Future<void> setupLocator() async {
 
   // View task Bloc
   locator.registerFactory(() => ViewTaskBloc());
+
+  // Archive Task Bloc
+  locator.registerFactory(() => TaskArchiveBloc(locator<TaskService>()));
+
+  // View Archive Task Bloc
+  locator.registerFactory(() => ViewArchiveTaskBloc(locator<TaskService>()));
 
   /// Router
   locator.registerLazySingleton<AppRouter>(() => AppRouter());

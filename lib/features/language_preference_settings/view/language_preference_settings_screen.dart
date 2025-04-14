@@ -3,14 +3,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hive/hive.dart';
-import 'package:taskapp/commons/exports/common_widgets_exports.dart';
-import 'package:taskapp/core/exports/core_exports.dart';
-import 'package:taskapp/features/language_preference_settings/exports/language_preference_settings_export.dart';
+import 'package:taskapp/commons/common_widgets_exports.dart';
+import 'package:taskapp/core/core_exports.dart';
+import 'package:taskapp/features/language_preference_settings/language_preference_settings_export.dart';
 import 'package:taskapp/gen/assets.gen.dart';
 import 'package:taskapp/gen/colors.gen.dart';
 import 'package:taskapp/l10n/app_localizations.dart';
-import 'package:taskapp/features/language_preference/exports/language_preference_exports.dart';
-import 'package:taskapp/features/proverb/exports/proverb_exports.dart';
+import 'package:taskapp/features/language_preference/language_preference_exports.dart';
+import 'package:taskapp/features/proverb/proverb_exports.dart';
 
 class LanguagePreferenceSettingsScreen extends StatelessWidget {
   const LanguagePreferenceSettingsScreen({super.key});

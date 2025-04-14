@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:taskapp/features/add_task/modals/add_task_modal.dart';
 import 'package:taskapp/l10n/app_localizations.dart';
 
-class AddTaskService {
+class TaskService {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
   /// **Add Task to Firestore**
@@ -13,7 +13,8 @@ class AddTaskService {
     required String userUid,
     required String taskName,
     required String taskDescription,
-    required List<DateTime> dateRange, // ✅ Changed from String to List<DateTime>
+    required List<DateTime>
+    dateRange, // ✅ Changed from String to List<DateTime>
     required bool notificationAlert,
     required String taskStatus,
     required String taskPriority,
@@ -24,7 +25,8 @@ class AddTaskService {
         userUid: userUid,
         taskName: taskName,
         taskDescription: taskDescription,
-        dateRange: dateRange.map((date) => date.toIso8601String()).toList(), // ✅ Convert to List<String>
+        dateRange: dateRange.map((date) => date.toIso8601String()).toList(),
+        // ✅ Convert to List<String>
         notificationAlert: notificationAlert,
         taskStatus: taskStatus,
         taskPriority: taskPriority,
@@ -43,14 +45,21 @@ class AddTaskService {
         .where('userUid', isEqualTo: userUid)
         .snapshots()
         .map(
-          (snapshot) => snapshot.docs.map((doc) {
-        Map<String, dynamic> data = doc.data();
-        List<DateTime> parsedDateRange = (data['dateRange'] as List<dynamic>)
-            .map((date) => DateTime.parse(date.toString())) // ✅ Convert back to List<DateTime>
-            .toList();
-        return AddTaskModel.fromJson({...data, 'dateRange': parsedDateRange});
-      }).toList(),
-    );
+          (snapshot) =>
+              snapshot.docs.map((doc) {
+                Map<String, dynamic> data = doc.data();
+                List<DateTime> parsedDateRange =
+                    (data['dateRange'] as List<dynamic>)
+                        .map(
+                          (date) => DateTime.parse(date.toString()),
+                        ) // ✅ Convert back to List<DateTime>
+                        .toList();
+                return AddTaskModel.fromJson({
+                  ...data,
+                  'dateRange': parsedDateRange,
+                });
+              }).toList(),
+        );
   }
 
   /// **Update Task in Firestore**
@@ -61,9 +70,12 @@ class AddTaskService {
   }) async {
     try {
       if (updatedData.containsKey('dateRange')) {
-        updatedData['dateRange'] = (updatedData['dateRange'] as List<DateTime>)
-            .map((date) => date.toIso8601String()) // ✅ Convert List<DateTime> to List<String>
-            .toList();
+        updatedData['dateRange'] =
+            (updatedData['dateRange'] as List<DateTime>)
+                .map(
+                  (date) => date.toIso8601String(),
+                ) // ✅ Convert List<DateTime> to List<String>
+                .toList();
       }
       await _firestore.collection('tasks').doc(taskId).update(updatedData);
     } on FirebaseException catch (e) {
@@ -81,6 +93,44 @@ class AddTaskService {
     } on FirebaseException catch (e) {
       throw _handleFirestoreError(context, e);
     }
+  }
+
+  /// **Archive a Task**
+  Future<void> archiveTask({
+    required BuildContext context,
+    required String taskId,
+  }) async {
+    try {
+      await _firestore.collection('tasks').doc(taskId).update({
+        'isArchived': true,
+      });
+    } on FirebaseException catch (e) {
+      throw _handleFirestoreError(context, e);
+    }
+  }
+
+  /// **Retrieve Archived Tasks**
+  Stream<List<AddTaskModel>> getArchivedTasks() {
+    return _firestore
+        .collection('tasks')
+        .where('isArchived', isEqualTo: true) // Filter tasks that are archived
+        .snapshots()
+        .map(
+          (snapshot) =>
+              snapshot.docs.map((doc) {
+                Map<String, dynamic> data = doc.data();
+                List<DateTime> parsedDateRange =
+                    (data['dateRange'] as List<dynamic>)
+                        .map(
+                          (date) => DateTime.parse(date.toString()),
+                        ) // Convert List<String> back to List<DateTime>
+                        .toList();
+                return AddTaskModel.fromJson({
+                  ...data,
+                  'dateRange': parsedDateRange,
+                });
+              }).toList(),
+        );
   }
 
   /// **Handle Firestore Errors**

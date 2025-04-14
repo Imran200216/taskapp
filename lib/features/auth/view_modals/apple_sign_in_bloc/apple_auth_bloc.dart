@@ -2,7 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:taskapp/core/exports/core_exports.dart';
+import 'package:taskapp/core/core_exports.dart';
 
 part 'apple_auth_event.dart';
 

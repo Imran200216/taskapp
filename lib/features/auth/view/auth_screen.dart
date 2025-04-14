@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:taskapp/core/exports/core_exports.dart';
-import 'package:taskapp/features/auth/exports/auth_exports.dart';
+import 'package:taskapp/core/core_exports.dart';
+import 'package:taskapp/features/auth/auth_exports.dart';
 import 'package:taskapp/gen/colors.gen.dart';
 import 'package:taskapp/l10n/app_localizations.dart';
 

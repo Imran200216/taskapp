@@ -2,15 +2,15 @@ import 'package:double_tap_to_exit/double_tap_to_exit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:taskapp/core/exports/core_exports.dart';
-import 'package:taskapp/features/add_task/exports/add_task_exports.dart';
-import 'package:taskapp/features/archive/exports/archive_exports.dart';
-import 'package:taskapp/features/home/exports/home_exports.dart';
-import 'package:taskapp/features/profile/exports/profile_exports.dart';
-import 'package:taskapp/features/proverb/exports/proverb_exports.dart';
+import 'package:taskapp/core/core_exports.dart';
+import 'package:taskapp/features/add_task/add_task_exports.dart';
+import 'package:taskapp/features/archive/archive_exports.dart';
+import 'package:taskapp/features/home/home_exports.dart';
+import 'package:taskapp/features/profile/profile_exports.dart';
+import 'package:taskapp/features/proverb/proverb_exports.dart';
 import 'package:taskapp/gen/colors.gen.dart';
 import 'package:taskapp/l10n/app_localizations.dart';
-import 'package:taskapp/features/bottom_nav/exports/bottom_nav_exports.dart';
+import 'package:taskapp/features/bottom_nav/bottom_nav_exports.dart';
 
 class BottomNav extends StatefulWidget {
   const BottomNav({super.key});
@@ -21,18 +21,15 @@ class BottomNav extends StatefulWidget {
 
 class _BottomNavState extends State<BottomNav> {
   @override
-  void initState() {
-    super.initState();
-    // Trigger network checker once globally
-    locator<NetworkBloc>().add(NetworkObserve());
-  }
-
-  @override
   Widget build(BuildContext context) {
     final appLocalization = AppLocalizations.of(context);
 
     return MultiBlocProvider(
       providers: [
+        // network bloc
+        BlocProvider(create: (context) => locator.get<NetworkBloc>()),
+
+        // bottom nav bloc
         BlocProvider(create: (context) => locator.get<BottomNavBloc>()),
       ],
       child: BlocBuilder<BottomNavBloc, BottomNavState>(

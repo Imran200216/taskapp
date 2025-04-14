@@ -20,7 +20,7 @@ export 'package:taskapp/core/locator/service_locator.dart';
 export 'package:taskapp/core/router/app_router.dart';
 
 // add task service
-export 'package:taskapp/core/service/add_task/add_task_service.dart';
+export 'package:taskapp/core/service/task/task_service.dart';
 
 // auth service
 export 'package:taskapp/core/service/auth/google_auth_service.dart';

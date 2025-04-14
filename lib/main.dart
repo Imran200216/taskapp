@@ -2,18 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hive/hive.dart';
-import 'package:taskapp/core/exports/core_exports.dart';
+import 'package:taskapp/core/core_exports.dart';
 import 'package:taskapp/l10n/app_localizations.dart';
 import 'package:toastification/toastification.dart';
-import 'package:taskapp/features/bottom_nav/exports/bottom_nav_exports.dart';
-import 'package:taskapp/features/home/exports/home_exports.dart';
-import 'package:taskapp/features/language_preference/exports/language_preference_exports.dart';
-import 'package:taskapp/features/language_preference_settings/exports/language_preference_settings_export.dart';
-import 'package:taskapp/features/on_boarding/exports/on_boarding_exports.dart';
-import 'package:taskapp/features/profile/exports/profile_exports.dart';
-import 'package:taskapp/features/proverb/exports/proverb_exports.dart';
-import 'package:taskapp/features/splash/exports/splash_exports.dart';
+import 'package:taskapp/features/bottom_nav/bottom_nav_exports.dart';
+import 'package:taskapp/features/home/home_exports.dart';
+import 'package:taskapp/features/language_preference/language_preference_exports.dart';
+import 'package:taskapp/features/language_preference_settings/language_preference_settings_export.dart';
+import 'package:taskapp/features/on_boarding/on_boarding_exports.dart';
+import 'package:taskapp/features/profile/profile_exports.dart';
+import 'package:taskapp/features/proverb/proverb_exports.dart';
+import 'package:taskapp/features/splash/splash_exports.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+
+import 'features/archive/archive_exports.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -116,6 +118,9 @@ class _MyAppState extends State<MyApp> {
 
         // view task bloc
         BlocProvider(create: (context) => locator.get<ViewTaskBloc>()),
+
+        // view archive task bloc
+        BlocProvider(create: (context) => locator.get<ViewArchiveTaskBloc>(),)
       ],
       child: BlocBuilder<LanguagePreferenceBloc, LanguagePreferenceState>(
         builder: (context, state) {

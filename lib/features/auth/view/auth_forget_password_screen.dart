@@ -3,12 +3,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
-import 'package:taskapp/core/exports/core_exports.dart';
-import 'package:taskapp/commons/exports/common_widgets_exports.dart';
+import 'package:taskapp/core/core_exports.dart';
+import 'package:taskapp/commons/common_widgets_exports.dart';
 import 'package:taskapp/gen/assets.gen.dart';
 import 'package:taskapp/gen/colors.gen.dart';
 import 'package:taskapp/l10n/app_localizations.dart';
-import 'package:taskapp/features/auth/exports/auth_exports.dart';
+import 'package:taskapp/features/auth/auth_exports.dart';
 
 class AuthForgetPasswordScreen extends StatefulWidget {
   const AuthForgetPasswordScreen({super.key});

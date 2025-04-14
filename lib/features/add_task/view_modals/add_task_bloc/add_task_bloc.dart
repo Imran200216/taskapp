@@ -1,15 +1,15 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
-import 'package:taskapp/features/add_task/exports/add_task_exports.dart';
-import 'package:taskapp/core/exports/core_exports.dart';
+import 'package:taskapp/features/add_task/add_task_exports.dart';
+import 'package:taskapp/core/core_exports.dart';
 
 part 'add_task_event.dart';
 
 part 'add_task_state.dart';
 
 class AddTaskBloc extends Bloc<AddTaskEvent, AddTaskState> {
-  final AddTaskService _taskService;
+  final TaskService _taskService;
 
   AddTaskBloc(this._taskService) : super(AddTaskInitial()) {
     /// Handle Add Task Event

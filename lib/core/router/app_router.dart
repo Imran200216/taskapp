@@ -1,11 +1,11 @@
 import 'package:go_router/go_router.dart';
-import 'package:taskapp/features/auth/exports/auth_exports.dart';
-import 'package:taskapp/features/bottom_nav/exports/bottom_nav_exports.dart';
-import 'package:taskapp/features/language_preference/exports/language_preference_exports.dart';
-import 'package:taskapp/features/language_preference_settings/exports/language_preference_settings_export.dart';
-import 'package:taskapp/features/on_boarding/exports/on_boarding_exports.dart';
-import 'package:taskapp/features/splash/exports/splash_exports.dart';
-import 'package:taskapp/features/task_description/exports/task_description_exports.dart';
+import 'package:taskapp/features/auth/auth_exports.dart';
+import 'package:taskapp/features/bottom_nav/bottom_nav_exports.dart';
+import 'package:taskapp/features/language_preference/language_preference_exports.dart';
+import 'package:taskapp/features/language_preference_settings/language_preference_settings_export.dart';
+import 'package:taskapp/features/on_boarding/on_boarding_exports.dart';
+import 'package:taskapp/features/splash/splash_exports.dart';
+import 'package:taskapp/features/task_description/task_description_exports.dart';
 
 class AppRouter {
   static final GoRouter _router = GoRouter(

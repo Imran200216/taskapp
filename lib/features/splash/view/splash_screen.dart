@@ -9,7 +9,7 @@ import 'package:hive/hive.dart';
 import 'package:taskapp/gen/assets.gen.dart';
 import 'package:taskapp/gen/colors.gen.dart';
 import 'package:taskapp/l10n/app_localizations.dart';
-import 'package:taskapp/features/splash/exports/splash_exports.dart';
+import 'package:taskapp/features/splash/splash_exports.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
