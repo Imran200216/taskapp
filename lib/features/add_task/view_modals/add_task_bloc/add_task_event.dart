@@ -13,9 +13,11 @@ class AddTask extends AddTaskEvent {
   final bool notificationAlert;
   final String taskStatus;
   final String taskPriority;
+  final bool isArchived;
   final BuildContext context;
 
   const AddTask({
+    required this.isArchived,
     required this.taskId,
     required this.userUid,
     required this.taskName,
@@ -37,6 +39,7 @@ class AddTask extends AddTaskEvent {
     notificationAlert,
     taskStatus,
     taskPriority,
+    isArchived,
   ];
 }
 

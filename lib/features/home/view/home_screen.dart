@@ -216,15 +216,25 @@ class _HomeScreenState extends State<HomeScreen> {
                                     GoRouter.of(context).pushNamed(
                                       "taskDescription",
                                       extra: {
+                                        // task name
                                         "taskId": task["taskId"],
+                                        // task priority
                                         "taskPriority": task["taskPriority"],
+                                        // task status
                                         "taskStatus": task["taskStatus"],
+                                        // task name
                                         "taskName": task["taskName"],
+                                        // task description
                                         "taskDescription":
                                             task["taskDescription"],
+                                        // task notification alert status
                                         "notificationAlert":
                                             task["notificationAlert"] ?? false,
+                                        // task date range picked
                                         "dateRange": task["dateRange"] ?? [],
+                                        // task is archived status
+                                        "isArchived":
+                                            task["isArchived"] ?? false,
                                       },
                                     );
                                   },

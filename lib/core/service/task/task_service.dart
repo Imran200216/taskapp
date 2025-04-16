@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:taskapp/features/add_task/modals/add_task_modal.dart';
 import 'package:taskapp/l10n/app_localizations.dart';
+import 'package:taskapp/features/add_task/add_task_exports.dart';
 
 class TaskService {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
@@ -13,11 +13,11 @@ class TaskService {
     required String userUid,
     required String taskName,
     required String taskDescription,
-    required List<DateTime>
-    dateRange, // ✅ Changed from String to List<DateTime>
+    required List<DateTime> dateRange,
     required bool notificationAlert,
     required String taskStatus,
     required String taskPriority,
+    required bool isArchived,
   }) async {
     try {
       AddTaskModel task = AddTaskModel(
@@ -26,10 +26,10 @@ class TaskService {
         taskName: taskName,
         taskDescription: taskDescription,
         dateRange: dateRange.map((date) => date.toIso8601String()).toList(),
-        // ✅ Convert to List<String>
         notificationAlert: notificationAlert,
         taskStatus: taskStatus,
         taskPriority: taskPriority,
+        isArchived: isArchived,
       );
 
       await _firestore.collection('tasks').doc(taskId).set(task.toJson());
@@ -113,22 +113,15 @@ class TaskService {
   Stream<List<AddTaskModel>> getArchivedTasks() {
     return _firestore
         .collection('tasks')
-        .where('isArchived', isEqualTo: true) // Filter tasks that are archived
+        .where('isArchived', isEqualTo: true)
         .snapshots()
         .map(
           (snapshot) =>
               snapshot.docs.map((doc) {
                 Map<String, dynamic> data = doc.data();
-                List<DateTime> parsedDateRange =
-                    (data['dateRange'] as List<dynamic>)
-                        .map(
-                          (date) => DateTime.parse(date.toString()),
-                        ) // Convert List<String> back to List<DateTime>
-                        .toList();
-                return AddTaskModel.fromJson({
-                  ...data,
-                  'dateRange': parsedDateRange,
-                });
+
+                // ✅ Don't parse dateRange here – it's already a List<String>
+                return AddTaskModel.fromJson(data);
               }).toList(),
         );
   }

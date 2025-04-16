@@ -11,25 +11,24 @@ class ViewArchiveTaskBloc
     extends Bloc<ViewArchiveTaskEvent, ViewArchiveTaskState> {
   final TaskService _taskService;
 
-  // Constructor
-  ViewArchiveTaskBloc(this._taskService) : super(ViewArchiveTaskInitial());
+  ViewArchiveTaskBloc(this._taskService) : super(ViewArchiveTaskInitial()) {
+    on<FetchArchivedTasksEvent>(_onFetchArchivedTasksEvent);
+  }
 
-  Stream<ViewArchiveTaskState> mapEventToState(
-    ViewArchiveTaskEvent event,
-  ) async* {
-    if (event is FetchArchivedTasksEvent) {
-      yield ViewArchiveLoadingState();
+  Future<void> _onFetchArchivedTasksEvent(
+      FetchArchivedTasksEvent event,
+      Emitter<ViewArchiveTaskState> emit,
+      ) async {
+    emit(ViewArchiveLoadingState());
+    try {
+      final archivedTasksStream = _taskService.getArchivedTasks();
 
-      try {
-        final archivedTasksStream = _taskService.getArchivedTasks();
-
-        // Await the stream for changes and yield the updated data
-        await for (var tasks in archivedTasksStream) {
-          yield ViewArchiveLoadedState(tasks);
-        }
-      } catch (e) {
-        yield ViewArchiveErrorState(e.toString());
+      await for (var tasks in archivedTasksStream) {
+        emit(ViewArchiveLoadedState(tasks));
       }
+    } catch (e) {
+      emit(ViewArchiveErrorState(e.toString()));
     }
   }
 }
+

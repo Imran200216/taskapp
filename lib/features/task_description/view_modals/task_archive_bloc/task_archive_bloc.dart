@@ -54,14 +54,16 @@ class TaskArchiveBloc extends Bloc<TaskArchiveEvent, TaskArchiveState> {
   }
 
   void _onSetArchiveStatus(
-    SetArchiveStatusEvent event,
-    Emitter<TaskArchiveState> emit,
-  ) {
+      SetArchiveStatusEvent event,
+      Emitter<TaskArchiveState> emit,
+      ) {
     emit(
       TaskArchiveSuccess(
         'Status updated manually',
         isArchived: event.isArchived,
+        showToast: false, // 🔥 don't show toast on init
       ),
     );
   }
+
 }

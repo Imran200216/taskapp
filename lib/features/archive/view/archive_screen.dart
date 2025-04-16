@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 import 'package:taskapp/core/core_exports.dart';
+import 'package:taskapp/features/home/home_exports.dart';
 import 'package:taskapp/gen/assets.gen.dart';
 import 'package:taskapp/gen/colors.gen.dart';
 import 'package:taskapp/l10n/app_localizations.dart';
@@ -16,13 +18,6 @@ class ArchiveScreen extends StatefulWidget {
 
 class _ArchiveScreenState extends State<ArchiveScreen> {
   @override
-  void initState() {
-    super.initState();
-    // Fetch archived tasks when the screen is loaded
-    context.read<ViewArchiveTaskBloc>().add(FetchArchivedTasksEvent());
-  }
-
-  @override
   Widget build(BuildContext context) {
     // app localization
     final appLocalization = AppLocalizations.of(context);
@@ -30,7 +25,12 @@ class _ArchiveScreenState extends State<ArchiveScreen> {
     return MultiBlocProvider(
       providers: [
         // view archive task bloc
-        BlocProvider(create: (context) => locator.get<ViewArchiveTaskBloc>()),
+        BlocProvider(
+          create:
+              (context) =>
+                  locator.get<ViewArchiveTaskBloc>()
+                    ..add(FetchArchivedTasksEvent()),
+        ),
       ],
       child: MultiBlocListener(
         listeners: [
@@ -103,15 +103,28 @@ class _ArchiveScreenState extends State<ArchiveScreen> {
                             itemCount: tasks.length,
                             itemBuilder: (context, index) {
                               final task = tasks[index];
-                              return ListTile(
-                                contentPadding: EdgeInsets.symmetric(
-                                  vertical: 8.h,
-                                ),
-                                title: Text(task.taskName ?? 'No Task Name'),
-                                subtitle: Text(
-                                  task.taskDescription ?? 'No Task Description',
-                                ),
-                                trailing: Icon(Icons.archive),
+
+                              // task widget
+                              return CustomTaskListTile(
+                                taskTitle: task.taskName,
+                                taskDescription: task.taskDescription,
+                                onTap: () {
+                                  // task description screen
+                                  GoRouter.of(context).pushNamed(
+                                    "taskDescription",
+                                    extra: {
+                                      "taskId": task.taskId,
+                                      "taskPriority": task.taskPriority,
+                                      "taskStatus": task.taskStatus,
+                                      "taskName": task.taskName,
+                                      "taskDescription": task.taskDescription,
+                                      "notificationAlert":
+                                          task.notificationAlert,
+                                      "dateRange": task.dateRange,
+                                      "isArchived": task.isArchived,
+                                    },
+                                  );
+                                },
                               );
                             },
                           ),

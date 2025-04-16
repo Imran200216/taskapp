@@ -74,13 +74,22 @@ class AppRouter {
         builder: (context, state) {
           final task = state.extra as Map<String, dynamic>;
           return TaskDescriptionScreen(
+            // task id
             taskId: task['taskId'],
+            // task priority
             taskPriority: task['taskPriority'],
+            // task status
             taskStatus: task['taskStatus'],
+            // task name
             taskName: task['taskName'],
+            // task description
             taskDescription: task['taskDescription'],
+            // task notification alert status
             notificationAlertStatus: task['notificationAlert'] ?? false,
+            // task date range
             dateRange: List<String>.from(task['dateRange']),
+            // task is archived status
+            isArchived: task['isArchived'] ?? false,
           );
         },
       ),

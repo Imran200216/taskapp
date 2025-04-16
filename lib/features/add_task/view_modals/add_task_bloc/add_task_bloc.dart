@@ -26,6 +26,7 @@ class AddTaskBloc extends Bloc<AddTaskEvent, AddTaskState> {
           notificationAlert: event.notificationAlert,
           taskStatus: event.taskStatus,
           taskPriority: event.taskPriority,
+          isArchived: event.isArchived,
         );
         emit(AddTaskSuccess());
       } catch (e) {

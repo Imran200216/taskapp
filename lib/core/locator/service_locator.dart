@@ -1,9 +1,9 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:get_it/get_it.dart';
-import 'package:taskapp/features/archive/archive_exports.dart';
-import 'package:taskapp/features/task_description/task_description_exports.dart';
 import 'package:taskapp/firebase_options.dart';
 import 'package:timezone/data/latest_all.dart' as tz;
+import 'package:taskapp/features/archive/archive_exports.dart';
+import 'package:taskapp/features/task_description/task_description_exports.dart';
 import 'package:taskapp/core/core_exports.dart';
 import 'package:taskapp/features/add_task/add_task_exports.dart';
 import 'package:taskapp/features/auth/auth_exports.dart';

@@ -399,6 +399,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                                                   notificationAlert,
                                               taskStatus: taskStatus!,
                                               taskPriority: taskPriority!,
+                                              isArchived: false,
                                               context: context,
                                             ),
                                           );

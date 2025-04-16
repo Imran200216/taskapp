@@ -19,12 +19,18 @@ class TaskArchiveLoading extends TaskArchiveState {
 
 class TaskArchiveSuccess extends TaskArchiveState {
   final String message;
+  final bool showToast;
 
-  const TaskArchiveSuccess(this.message, {required super.isArchived});
+  const TaskArchiveSuccess(
+      this.message, {
+        required super.isArchived,
+        this.showToast = true, // default to true
+      });
 
   @override
-  List<Object?> get props => [message, isArchived];
+  List<Object?> get props => [message, isArchived, showToast];
 }
+
 
 class TaskArchiveFailure extends TaskArchiveState {
   final String error;

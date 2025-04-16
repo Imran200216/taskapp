@@ -120,7 +120,7 @@ class _MyAppState extends State<MyApp> {
         BlocProvider(create: (context) => locator.get<ViewTaskBloc>()),
 
         // view archive task bloc
-        BlocProvider(create: (context) => locator.get<ViewArchiveTaskBloc>(),)
+        BlocProvider(create: (context) => locator.get<ViewArchiveTaskBloc>()),
       ],
       child: BlocBuilder<LanguagePreferenceBloc, LanguagePreferenceState>(
         builder: (context, state) {

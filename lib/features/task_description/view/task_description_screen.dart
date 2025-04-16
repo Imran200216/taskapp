@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
+import 'package:intl/intl.dart';
 import 'package:taskapp/core/core_exports.dart';
 import 'package:taskapp/features/task_description/task_description_exports.dart';
 import 'package:taskapp/gen/colors.gen.dart';
@@ -14,6 +15,7 @@ class TaskDescriptionScreen extends StatelessWidget {
   final String taskDescription;
   final bool notificationAlertStatus;
   final List<String> dateRange;
+  final bool isArchived;
 
   const TaskDescriptionScreen({
     super.key,
@@ -24,28 +26,43 @@ class TaskDescriptionScreen extends StatelessWidget {
     required this.taskDescription,
     required this.notificationAlertStatus,
     required this.dateRange,
+    required this.isArchived,
   });
 
   @override
   Widget build(BuildContext context) {
+    // formatted date
+    final formattedStartDate = DateFormat(
+      'd MMM yyyy',
+    ).format(DateTime.parse(dateRange.first));
+    final formattedEndDate = DateFormat(
+      'd MMM yyyy',
+    ).format(DateTime.parse(dateRange.last));
+
     return MultiBlocProvider(
       providers: [
         // task archive bloc
-        BlocProvider(create: (context) => locator.get<TaskArchiveBloc>()),
+        BlocProvider(
+          create:
+              (context) =>
+                  locator.get<TaskArchiveBloc>()
+                    ..add(SetArchiveStatusEvent(isArchived)),
+        ),
       ],
       child: MultiBlocListener(
         listeners: [
           BlocListener<TaskArchiveBloc, TaskArchiveState>(
             listener: (context, state) {
-              if (state is TaskArchiveSuccess) {
-                // success toast
+              if (state is TaskArchiveSuccess && state.showToast) {
                 ToastHelper.showToast(
                   context: context,
-                  message: "Task added to archive",
+                  message:
+                      state.isArchived
+                          ? "Task added to archive"
+                          : "Task removed from archive",
                   isSuccess: true,
                 );
               } else if (state is TaskArchiveFailure) {
-                // failure toast
                 ToastHelper.showToast(
                   context: context,
                   message: "Failed to update task archive status",
@@ -122,7 +139,7 @@ class TaskDescriptionScreen extends StatelessWidget {
 
                   // task date range
                   CustomTaskDescriptionLabelTextField(
-                    textFieldText: "${dateRange.first} - ${dateRange.last}",
+                    textFieldText: "$formattedStartDate - $formattedEndDate",
                     textFieldLabel: "Date Range",
                     textFieldHintText: "Start - End",
                     textFieldPrefixIcon: Icons.date_range,
